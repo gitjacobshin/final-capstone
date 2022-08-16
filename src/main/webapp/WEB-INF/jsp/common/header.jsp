@@ -40,10 +40,11 @@
 
 </head>
 <body>
+	<div class="entire-header">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="#"> 
 			<c:url var="homePageHref" value="/" />
-			<c:url var="imgSrc" value="/img/placeholder.png" /> 
+			<c:url var="imgSrc" value="/img/fitnesslogo.png" />
 			<a href="${homePageHref}"><img src="${imgSrc}" class="img-fluid" style="height: 50px;" /></a>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -54,43 +55,51 @@
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<c:url var="homePageHref" value="/" />
-				<li class="nav-item"><a class="nav-link" href="${homePageHref}">Home</a></li>
+			<table>
+				<tr>
+					<div class="navbar-nav mr-auto">
+						<c:url var="homePageHref" value="/" />
+						<td class="nav-item"><a class="nav-link" href="${homePageHref}">Home</a></td>
 
-				<c:if test="${not empty currentUser}">
-					<c:url var="dashboardHref" value="/users/${currentUser}" />
-					<li class="nav-item"><a class="nav-link" href="${dashboardHref}">Private Messages</a></li>
-					<c:url var="newMessageHref"
-						value="/users/${currentUser}/messages/new" />
-					<li class="nav-item"><a class="nav-link" href="${newMessageHref}">New Message</a></li>
-					<c:url var="sentMessagesHref"
-						value="/users/${currentUser}/messages" />
-					<li class="nav-item"><a class="nav-link" href="${sentMessagesHref}">Sent Messages</a></li>
-					<c:url var="changePasswordHref"
-						value="/users/${currentUser}/changePassword" />
-					<li class="nav-item"><a class="nav-link" href="${changePasswordHref}">Change Password</a></li>
-				</c:if>
-			</ul>
-			<ul class="navbar-nav ml-auto">
-				<c:choose>
-					<c:when test="${empty currentUser}">
-						<c:url var="newUserHref" value="/users/new" />
-						<li class="nav-item"><a class="nav-link" href="${newUserHref}">Sign Up</a></li>
-						<c:url var="loginHref" value="/login" />
-						<li class="nav-item"><a class="nav-link" href="${loginHref}">Log In</a></li>
-					</c:when>
-					<c:otherwise>
-						<c:url var="logoutAction" value="/logout" />
-						<form id="logoutForm" action="${logoutAction}" method="POST">
-							<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
-						</form>
-						<li class="nav-item"><a id="logoutLink" href="#">Log Out</a></li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
+						<c:if test="${not empty currentUser}">
+							<c:url var="dashboardHref" value="/users/${currentUser}" />
+							<li class="nav-item"><a class="nav-link" href="${dashboardHref}">Private Messages</a></li>
+							<c:url var="newMessageHref"
+								value="/users/${currentUser}/messages/new" />
+							<li class="nav-item"><a class="nav-link" href="${newMessageHref}">New Message</a></li>
+							<c:url var="sentMessagesHref"
+								value="/users/${currentUser}/messages" />
+							<li class="nav-item"><a class="nav-link" href="${sentMessagesHref}">Sent Messages</a></li>
+							<c:url var="changePasswordHref"
+								value="/users/${currentUser}/changePassword" />
+							<li class="nav-item"><a class="nav-link" href="${changePasswordHref}">Change Password</a></li>
+						</c:if>
+					</div>
+					<div class="navbar-nav ml-auto">
+						<c:choose>
+							<c:when test="${empty currentUser}">
+								<c:url var="newUserHref" value="/users/new" />
+								<td class="nav-item"><a class="nav-link" href="${newUserHref}">Sign Up</a></td>
+					</div>
+					<div class="navbar-nav ml-auto">
+								<c:url var="loginHref" value="/login" />
+								<td class="nav-item"><a class="nav-link" href="${loginHref}">Log In</a></td>
+							</c:when>
+							<c:otherwise>
+								<c:url var="logoutAction" value="/logout" />
+								<form id="logoutForm" action="${logoutAction}" method="POST">
+									<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+								</form>
+								<li class="nav-item"><a id="logoutLink" href="#">Log Out</a></li>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</tr>
+			</table>
 		</div>
 	</nav>
+	<hr>
+	</div>
 
 	<c:if test="${not empty currentUser}">
 		<p id="currentUser">Current User: ${currentUser}</p>
