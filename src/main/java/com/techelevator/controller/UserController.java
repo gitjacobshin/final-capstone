@@ -64,6 +64,21 @@ public class UserController {
 
 		return "redirect:/login";
 	}
-	
-	
+
+	//----------------------------------------------------------------- Home Page
+	@RequestMapping(path="/", method=RequestMethod.GET)
+	public String displayHomePage(ModelMap modelHolder) {
+
+		return "homepage";
+	}
+
+	//----------------------------------------------------------------- Profile Page
+	@RequestMapping(path="/users/profile", method=RequestMethod.GET)
+	public String displayUserProfile(ModelMap modelHolder) {
+		if( ! modelHolder.containsAttribute("user")) {
+			modelHolder.addAttribute("user", new User());
+		}
+		return "profilePage";
+	}
+
 }
