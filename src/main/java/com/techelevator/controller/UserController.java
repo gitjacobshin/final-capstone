@@ -47,7 +47,7 @@ public class UserController {
 
 	//-------------------------------------------------------------------EDITING PROFILE
 	@RequestMapping(path="/users/create", method=RequestMethod.GET)
-	public String displayEditProfileForm(ModelMap modelHolder) {
+	public String displayCreateProfileForm(ModelMap modelHolder) {
 		if( ! modelHolder.containsAttribute("user")) {
 			modelHolder.addAttribute("user", new User());
 		}
@@ -55,7 +55,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path="/users/create", method=RequestMethod.POST)
-	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
+	public String createProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
 		if (result.hasErrors()) {
 			flash.addFlashAttribute("user", user);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
@@ -64,6 +64,7 @@ public class UserController {
 
 		return "redirect:/login";
 	}
+
 
 	//----------------------------------------------------------------- Home Page
 	@RequestMapping(path="/", method=RequestMethod.GET)
@@ -79,6 +80,27 @@ public class UserController {
 			modelHolder.addAttribute("user", new User());
 		}
 		return "profilePage";
+	}
+
+
+
+	@RequestMapping(path="/users/edit", method=RequestMethod.GET)
+	public String displayEditProfileForm(ModelMap modelHolder) {
+		if( ! modelHolder.containsAttribute("user")) {
+			modelHolder.addAttribute("user", new User());
+		}
+		return "editProfile";
+	}
+
+	@RequestMapping(path="/users/edit", method=RequestMethod.POST)
+	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
+		if (result.hasErrors()) {
+			flash.addFlashAttribute("user", user);
+			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
+			return "redirect:/users/edit";
+		}
+
+		return "redirect:/login";
 	}
 
 }

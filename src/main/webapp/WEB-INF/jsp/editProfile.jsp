@@ -16,7 +16,7 @@
 
             <div class="form-group">
                 <label for="name">Name: </label>
-                <input type="text" id="name" name="name" placeHolder="Hame" class="form-control" />
+                <input type="text" id="name" name="name" placeHolder="Name" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -39,7 +39,12 @@
                 <input type="date" id="birthday" name="birthday" placeHolder="Birthday" class="form-control" />
             </div>
 
-            <button type="submit" class="btn btn-primary">Create User</button>
+            <div class="form-group">
+                <label for="file">Insert Profile Picture </label>
+                <input type="file" name="file" id="file"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update User</button>
 
         </div>
         <div class="col-sm-4"></div>
