@@ -66,6 +66,24 @@ public class UserController {
 	}
 
 
+	//----------------------------------------------------------------- Home Page
+	@RequestMapping(path="/", method=RequestMethod.GET)
+	public String displayHomePage(ModelMap modelHolder) {
+
+		return "homepage";
+	}
+
+	//----------------------------------------------------------------- Profile Page
+	@RequestMapping(path="/users/profile", method=RequestMethod.GET)
+	public String displayUserProfile(ModelMap modelHolder) {
+		if( ! modelHolder.containsAttribute("user")) {
+			modelHolder.addAttribute("user", new User());
+		}
+		return "profilePage";
+	}
+
+
+
 	@RequestMapping(path="/users/edit", method=RequestMethod.GET)
 	public String displayEditProfileForm(ModelMap modelHolder) {
 		if( ! modelHolder.containsAttribute("user")) {
@@ -84,6 +102,5 @@ public class UserController {
 
 		return "redirect:/login";
 	}
-	
-	
+
 }
