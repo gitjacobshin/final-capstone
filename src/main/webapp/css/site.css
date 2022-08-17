@@ -34,7 +34,7 @@ footer{
 
 .flex-container {
    display: flex;
-   flex-wrap: nowrap;
+   flex-wrap: wrap;
 }
 
 .flex-column {
@@ -44,9 +44,24 @@ footer{
 
 .img-tile {
    width: 300px;
-   height: 300px;
+   height: 250px;
    object-fit: cover;
    margin: 30px;
    border-radius: 10%;
    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+h3 {
+   font-weight: bold;
+   text-align: center;
+}
+
+.text-tile {
+   margin: 30px;
+   height: 400px;
+   background-color: #3bd3ff;
+   border-radius: 10%;
+   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+
 }
