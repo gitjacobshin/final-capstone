@@ -35,6 +35,11 @@
             </div>
 
             <div class="form-group">
+                <label for="goal">Goal: </label>
+                <input type="text" id="goal" name="goal" placeHolder="Goal" class="form-control" />
+            </div>
+
+            <div class="form-group">
                 <label for="birthday">Birthday: </label>
                 <input type="date" id="birthday" name="birthday" placeHolder="Birthday" class="form-control" />
             </div>

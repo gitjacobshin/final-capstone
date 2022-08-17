@@ -1,11 +1,16 @@
 package com.techelevator.model.dto;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class User {
+
 	private String userName;
 
 	@Size(min=8, message="Password too short, must be at least 8")
@@ -15,14 +20,30 @@ public class User {
 	})
 	private String password;
 	private String role;
+
+	@NotBlank(message="Name is required")
 	private String name;
+
+	@NotNull(message="Current weight is required")
 	private int currentWeight;
+
+	@NotNull(message="Desired weight is required")
 	private int desiredWeight;
+
 	private int age;
+
+	@NotNull(message="Height is required (inches)")
 	private int heightInInches;
+
+	@NotNull(message="Birthday is required")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private LocalDate birthdate;
+
 	private String confirmPassword;
+
+	@NotBlank(message="Please enter a goal")
 	private String goal;
+
 	private String updateUsername;
 
 	public String getUserName() {
