@@ -14,7 +14,6 @@ public interface UserDAO {
 
 	public void updateAge(String userName, int age);
 
-	// Do rest for update height, current weight, desired weight
 
 	public Object getUserByUserName(String userName);
 
