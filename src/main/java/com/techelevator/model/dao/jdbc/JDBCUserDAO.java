@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import com.techelevator.model.dto.User;
 import com.techelevator.services.security.PasswordHasher;
 
+import java.time.LocalDate;
+
 @Component
 public class JDBCUserDAO implements UserDAO
 {
@@ -53,9 +55,47 @@ public class JDBCUserDAO implements UserDAO
 	}
 
 	@Override
+	public void updateUsername(String updateUsername, String userName) {
+		jdbcTemplate.update("UPDATE app_user SET user_name = ? WHERE user_name = ?", updateUsername, userName);
+	}
+
+	@Override
 	public void updatePassword(String userName, String password) {
 		jdbcTemplate.update("UPDATE app_user SET password = ? WHERE user_name = ?", password, userName);
 	}
+
+	@Override
+	public void updateRole(String userName, String role) {
+		jdbcTemplate.update("UPDATE app_user SET role = ? WHERE user_name = ?", role, userName);
+	}
+
+	@Override
+	public void updateBirthday(String userName, LocalDate birthdate) {
+		jdbcTemplate.update("UPDATE app_user SET birthdate = ? WHERE user_name = ?", birthdate, userName);
+	}
+
+	@Override
+	public void updateHeight(String userName, int height) {
+		jdbcTemplate.update("UPDATE app_user SET heightInInches = ? WHERE user_name = ?", height, userName);
+	}
+
+	@Override
+	public void updateCurrentWeight(String userName, int currentWeight) {
+		jdbcTemplate.update("UPDATE app_user SET current_weight = ? WHERE user_name = ?", currentWeight, userName);
+	}
+
+	@Override
+	public void updateDesiredWeight(String userName, int desiredWeight) {
+		jdbcTemplate.update("UPDATE app_user SET desired_weight = ? WHERE user_name = ?", desiredWeight, userName);
+	}
+
+	@Override
+	public void updateGoal(String userName, String goal) {
+		jdbcTemplate.update("UPDATE app_user SET goal = ? WHERE user_name = ?", goal, userName);
+
+
+	}
+
 
 	@Override
 	public Object getUserByUserName(String userName) {
