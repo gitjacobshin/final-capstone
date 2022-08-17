@@ -22,6 +22,8 @@ public class User {
 	private int heightInInches;
 	private LocalDate birthdate;
 	private String confirmPassword;
+	private String goal;
+	private String updateUsername;
 
 	public String getUserName() {
 		return userName;
@@ -30,10 +32,6 @@ public class User {
 	/**
 	 * @return the role
 	 */
-
-
-
-
 
 
 	public String getRole() {
@@ -98,6 +96,21 @@ public class User {
 		this.age = age;
 	}
 
+	public String getGoal() {
+		return goal;
+	}
+
+	public void setGoal(String goal) {
+		this.goal = goal;
+	}
+
+	public String getUpdateUsername() {
+		return updateUsername;
+	}
+
+	public void setUpdateUsername(String updateUsername) {
+		this.updateUsername = updateUsername;
+	}
 
 
 	public void setRole(String role) {
