@@ -35,8 +35,8 @@ public class User {
 	@NotNull(message="Height is required (inches)")
 	private int heightInInches;
 
-	@NotNull(message="Birthday is required")
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
+//	@NotNull(message="Birthday is required")
+//	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate birthdate;
 
 	private String confirmPassword;
