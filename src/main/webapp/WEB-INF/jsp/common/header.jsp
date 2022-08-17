@@ -97,7 +97,6 @@
 			</table>
 		</div>
 	</nav>
-	<hr>
 	</div>
 
 	<c:if test="${not empty currentUser}">
