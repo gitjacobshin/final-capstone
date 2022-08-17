@@ -1,3 +1,5 @@
+
+
 package com.techelevator.controller;
 
 import javax.validation.Valid;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.techelevator.model.dto.User;
@@ -48,11 +51,15 @@ public class UserController {
 
 	@RequestMapping(path="/users/create", method=RequestMethod.POST)
 	public String createProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
+
+		//boolean isUserName
+
 		if (result.hasErrors()) {
 			flash.addFlashAttribute("user", user);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
 			return "redirect:/users/create";
 		}
+
 
 		return "redirect:/login";
 	}
@@ -85,12 +92,20 @@ public class UserController {
 
 	//----------------------------------------------------------------- Edit Profile
 	@RequestMapping(path="/users/edit", method=RequestMethod.POST)
-	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
+	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash,
+							  @RequestParam String name, @RequestParam int height, @RequestParam int currentWeight,
+							  @RequestParam int desiredWeight, @RequestParam String goal) {
 		if (result.hasErrors()) {
 			flash.addFlashAttribute("user", user);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
 			return "redirect:/users/edit";
 		}
+
+		userDAO.updateName(user.getUserName(), name);
+		userDAO.updateHeight(user.getUserName(), height);
+		userDAO.updateCurrentWeight(user.getUserName(), currentWeight);
+		userDAO.updateDesiredWeight(user.getUserName(), desiredWeight);
+		userDAO.updateGoal(user.getUserName(), goal);
 
 		return "redirect:/users/profile";
 	}

@@ -14,6 +14,8 @@ public interface UserDAO {
 
 	public void updateRole(String userName, String role);
 
+	public void updateName(String userName, String name);
+
 	public void updateBirthday(String userName, LocalDate birthdate);
 
 	public void updateHeight(String userName, int height);

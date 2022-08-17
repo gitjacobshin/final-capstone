@@ -70,8 +70,13 @@ public class JDBCUserDAO implements UserDAO
 	}
 
 	@Override
+	public void updateName(String userName, String name) {
+		jdbcTemplate.update("UPDATE app_user SET name = ? WHERE user_name = ?", name, userName);
+	}
+
+	@Override
 	public void updateBirthday(String userName, LocalDate birthdate) {
-		jdbcTemplate.update("UPDATE app_user SET birthdate = ? WHERE user_name = ?", birthdate, userName);
+		jdbcTemplate.update("UPDATE app_user SET birthdate = ? WHERE user_name = ?", birthdate.toString(), userName);
 	}
 
 	@Override
@@ -92,7 +97,6 @@ public class JDBCUserDAO implements UserDAO
 	@Override
 	public void updateGoal(String userName, String goal) {
 		jdbcTemplate.update("UPDATE app_user SET goal = ? WHERE user_name = ?", goal, userName);
-
 
 	}
 
