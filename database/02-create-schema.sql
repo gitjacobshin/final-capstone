@@ -19,7 +19,7 @@ CREATE TABLE app_user (
   heightInInches int,
   birthdate DATE,
   salt varchar(255) NOT NULL,
-  goal varchar(300) NOT NULL
+  goal varchar(300)
 );
 
 DROP TABLE IF EXISTS workout;
