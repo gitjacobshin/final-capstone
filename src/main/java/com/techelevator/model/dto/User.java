@@ -16,12 +16,13 @@ public class User {
 	private String password;
 	private String role;
 	private String name;
-	private int weight;
+	private int currentWeight;
 	private int desiredWeight;
 	private int age;
-	private int height;
-	private LocalDate birthDate;
+	private int heightInInches;
+	private LocalDate birthdate;
 	private String confirmPassword;
+
 	public String getUserName() {
 		return userName;
 	}
@@ -47,12 +48,12 @@ public class User {
 		this.name = name;
 	}
 
-	public int getWeight() {
-		return weight;
+	public int getCurrentWeight() {
+		return currentWeight;
 	}
 
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setCurrentWeight(int currentWeight) {
+		this.currentWeight = currentWeight;
 	}
 
 	public int getDesiredWeight() {
@@ -63,31 +64,31 @@ public class User {
 		this.desiredWeight = desiredWeight;
 	}
 
-	public int getHeight() {
-		return height;
+	public int getHeightInInches() {
+		return heightInInches;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setHeightInInches(int getHeightInInches) {
+		this.heightInInches = heightInInches;
 	}
 
 	public LocalDate getBirthDate() {
-		return birthDate;
+		return birthdate;
 	}
 
 	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
+		this.birthdate = birthDate;
 	}
 
 	public int getAge() {
-		if (birthDate.getMonthValue() < LocalDate.now().getMonthValue()
-				&& birthDate.getDayOfMonth() < LocalDate.now().getDayOfMonth()
-				&&  birthDate.getYear() < LocalDate.now().getYear()) {
+		if (birthdate.getMonthValue() < LocalDate.now().getMonthValue()
+				&& birthdate.getDayOfMonth() < LocalDate.now().getDayOfMonth()
+				&&  birthdate.getYear() < LocalDate.now().getYear()) {
 
-			age = LocalDate.now().getYear() - birthDate.getYear();
+			age = LocalDate.now().getYear() - birthdate.getYear();
 
 		} else {
-			age = (LocalDate.now().getYear() - birthDate.getYear()) - 1;
+			age = (LocalDate.now().getYear() - birthdate.getYear()) - 1;
 
 		}
 		return age;

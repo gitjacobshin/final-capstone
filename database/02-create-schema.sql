@@ -12,6 +12,12 @@ CREATE TABLE app_user (
   user_name varchar(32) NOT NULL UNIQUE,
   password varchar(32) NOT NULL,
   role varchar(32),
+  name varchar(32),
+  current_weight int,
+  desired_weight int,
+  age int,
+  heightInInches int,
+  birthdate DATE,
   salt varchar(255) NOT NULL
 );
 

@@ -6,8 +6,18 @@ public interface UserDAO {
 
 	public boolean searchForUsernameAndPassword(String userName, String password);
 
+	public void updateUsername(String userName, String password);
+
 	public void updatePassword(String userName, String password);
 
+	public void updateRole(String userName, String role);
+
+	public void updateAge(String userName, int age);
+
+	// Do rest for update height, current weight, desired weight
+
 	public Object getUserByUserName(String userName);
+
+
 
 }
