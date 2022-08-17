@@ -58,30 +58,29 @@
 			<table>
 				<tr>
 					<div class="navbar-nav mr-auto">
-						<c:url var="homePageHref" value="/" />
-						<td class="nav-item"><a class="nav-link" href="${homePageHref}">Home</a></td>
-
 						<c:if test="${not empty currentUser}">
+							<c:url var="homePageHref" value="/users/profile" />
+							<td class="nav-item"><a class="nav-link" href="${homePageHref}">Home</a></td>
 							<c:url var="dashboardHref" value="/users/${currentUser}" />
-							<li class="nav-item"><a class="nav-link" href="${dashboardHref}">Private Messages</a></li>
+							<td class="nav-item"><a class="nav-link" href="${dashboardHref}">Private Messages</a></td>
 							<c:url var="newMessageHref"
 								value="/users/${currentUser}/messages/new" />
-							<li class="nav-item"><a class="nav-link" href="${newMessageHref}">New Message</a></li>
+							<td class="nav-item"><a class="nav-link" href="${newMessageHref}">New Message</a></td>
 							<c:url var="sentMessagesHref"
 								value="/users/${currentUser}/messages" />
-							<li class="nav-item"><a class="nav-link" href="${sentMessagesHref}">Sent Messages</a></li>
+							<td class="nav-item"><a class="nav-link" href="${sentMessagesHref}">Sent Messages</a></td>
 							<c:url var="changePasswordHref"
 								value="/users/${currentUser}/changePassword" />
-							<li class="nav-item"><a class="nav-link" href="${changePasswordHref}">Change Password</a></li>
+							<td class="nav-item"><a class="nav-link" href="${changePasswordHref}">Change Password</a></td>
 						</c:if>
 					</div>
 					<div class="navbar-nav ml-auto">
 						<c:choose>
 							<c:when test="${empty currentUser}">
+								<c:url var="homePageHref" value="/" />
+								<td class="nav-item"><a class="nav-link" href="${homePageHref}">Home</a></td>
 								<c:url var="newUserHref" value="/users/new" />
 								<td class="nav-item"><a class="nav-link" href="${newUserHref}">Sign Up</a></td>
-					</div>
-					<div class="navbar-nav ml-auto">
 								<c:url var="loginHref" value="/login" />
 								<td class="nav-item"><a class="nav-link" href="${loginHref}">Log In</a></td>
 							</c:when>
@@ -90,7 +89,7 @@
 								<form id="logoutForm" action="${logoutAction}" method="POST">
 									<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 								</form>
-								<li class="nav-item"><a id="logoutLink" href="#">Log Out</a></li>
+								<td class="nav-item"><a id="logoutLink" href="#">Log Out</a></td>
 							</c:otherwise>
 						</c:choose>
 					</div>

@@ -45,15 +45,6 @@ public class UserController {
 		return "redirect:/login";
 	}
 
-	//-------------------------------------------------------------------EDITING PROFILE
-	@RequestMapping(path="/users/create", method=RequestMethod.GET)
-	public String displayCreateProfileForm(ModelMap modelHolder) {
-		if( ! modelHolder.containsAttribute("user")) {
-			modelHolder.addAttribute("user", new User());
-		}
-		return "createProfile";
-	}
-
 	@RequestMapping(path="/users/create", method=RequestMethod.POST)
 	public String createProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
 		if (result.hasErrors()) {
@@ -82,8 +73,7 @@ public class UserController {
 		return "profilePage";
 	}
 
-
-
+	//----------------------------------------------------------------- Display Edit Profile Page
 	@RequestMapping(path="/users/edit", method=RequestMethod.GET)
 	public String displayEditProfileForm(ModelMap modelHolder) {
 		if( ! modelHolder.containsAttribute("user")) {
@@ -92,6 +82,7 @@ public class UserController {
 		return "editProfile";
 	}
 
+	//----------------------------------------------------------------- Edit Profile
 	@RequestMapping(path="/users/edit", method=RequestMethod.POST)
 	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
 		if (result.hasErrors()) {
@@ -100,7 +91,50 @@ public class UserController {
 			return "redirect:/users/edit";
 		}
 
-		return "redirect:/login";
+		return "redirect:/users/profile";
 	}
 
+
+	//----------------------------------------------------------------- Display Add Workout Form
+	@RequestMapping(path="/users/workout", method=RequestMethod.GET)
+	public String displayAddWorkoutForm(ModelMap modelHolder) {
+		if( ! modelHolder.containsAttribute("user")) {
+			modelHolder.addAttribute("user", new User());
+		}
+		return "addWorkout";
+	}
+
+	//----------------------------------------------------------------- Edit Add Workout Form
+	@RequestMapping(path="/users/workout", method=RequestMethod.POST)
+	public String editWorkout(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
+		if (result.hasErrors()) {
+			flash.addFlashAttribute("user", user);
+			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
+			return "redirect:/users/workout";
+		}
+
+		return "redirect:/users/profile";
+	}
+
+
+	//----------------------------------------------------------------- Display Custom Exercise Form
+	@RequestMapping(path="/users/workout/custom-exercise", method=RequestMethod.GET)
+	public String displayCustomExerciseForm(ModelMap modelHolder) {
+		if( ! modelHolder.containsAttribute("user")) {
+			modelHolder.addAttribute("user", new User());
+		}
+		return "customExercise";
+	}
+
+	//----------------------------------------------------------------- Edit Custom Exercise Form
+	@RequestMapping(path="/users/workout/custom-exercise", method=RequestMethod.POST)
+	public String editCustomExercise(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
+		if (result.hasErrors()) {
+			flash.addFlashAttribute("user", user);
+			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
+			return "redirect:/users/workout/custom-exercise";
+		}
+
+		return "redirect:/users/workout";
+	}
 }
