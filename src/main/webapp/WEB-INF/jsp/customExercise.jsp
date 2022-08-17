@@ -8,10 +8,10 @@
 <c:url var="submitCustomExercise" value="/users/workout"/>
 
 <h1>Custom Exercise Page</h1>
-
 <div>
     <form method="POST" action="${submitCustomExercise}">
-        <button type="submit" class="btn btn-primary">Submit Exercise</button>
+        <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
+            <button type="submit" class="btn btn-primary">Submit Exercise</button>
     </form>
 </div>
 
