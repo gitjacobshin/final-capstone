@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import javax.validation.Valid;
 
+import com.techelevator.model.dao.ExerciseDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -94,47 +95,4 @@ public class UserController {
 		return "redirect:/users/profile";
 	}
 
-
-	//----------------------------------------------------------------- Display Add Workout Form
-	@RequestMapping(path="/users/workout", method=RequestMethod.GET)
-	public String displayAddWorkoutForm(ModelMap modelHolder) {
-		if( ! modelHolder.containsAttribute("user")) {
-			modelHolder.addAttribute("user", new User());
-		}
-		return "addWorkout";
-	}
-
-	//----------------------------------------------------------------- Edit Add Workout Form
-	@RequestMapping(path="/users/workout", method=RequestMethod.POST)
-	public String editWorkout(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
-		if (result.hasErrors()) {
-			flash.addFlashAttribute("user", user);
-			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-			return "redirect:/users/workout";
-		}
-
-		return "redirect:/users/profile";
-	}
-
-
-	//----------------------------------------------------------------- Display Custom Exercise Form
-	@RequestMapping(path="/users/workout/custom-exercise", method=RequestMethod.GET)
-	public String displayCustomExerciseForm(ModelMap modelHolder) {
-		if( ! modelHolder.containsAttribute("user")) {
-			modelHolder.addAttribute("user", new User());
-		}
-		return "customExercise";
-	}
-
-	//----------------------------------------------------------------- Edit Custom Exercise Form
-	@RequestMapping(path="/users/workout/custom-exercise", method=RequestMethod.POST)
-	public String editCustomExercise(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
-		if (result.hasErrors()) {
-			flash.addFlashAttribute("user", user);
-			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-			return "redirect:/users/workout/custom-exercise";
-		}
-
-		return "redirect:/users/workout";
-	}
 }
