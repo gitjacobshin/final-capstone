@@ -25,9 +25,8 @@
 	});
 </script>
 
-<div class="row">
-	<div class="col-sm-4"></div>
-	<div class="col-sm-4">
+<div class="row form-container">
+	<div class="col-sm-4 form-column">
 		<c:url var="formAction" value="/login" />
 		<form method="POST" action="${formAction}">
 		<input type="hidden" name="destination" value="${param.destination}"/>
@@ -43,6 +42,5 @@
 			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
 	</div>
-	<div class="col-sm-4"></div>
 </div>
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />

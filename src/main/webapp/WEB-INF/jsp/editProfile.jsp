@@ -11,12 +11,11 @@
 <c:set var="currentUser" scope="session" value="${currentUser}"/>
 
 
-<form:form modelAttribute="user" method="POST" action="${formAction}">>
+<form:form modelAttribute="user" method="POST" action="${formAction}">
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 
-    <div class="row">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
+    <div class="row form-container">
+        <div class="col-sm-4 form-column">
 
             <div class="form-group">
                 <label for="name">Name: </label>
@@ -56,7 +55,6 @@
             <button type="submit" class="btn btn-primary">Update User</button>
 
         </div>
-        <div class="col-sm-4"></div>
     </div>
 
 

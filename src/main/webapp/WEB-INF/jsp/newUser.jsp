@@ -9,9 +9,8 @@
 <c:url var="formAction" value="/users/new" />
 <form:form modelAttribute="user" method="POST" action="${formAction}">
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
-	<div class="row">
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4">
+	<div class="row form-container">
+		<div class="col-sm-4 form-column">
 			<div class="form-group">
 				<form:label path="userName">User Name: </form:label>
 				<form:input path="userName" cssClass="form-control" />
@@ -29,7 +28,6 @@
 
 			<button type="submit" class="btn btn-primary">Create User</button>
 		</div>
-		<div class="col-sm-4"></div>
 	</div>
 </form:form>
 		
