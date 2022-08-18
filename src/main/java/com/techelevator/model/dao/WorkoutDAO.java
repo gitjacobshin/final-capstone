@@ -1,5 +1,7 @@
 package com.techelevator.model.dao;
 
+import com.techelevator.model.dto.Workout;
+
 import java.time.LocalDate;
 
 public interface WorkoutDAO {
@@ -13,5 +15,11 @@ public interface WorkoutDAO {
     public void updateTotalCalories(String profile_id, int totalCalories);
 
     public void updateDate(String profile_id, LocalDate date);
+
+    public Object getWorkoutByWorkoutName(String userName, String workoutName);
+
+    public void updateWorkout(String userName, Workout workout);
+
+//    public Object getUserProfileId(int profile_id);
 
 }
