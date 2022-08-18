@@ -8,34 +8,38 @@
 <c:url var="editProfileAction" value="/users/edit"/>
 <c:url var="addWorkoutAction" value="/users/workout/addWorkout"/>
 
-<h1>Profile page</h1>
+<div class="page-background">
+    <h1>
+        <c:url var="imgSrc" value="/img/fitnesslogo.png" />
+        <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> Profile Page</a>
+    </h1>
+    <div class="flex-container">
 
-<div class="flex-container">
+        <div class="flex-column">
+            <div>
+                Profile Info
+                <form method="GET" action="${editProfileAction}">
+                    <button type="submit" class="btn btn-primary">Edit Profile</button>
+                </form>
+            </div>
 
-
-    <div class="flex-column">
-        <div>
-            Profile Info
-            <form method="GET" action="${editProfileAction}">
-                <button type="submit" class="btn btn-primary">Edit Profile</button>
-            </form>
+            <div>
+                Workout History
+                <form method="GET" action="${addWorkoutAction}">
+                    <button type="submit" class="btn btn-primary">Add Workout</button>
+                </form>
+            </div>
         </div>
 
-        <div>
-            Workout History
-            <form method="GET" action="${addWorkoutAction}">
-                <button type="submit" class="btn btn-primary">Add Workout</button>
-            </form>
+
+
+        <div class="flex-column">
+            Graph Data
+
         </div>
-    </div>
-
-
-
-    <div class="flex-column">
-        Graph Data
-
     </div>
 </div>
+
 
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />
