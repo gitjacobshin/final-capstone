@@ -16,7 +16,7 @@ CREATE TABLE app_user (
   current_weight int,
   desired_weight int,
   age int,
-  heightInInches int,
+  height int,
   birthdate DATE,
   salt varchar(255) NOT NULL,
   goal varchar(300)

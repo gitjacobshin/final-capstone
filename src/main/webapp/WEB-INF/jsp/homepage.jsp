@@ -5,7 +5,10 @@
 <c:url var="validationJs" value="/js/user-validation.js" />
 <script src="${validationJs}"></script>
 
-<h1>Tech Fitness Pal</h1>
+<h1>
+    <c:url var="imgSrc" value="/img/fitnesslogo.png" />
+    <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> Tech Fitness Pal</a>
+</h1>
 
 <div class="flex-container">
     <div class="flex-column">

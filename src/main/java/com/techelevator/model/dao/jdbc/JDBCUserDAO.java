@@ -81,7 +81,7 @@ public class JDBCUserDAO implements UserDAO
 
 	@Override
 	public void updateHeight(String userName, int height) {
-		jdbcTemplate.update("UPDATE app_user SET heightInInches = ? WHERE user_name = ?", height, userName);
+		jdbcTemplate.update("UPDATE app_user SET height = ? WHERE user_name = ?", height, userName);
 	}
 
 	@Override
@@ -113,9 +113,36 @@ public class JDBCUserDAO implements UserDAO
 			thisUser = new User();
 			thisUser.setUserName(user.getString("user_name"));
 			thisUser.setPassword(user.getString("password"));
+			thisUser.setName(user.getString("name"));
+			thisUser.setHeight(user.getInt("height"));
+			thisUser.setCurrentWeight(user.getInt("current_weight"));
+			thisUser.setDesiredWeight(user.getInt("desired_weight"));
+			thisUser.setGoal(user.getString("goal"));
 		}
 
 		return thisUser;
+	}
+
+	@Override
+	public boolean isUserNameAvailable(String userName) {
+		if (getUserByUserName(userName) == null) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public void updateProfile(String userName, User user) {
+		jdbcTemplate.update("UPDATE app_user " +
+				"SET name = ?," +
+				" height = ?, " +
+				" current_weight = ?, " +
+				" desired_weight = ?, " +
+				" goal = ? " +
+				" WHERE user_name = ?",
+				user.getName(), user.getHeight(), user.getCurrentWeight(), user.getDesiredWeight(), user.getGoal(), userName);
 	}
 
 }

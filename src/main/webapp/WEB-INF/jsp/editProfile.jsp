@@ -8,10 +8,10 @@
 
 <c:url var="formAction" value="/users/edit" />
 
-<c:set var="user" scope="session" value="${user}"/>
+<c:set var="currentUser" scope="session" value="${currentUser}"/>
 
 
-<form method="POST" action="${formAction}">
+<form:form modelAttribute="user" method="POST" action="${formAction}">>
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 
     <div class="row">
@@ -20,27 +20,27 @@
 
             <div class="form-group">
                 <label for="name">Name: </label>
-                <input type="text" id="name" value="${user.name}" name="name" placeHolder="Name" class="form-control" />
+                <input type="text" id="name" value="${currentUser.name}" name="name" placeHolder="Name" class="form-control" />
             </div>
 
             <div class="form-group">
                 <label for="height">Height: </label>
-                <input type="text" id="height" value="${user.heightInInches}" name="height" placeHolder="Height" class="form-control" />
+                <input type="text" id="height" value="${currentUser.height}" name="height" placeHolder="Height" class="form-control" />
             </div>
 
             <div class="form-group">
                 <label for="currentWeight">Current Weight: </label>
-                <input type="text" id="currentWeight" value="${user.currentWeight}" name="currentWeight" placeHolder="Current Weight" class="form-control" />
+                <input type="text" id="currentWeight" value="${currentUser.currentWeight}" name="currentWeight" placeHolder="Current Weight" class="form-control" />
             </div>
 
             <div class="form-group">
                 <label for="desiredWeight">Desired Weight: </label>
-                <input type="text" id="desiredWeight" value="${user.desiredWeight}" name="desiredWeight" placeHolder="Desired Weight" class="form-control" />
+                <input type="text" id="desiredWeight" value="${currentUser.desiredWeight}" name="desiredWeight" placeHolder="Desired Weight" class="form-control" />
             </div>
 
             <div class="form-group">
                 <label for="goal">Goal: </label>
-                <input type="text" id="goal" name="goal" value="${user.goal}" placeHolder="Goal" class="form-control" />
+                <input type="text" id="goal" name="goal" value="${currentUser.goal}" placeHolder="Goal" class="form-control" />
             </div>
 
             <div class="form-group">
