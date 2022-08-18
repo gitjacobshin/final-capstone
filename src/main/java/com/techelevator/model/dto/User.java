@@ -21,18 +21,18 @@ public class User {
 	private String password;
 	private String role;
 
-	@NotBlank(message="Name is required")
+	//@NotBlank(message="Name is required")
 	private String name;
 
-	@NotNull(message="Current weight is required")
+	//@NotNull(message="Current weight is required")
 	private int currentWeight;
 
-	@NotNull(message="Desired weight is required")
+	//@NotNull(message="Desired weight is required")
 	private int desiredWeight;
 
 	private int age;
 
-	@NotNull(message="Height is required (inches)")
+	//@NotNull(message="Height is required (inches)")
 	private int heightInInches;
 
 //	@NotNull(message="Birthday is required")
@@ -41,7 +41,7 @@ public class User {
 
 	private String confirmPassword;
 
-	@NotBlank(message="Please enter a goal")
+	//@NotBlank(message="Please enter a goal")
 	private String goal;
 
 	private String updateUsername;

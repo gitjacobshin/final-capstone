@@ -2,6 +2,8 @@
 
 package com.techelevator.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.techelevator.model.dao.ExerciseDAO;
@@ -94,18 +96,24 @@ public class UserController {
 	@RequestMapping(path="/users/edit", method=RequestMethod.POST)
 	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash,
 							  @RequestParam String name, @RequestParam int height, @RequestParam int currentWeight,
-							  @RequestParam int desiredWeight, @RequestParam String goal) {
+							  @RequestParam int desiredWeight, @RequestParam String goal, HttpSession session,
+							  HttpServletRequest request) {
 		if (result.hasErrors()) {
 			flash.addFlashAttribute("user", user);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
 			return "redirect:/users/edit";
 		}
 
-		userDAO.updateName(user.getUserName(), name);
-		userDAO.updateHeight(user.getUserName(), height);
-		userDAO.updateCurrentWeight(user.getUserName(), currentWeight);
-		userDAO.updateDesiredWeight(user.getUserName(), desiredWeight);
-		userDAO.updateGoal(user.getUserName(), goal);
+
+
+		User currentUser = (User) session.getAttribute("currentUser");
+		//request.setAttribute("user", currentUser);
+
+		userDAO.updateName(currentUser.getUserName(), name);
+		userDAO.updateHeight(currentUser.getUserName(), height);
+		userDAO.updateCurrentWeight(currentUser.getUserName(), currentWeight);
+		userDAO.updateDesiredWeight(currentUser.getUserName(), desiredWeight);
+		userDAO.updateGoal(currentUser.getUserName(), goal);
 
 		return "redirect:/users/profile";
 	}
