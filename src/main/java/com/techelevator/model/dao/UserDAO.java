@@ -1,5 +1,7 @@
 package com.techelevator.model.dao;
 
+import com.techelevator.model.dto.User;
+
 import java.time.LocalDate;
 
 public interface UserDAO {
@@ -27,4 +29,8 @@ public interface UserDAO {
 	public void updateGoal(String userName, String goal);
 
 	public Object getUserByUserName(String userName);
+
+	boolean isUserNameAvailable(String userName);
+
+	public void updateProfile(String userName, User user);
 }

@@ -1,10 +1,7 @@
 package com.techelevator.model.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -21,7 +18,7 @@ public class User {
 	private String password;
 	private String role;
 
-	//@NotBlank(message="Name is required")
+	@NotBlank(message="Name is required")
 	private String name;
 
 	//@NotNull(message="Current weight is required")
@@ -33,7 +30,7 @@ public class User {
 	private int age;
 
 	//@NotNull(message="Height is required (inches)")
-	private int heightInInches;
+	private int height;
 
 //	@NotNull(message="Birthday is required")
 //	@DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -83,12 +80,12 @@ public class User {
 		this.desiredWeight = desiredWeight;
 	}
 
-	public int getHeightInInches() {
-		return heightInInches;
+	public int getHeight() {
+		return height;
 	}
 
-	public void setHeightInInches(int getHeightInInches) {
-		this.heightInInches = heightInInches;
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 	public LocalDate getBirthDate() {

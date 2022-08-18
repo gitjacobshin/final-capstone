@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +42,13 @@ public class UserController {
 	
 	@RequestMapping(path="/users/new", method=RequestMethod.POST)
 	public String createUser(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
+
+		boolean isUserNameAvailable = userDAO.isUserNameAvailable(user.getUserName());
+		if(!isUserNameAvailable) {
+			FieldError error = new FieldError("user", "userName","The UserName is not available.");
+			result.addError(error);
+		}
+
 		if(result.hasErrors()) {
 			flash.addFlashAttribute("user", user);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
@@ -85,35 +93,29 @@ public class UserController {
 
 	//----------------------------------------------------------------- Display Edit Profile Page
 	@RequestMapping(path="/users/edit", method=RequestMethod.GET)
-	public String displayEditProfileForm(ModelMap modelHolder) {
+	public String displayEditProfileForm(ModelMap modelHolder, @ModelAttribute User user) {
 		if( ! modelHolder.containsAttribute("user")) {
 			modelHolder.addAttribute("user", new User());
+
 		}
+
 		return "editProfile";
 	}
 
 	//----------------------------------------------------------------- Edit Profile
 	@RequestMapping(path="/users/edit", method=RequestMethod.POST)
-	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash,
-							  @RequestParam String name, @RequestParam int height, @RequestParam int currentWeight,
-							  @RequestParam int desiredWeight, @RequestParam String goal, HttpSession session,
-							  HttpServletRequest request) {
+	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash, HttpSession session) {
 		if (result.hasErrors()) {
 			flash.addFlashAttribute("user", user);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
 			return "redirect:/users/edit";
 		}
 
-
-
 		User currentUser = (User) session.getAttribute("currentUser");
-		//request.setAttribute("user", currentUser);
 
-		userDAO.updateName(currentUser.getUserName(), name);
-		userDAO.updateHeight(currentUser.getUserName(), height);
-		userDAO.updateCurrentWeight(currentUser.getUserName(), currentWeight);
-		userDAO.updateDesiredWeight(currentUser.getUserName(), desiredWeight);
-		userDAO.updateGoal(currentUser.getUserName(), goal);
+		userDAO.updateProfile(currentUser.getUserName(), user);
+
+		session.setAttribute("currentUser", userDAO.getUserByUserName(currentUser.getUserName()));
 
 		return "redirect:/users/profile";
 	}
