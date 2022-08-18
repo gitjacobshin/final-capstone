@@ -6,7 +6,7 @@
 <script src="${validationJs}"></script>
 
 <c:url var="editProfileAction" value="/users/edit"/>
-<c:url var="addWorkoutAction" value="/users/workout"/>
+<c:url var="addWorkoutAction" value="/users/workout/addWorkout"/>
 
 <h1>Profile page</h1>
 

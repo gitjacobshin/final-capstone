@@ -18,7 +18,7 @@ public class User {
 	private String password;
 	private String role;
 
-	@NotBlank(message="Name is required")
+	//@NotBlank(message="Name is required")
 	private String name;
 
 	//@NotNull(message="Current weight is required")

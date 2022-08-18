@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class WorkoutController {
 
     //----------------------------------------------------------------- Display Add Workout Form
-    @RequestMapping(path="/workout/addWorkout", method= RequestMethod.GET)
+    @RequestMapping(path="/users/workout/addWorkout", method= RequestMethod.GET)
     public String displayAddWorkoutForm(ModelMap modelHolder) {
         if( ! modelHolder.containsAttribute("workout")) {
             modelHolder.addAttribute("workout", new Workout());
@@ -25,12 +25,12 @@ public class WorkoutController {
     }
 
     //----------------------------------------------------------------- Edit Add Workout Form
-    @RequestMapping(path="/workout/addWorkout", method=RequestMethod.POST)
+    @RequestMapping(path="/users/workout/addWorkout", method=RequestMethod.POST)
     public String editWorkout(@Valid @ModelAttribute Workout workout, BindingResult result, RedirectAttributes flash) {
         if (result.hasErrors()) {
             flash.addFlashAttribute("workout", workout);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "workout", result);
-            return "redirect:/workout/addWorkout";
+            return "redirect:/users/workout/addWorkout";
         }
 
         return "redirect:/users/profile";

@@ -6,7 +6,7 @@
 <c:url var="validationJs" value="/js/user-validation.js" />
 <script src="${validationJs}"></script>
 
-<c:url var="formAction" value="/workout/addWorkout" />
+<c:url var="formAction" value="/users/workout/addWorkout" />
 
 <c:set var="workout" scope="session" value="${workout}"/>
 
