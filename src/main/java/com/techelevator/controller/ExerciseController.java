@@ -26,7 +26,7 @@ public class ExerciseController {
 
 
     //----------------------------------------------------------------- Display Custom Exercise Form
-    @RequestMapping(path="/users/workout/custom-exercise", method= RequestMethod.GET)
+    @RequestMapping(path="/users/custom-exercise", method= RequestMethod.GET)
     public String displayCustomExerciseForm(ModelMap modelHolder) {
         if( ! modelHolder.containsAttribute("user")) {
             modelHolder.addAttribute("user", new User());
@@ -35,7 +35,7 @@ public class ExerciseController {
     }
 
     //----------------------------------------------------------------- Edit Custom Exercise Form
-    @RequestMapping(path="/users/workout/custom-exercise", method=RequestMethod.POST)
+    @RequestMapping(path="/users/custom-exercise", method=RequestMethod.POST)
     public String editCustomExercise(@Valid @ModelAttribute Exercise exercise, BindingResult result, RedirectAttributes flash) {
 //        if (result.hasErrors()) {
 //            flash.addFlashAttribute("user", user);
