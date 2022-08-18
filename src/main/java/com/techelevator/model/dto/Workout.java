@@ -7,6 +7,9 @@ public class Workout {
     private String profile_id;
     private String workoutName;
     private String workoutType;
+    private int workoutReps;
+    private int workoutSets;
+    private int workoutLength;
     private int totalCalories;
     private LocalDate date;
 
@@ -33,6 +36,30 @@ public class Workout {
 
     public void setWorkoutType(String workoutType) {
         this.workoutType = workoutType;
+    }
+
+    public int getWorkoutReps() {
+        return workoutReps;
+    }
+
+    public void setWorkoutReps(int workoutReps) {
+        this.workoutReps = workoutReps;
+    }
+
+    public int getWorkoutSets() {
+        return workoutSets;
+    }
+
+    public void setWorkoutSets(int workoutSets) {
+        this.workoutSets = workoutSets;
+    }
+
+    public int getWorkoutLength() {
+        return workoutLength;
+    }
+
+    public void setWorkoutLength(int workoutLength) {
+        this.workoutLength = workoutLength;
     }
 
     public int getTotalCalories() {

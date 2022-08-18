@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.model.dto.User;
+import com.techelevator.model.dto.Workout;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,23 +15,22 @@ import javax.validation.Valid;
 @Controller
 public class WorkoutController {
 
-
     //----------------------------------------------------------------- Display Add Workout Form
-    @RequestMapping(path="/users/workout", method= RequestMethod.GET)
+    @RequestMapping(path="/workout/addWorkout", method= RequestMethod.GET)
     public String displayAddWorkoutForm(ModelMap modelHolder) {
-        if( ! modelHolder.containsAttribute("user")) {
-            modelHolder.addAttribute("user", new User());
+        if( ! modelHolder.containsAttribute("workout")) {
+            modelHolder.addAttribute("workout", new Workout());
         }
-        return "addWorkout";
+        return "workoutForm";
     }
 
     //----------------------------------------------------------------- Edit Add Workout Form
-    @RequestMapping(path="/users/workout", method=RequestMethod.POST)
-    public String editWorkout(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
+    @RequestMapping(path="/workout/addWorkout", method=RequestMethod.POST)
+    public String editWorkout(@Valid @ModelAttribute Workout workout, BindingResult result, RedirectAttributes flash) {
         if (result.hasErrors()) {
-            flash.addFlashAttribute("user", user);
-            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-            return "redirect:/users/workout";
+            flash.addFlashAttribute("workout", workout);
+            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "workout", result);
+            return "redirect:/workout/addWorkout";
         }
 
         return "redirect:/users/profile";
