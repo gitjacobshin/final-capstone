@@ -100,6 +100,6 @@
 	</div>
 
 	<c:if test="${not empty currentUser}">
-		<p id="currentUser">Current User: ${currentUser}</p>
+		<p id="currentUser" style="font-weight:bold">Current User: ${currentUser.userName}</p>
 	</c:if>
-	<div class="container">
+	<div class="container" style="background-color: #f2f8fc">
