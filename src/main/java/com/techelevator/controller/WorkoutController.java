@@ -1,5 +1,7 @@
 package com.techelevator.controller;
 
+import com.techelevator.model.dao.UserDAO;
+import com.techelevator.model.dao.WorkoutDAO;
 import com.techelevator.model.dto.User;
 import com.techelevator.model.dto.Workout;
 import org.springframework.stereotype.Controller;
@@ -10,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
 public class WorkoutController {
+
+    private WorkoutDAO workoutDAO;
 
     //----------------------------------------------------------------- Display Add Workout Form
     @RequestMapping(path="/users/workout/addWorkout", method= RequestMethod.GET)
@@ -24,15 +29,25 @@ public class WorkoutController {
         return "workoutForm";
     }
 
-    //----------------------------------------------------------------- Edit Add Workout Form
+    //----------------------------------------------------------------- Add Workout Form
     @RequestMapping(path="/users/workout/addWorkout", method=RequestMethod.POST)
-    public String editWorkout(@Valid @ModelAttribute Workout workout, BindingResult result, RedirectAttributes flash) {
+    public String editWorkout(@Valid @ModelAttribute Workout workout, BindingResult result, RedirectAttributes flash, HttpSession session) {
         if (result.hasErrors()) {
             flash.addFlashAttribute("workout", workout);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "workout", result);
             return "redirect:/users/workout/addWorkout";
         }
+        User currentUser = (User) session.getAttribute("currentUser");
+        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
+
+
+
+        workoutDAO.updateWorkout(currentUser.getUserName(),currentWorkout ); //String userName, Workout workout
+
+        session.setAttribute("currentWorkout",  workoutDAO.updateWorkout(currentUser.getUserName()));
 
         return "redirect:/users/profile";
     }
+
+
 }
