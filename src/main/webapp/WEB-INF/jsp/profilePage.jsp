@@ -13,7 +13,7 @@
         <c:url var="imgSrc" value="/img/fitnesslogo.png" />
         <c:if test="${not empty currentUser}">
             <c:choose>
-                <c:when test="${ currentUser.name}">
+                <c:when test="${not empty currentUser.name}">
                     <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> ${currentUser.name}'s Page</a>
                 </c:when>
                 <c:otherwise>
@@ -32,8 +32,7 @@
                     <button type="submit" class="btn btn-primary">Edit Profile</button>
                 </form>
             </div>
-            <div> </div>
-            <div class="flex-column">
+            <div class="flex-column flex-column-style">
                 Workout History
                 <form method="GET" action="${addWorkoutAction}">
                     <button type="submit" class="btn btn-primary">Add Workout</button>
@@ -41,7 +40,8 @@
             </div>
         </div>
 
-        <div class="flex-column">
+
+        <div class="flex-column flex-column-style">
             Graph Data
 
         </div>

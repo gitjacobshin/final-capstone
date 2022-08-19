@@ -60,6 +60,7 @@ body {
 .flex-column {
    flex: 1;
    display: inline-block;
+   width: 90%;
 }
 
 .flex-column-profile {

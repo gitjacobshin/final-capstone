@@ -60,7 +60,16 @@
 					<div class="navbar-nav mr-auto">
 						<c:if test="${not empty currentUser}">
 							<c:url var="homePageHref" value="/users/profile" />
-							<td class="nav-item"><a class="nav-link" href="${homePageHref}">Home</a></td>
+							<c:choose>
+								<c:when test="${not empty currentUser.name}">
+									<td class="nav-item"><a class="nav-link" href="${homePageHref}">
+											${currentUser.name}'s Home Page</a></td>
+								</c:when>
+								<c:otherwise>
+									<td class="nav-item"><a class="nav-link" href="${homePageHref}">
+											${currentUser.userName}'s Home Page</a></td>
+								</c:otherwise>
+							</c:choose>
 							<c:url var="dashboardHref" value="/users/${currentUser}" />
 							<td class="nav-item"><a class="nav-link" href="${dashboardHref}">Private Messages</a></td>
 							<c:url var="newMessageHref"
@@ -100,6 +109,13 @@
 	</div>
 
 	<c:if test="${not empty currentUser}">
-		<p id="currentUser" style="font-weight:bold">Current User: ${currentUser.userName}</p>
+		<c:choose>
+			<c:when test="${not empty currentUser.name}">
+				<p id="currentUser" style="font-weight:bold">Current User: ${currentUser.name}</p>
+			</c:when>
+			<c:otherwise>
+				<p id="currentUser" style="font-weight:bold">Current User: ${currentUser.userName}</p>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 	<div class="container">
