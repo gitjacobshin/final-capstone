@@ -39,11 +39,10 @@ DROP TABLE IF EXISTS exercise;
 CREATE TABLE exercise (
                           id SERIAL PRIMARY KEY,
                           workout_id int NOT NULL,
-                          exercise_name varchar(32) NOT NULL,
+                          exercise_name varchar(32) NOT NULL UNIQUE,
                           calories int,
                           reps int,
-                          sets int,
-                          category varchar(32)
+                          sets int
 );
 
 

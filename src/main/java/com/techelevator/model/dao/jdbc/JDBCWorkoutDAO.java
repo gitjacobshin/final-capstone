@@ -92,8 +92,8 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
                         "ON u.id = w.profile_id "+
                         "WHERE UPPER(user_name) = ? " +
                         "AND workout_name = ?",
-                workout.getWorkoutName(), workout.getWorkoutType(),
-                workout.getTotalCalories(), workout.getDate(), userName);
+                workout.getWorkoutName(), workout.getWorkoutType(), workout.getDate(),
+                userName, workout.getWorkoutName());
     }
 
     @Override

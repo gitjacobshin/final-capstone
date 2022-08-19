@@ -18,15 +18,8 @@
         <div class="col-sm-4">
 
             <div class="form-group">
-                <label for="category">WE ARE NOW IN THE CUSTOM EXERCISE PAGE: </label>
-                <select name="category" id="category" class="form-control">
-                    <option value="Arms">Arms</option>
-                    <option value="Legs">Legs</option>
-                    <option value="Core">Core</option>
-                    <option value="Cardio">Cardio</option>
-                    <option value="Rest">Rest</option>
-                </select>
-
+                <label for="exerciseName">Exercise Name: </label>
+                <input type="text" id="exerciseName" value="${exercise.exerciseName}" name="exerciseName" placeHolder="Exercise Name" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -40,8 +33,8 @@
             </div>
 
             <div class="form-group">
-                <label for="exerciseName">Exercise Name: </label>
-                <input type="text" id="exerciseName" value="${exercise.exerciseName}" name="exerciseName" placeHolder="Exercise Name" class="form-control" />
+                <label for="calories">calories: </label>
+                <input type="text" id="calories" value="${exercise.calories}" name="calories" placeHolder="Calories" class="form-control" />
             </div>
 
             <button type="submit" class="btn btn-primary">Create Exercise</button>
