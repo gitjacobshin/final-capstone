@@ -1,6 +1,7 @@
 package com.techelevator.model.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -35,8 +36,8 @@ public class User {
 	private int height;
 
 //	@NotNull(message="Birthday is required")
-//	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private LocalDate birthdate;
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String birthdate;
 
 	private String confirmPassword;
 
@@ -45,17 +46,36 @@ public class User {
 
 	private String updateUsername;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
 
-	/**
-	 * @return the role
-	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getRole() {
 		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getName() {
@@ -90,27 +110,19 @@ public class User {
 		this.height = height;
 	}
 
-	public LocalDate getBirthDate() {
-		return birthdate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthdate = birthDate;
-	}
-
-	public int getAge() {
-		if (birthdate.getMonthValue() < LocalDate.now().getMonthValue()
-				&& birthdate.getDayOfMonth() < LocalDate.now().getDayOfMonth()
-				&&  birthdate.getYear() < LocalDate.now().getYear()) {
-
-			age = LocalDate.now().getYear() - birthdate.getYear();
-
-		} else {
-			age = (LocalDate.now().getYear() - birthdate.getYear()) - 1;
-
-		}
-		return age;
-	}
+//	public int getAge() {
+//		if (birthdate.getMonthValue() < LocalDate.now().getMonthValue()
+//				&& birthdate.getDayOfMonth() < LocalDate.now().getDayOfMonth()
+//				&&  birthdate.getYear() < LocalDate.now().getYear()) {
+//
+//			age = LocalDate.now().getYear() - birthdate.getYear();
+//
+//		} else {
+//			age = (LocalDate.now().getYear() - birthdate.getYear()) - 1;
+//
+//		}
+//		return age;
+//	}
 
 	public void setAge(int age) {
 		this.age = age;
@@ -132,22 +144,18 @@ public class User {
 		this.updateUsername = updateUsername;
 	}
 
+	public String getBirthdate() {
+		return birthdate;
+	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public String getConfirmPassword() {
 		return confirmPassword;
 	}
+
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}

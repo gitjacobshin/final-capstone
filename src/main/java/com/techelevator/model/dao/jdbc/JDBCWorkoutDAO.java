@@ -73,7 +73,7 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
             thisWorkout.setWorkoutName(workout.getString("workout_name"));
             thisWorkout.setWorkoutType(workout.getString("workout_type"));
             thisWorkout.setTotalCalories(workout.getInt("total_calories"));
-//            thisWorkout.setDate(workout.getDate("date"));
+//          thisWorkout.setDate(workout.getDate("date"));
         }
 
         return thisWorkout;
@@ -83,8 +83,8 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
     public void updateWorkout(String userName, Workout workout) {
         jdbcTemplate.update("UPDATE workout " +
                         "SET workout_name = ?, " +
-                        "workout_type = ?, " +
-                        "total_calories = ? " +
+                        "workout_type = ? " +
+//                        "total_calories = ? " +
                         "FROM app_user as u " +
                         "LEFT JOIN workout w " +
                         "ON u.id = w.profile_id "+

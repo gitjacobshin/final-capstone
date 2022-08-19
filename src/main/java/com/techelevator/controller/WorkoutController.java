@@ -20,9 +20,10 @@ import javax.validation.Valid;
 public class WorkoutController {
 
     private WorkoutDAO workoutDAO;
+    private UserDAO userDAO;
 
     //----------------------------------------------------------------- Display Add Workout Form
-    @RequestMapping(path="/users/workout/workoutForm", method= RequestMethod.GET)
+    @RequestMapping(path="/users/workout/newWorkoutForm", method= RequestMethod.GET)
     public String displayAddWorkoutForm(ModelMap modelHolder) {
         if( ! modelHolder.containsAttribute("workout")) {
             modelHolder.addAttribute("workout", new Workout());
@@ -41,7 +42,7 @@ public class WorkoutController {
 
         User currentUser = (User) session.getAttribute("currentUser");
 
-//        workoutDAO.createWorkout(currentUser.getUserName(), workout);
+//        workoutDAO.createWorkout(userDAO.getUserByUserName(currentUser.getUserName()) , workout);
 
         return "redirect:/login";
     }

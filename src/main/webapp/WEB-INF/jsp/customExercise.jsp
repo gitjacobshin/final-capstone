@@ -31,17 +31,17 @@
 
             <div class="form-group">
                 <label for="reps">Reps: </label>
-                <input type="text" id="reps" value="${workout.reps}" name="reps" placeHolder="Reps" class="form-control" />
+                <input type="text" id="reps" value="${exercise.reps}" name="reps" placeHolder="Reps" class="form-control" />
             </div>
 
             <div class="form-group">
                 <label for="sets">sets: </label>
-                <input type="text" id="sets" value="${workout.sets}" name="sets" placeHolder="Sets" class="form-control" />
+                <input type="text" id="sets" value="${exercise.sets}" name="sets" placeHolder="Sets" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label for="workoutName">Name: </label>
-                <input type="text" id="workoutName" value="${workout.workoutName}" name="workoutName" placeHolder="Workout Name" class="form-control" />
+                <label for="exerciseName">Exercise Name: </label>
+                <input type="text" id="exerciseName" value="${exercise.exerciseName}" name="exerciseName" placeHolder="Exercise Name" class="form-control" />
             </div>
 
             <button type="submit" class="btn btn-primary">Create Exercise</button>

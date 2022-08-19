@@ -117,6 +117,7 @@ public class JDBCUserDAO implements UserDAO
 			thisUser.setHeight(user.getInt("height"));
 			thisUser.setCurrentWeight(user.getInt("current_weight"));
 			thisUser.setDesiredWeight(user.getInt("desired_weight"));
+			thisUser.setBirthdate(user.getString("birthdate"));
 			thisUser.setGoal(user.getString("goal"));
 		}
 
@@ -143,7 +144,7 @@ public class JDBCUserDAO implements UserDAO
 				" goal = ?, " +
 				" birthdate =  ?" +
 				" WHERE user_name = ?",
-				user.getName(), user.getHeight(), user.getCurrentWeight(), user.getDesiredWeight(), user.getGoal(), user.getBirthDate(), userName);
+				user.getName(), user.getHeight(), user.getCurrentWeight(), user.getDesiredWeight(), user.getGoal(), user.getBirthdate(), userName);
 	}
 
 }
