@@ -4,10 +4,12 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class User {
 
+	private int id;
 	private String userName;
 
 	@Size(min=8, message="Password too short, must be at least 8")

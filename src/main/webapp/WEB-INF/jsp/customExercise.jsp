@@ -8,8 +8,7 @@
 
 <c:url var="formAction" value="/users/custom-exercise" />
 
-<c:set var="workout" scope="session" value="${workout}"/>
-
+<c:set var="exercise" scope="session" value="${exercise}"/>
 
 <form method="POST" action="${formAction}">
     <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
@@ -19,8 +18,8 @@
         <div class="col-sm-4">
 
             <div class="form-group">
-                <label for="workoutType">WE ARE NOW IN THE CUSTOM EXERCISE PAGE: </label>
-                <select name="workoutType" id="workoutType" class="form-control">
+                <label for="category">WE ARE NOW IN THE CUSTOM EXERCISE PAGE: </label>
+                <select name="category" id="category" class="form-control">
                     <option value="Arms">Arms</option>
                     <option value="Legs">Legs</option>
                     <option value="Core">Core</option>
@@ -31,27 +30,21 @@
             </div>
 
             <div class="form-group">
-                <label for="workoutReps">Reps: </label>
-                <input type="text" id="workoutReps" value="${workout.workoutReps}" name="workoutReps" placeHolder="Workout Reps" class="form-control" />
+                <label for="reps">Reps: </label>
+                <input type="text" id="reps" value="${workout.reps}" name="reps" placeHolder="Reps" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label for="workoutSets">sets: </label>
-                <input type="text" id="workoutSets" value="${workout.workoutSets}" name="workoutSets" placeHolder="Workout Sets" class="form-control" />
+                <label for="sets">sets: </label>
+                <input type="text" id="sets" value="${workout.sets}" name="sets" placeHolder="Sets" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label for="workoutLength">Length: </label>
-                <input type="text" id="workoutLength" value="${workout.workoutLength}" name="workoutLength" placeHolder="Workout Length" class="form-control" />
+                <label for="workoutName">Name: </label>
+                <input type="text" id="workoutName" value="${workout.workoutName}" name="workoutName" placeHolder="Workout Name" class="form-control" />
             </div>
 
-
-            <div class="form-group">
-                <label for="date">Date: </label>
-                <input type="date" id="date" name="date" placeHolder="Date" class="form-control" />
-            </div>
-
-            <button type="submit" class="btn btn-primary">Create Workout</button>
+            <button type="submit" class="btn btn-primary">Create Exercise</button>
 
         </div>
         <div class="col-sm-4"></div>

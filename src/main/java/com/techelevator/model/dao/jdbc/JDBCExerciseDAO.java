@@ -21,9 +21,8 @@ public class JDBCExerciseDAO implements ExerciseDAO {
     @Override
     public void saveExercise(String exerciseName, int calories, int reps, int sets, String category) {
 
-        jdbcTemplate.update("INSERT INTO exercise(exercise_name, calories, reps, sets, category) VALUES (?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO exercise(name, calories, reps, sets, category) VALUES (?, ?, ?, ?, ?)",
                 exerciseName, calories, reps, sets, category);
-
     }
 
 

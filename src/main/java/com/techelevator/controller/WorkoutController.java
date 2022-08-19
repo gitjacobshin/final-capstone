@@ -41,7 +41,7 @@ public class WorkoutController {
 
         User currentUser = (User) session.getAttribute("currentUser");
 
-//        workoutDAO.createWorkout(currentUser.getUserName(), );
+//        workoutDAO.createWorkout(currentUser.getUserName(), workout);
 
         return "redirect:/login";
     }
@@ -64,6 +64,4 @@ public class WorkoutController {
 
         return "redirect:/users/profile";
     }
-
-
 }
