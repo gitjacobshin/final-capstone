@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 public class User {
 
+	private int id;
 	private String userName;
 
 	@Size(min=8, message="Password too short, must be at least 8")

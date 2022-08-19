@@ -95,18 +95,21 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
     }
 
 //    @Override
-//    public Object createWorkout(String userName, String workoutName, String workoutType) {
-//        jdbcTemplate.update("UPDATE workout " +
+//    public void createWorkout(String userId, Workout workout) {
+//        jdbcTemplate.update(
+//                "INSERT INTO workout(profile_id, workout_name, workout_type) VALUES (?, ?, ?)",
+//                userId , workout.getWorkoutName(), workout.getWorkoutType());
+//                "UPDATE workout " +
 //                        "SET workout_name = ?, " +
-//                        "workout_type = ?, " +
-//                        "total_calories = ? " +
+//                        "workout_type = ? " +
+////                      "total_calories = ? " +
+////                      "date = ? " +
 //                        "FROM app_user as u " +
 //                        "LEFT JOIN workout w " +
 //                        "ON u.id = w.profile_id "+
 //                        "WHERE UPPER(user_name) = ? " +
 //                        "AND workout_name = ?",
-//                workout.getWorkoutName(), workout.getWorkoutType(),
-//                workout.getTotalCalories(), userName);
+//                workout.getWorkoutName(), workout.getWorkoutType(), userName);
 //    }
 //
 //    @Override
