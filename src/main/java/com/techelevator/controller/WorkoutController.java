@@ -4,10 +4,10 @@ import com.techelevator.model.dao.UserDAO;
 import com.techelevator.model.dao.WorkoutDAO;
 import com.techelevator.model.dto.User;
 import com.techelevator.model.dto.Workout;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,9 @@ import javax.validation.Valid;
 @Controller
 public class WorkoutController {
 
+    @Autowired
     private WorkoutDAO workoutDAO;
+    @Autowired
     private UserDAO userDAO;
 
     //----------------------------------------------------------------- Display Add Workout Form
@@ -36,33 +38,35 @@ public class WorkoutController {
 
         if(result.hasErrors()) {
             flash.addFlashAttribute("workout", workout);
-            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-            return "redirect:/users/workoutForm";
-        }
-
-        User currentUser = (User) session.getAttribute("currentUser");
-
-//        workoutDAO.createWorkout(userDAO.getUserByUserName(currentUser.getUserName()) , workout);
-
-        return "redirect:/login";
-    }
-
-    //----------------------------------------------------------------- Add Workout Form
-    @RequestMapping(path="/users/workout/workoutForm", method=RequestMethod.POST)
-    public String editWorkout(@Valid @ModelAttribute Workout workout, BindingResult result, RedirectAttributes flash, HttpSession session) {
-        if (result.hasErrors()) {
-            flash.addFlashAttribute("workout", workout);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "workout", result);
-            return "redirect:/users/workout/workoutForm";
+            return "redirect:/users/workout/newWorkoutForm";
         }
+
         User currentUser = (User) session.getAttribute("currentUser");
 
-        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
+        workoutDAO.createWorkout(currentUser, workout);
 
-        workoutDAO.updateWorkout(currentUser.getUserName(), currentWorkout);
-
-        session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(), currentWorkout.getWorkoutName()));
+        session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(), workout.getWorkoutName()));
 
         return "redirect:/users/profile";
     }
+
+//    //----------------------------------------------------------------- Add Workout Form
+//    @RequestMapping(path="/users/workout/newWorkoutForm", method=RequestMethod.POST)
+//    public String editWorkout(@Valid @ModelAttribute Workout workout, BindingResult result, RedirectAttributes flash, HttpSession session) {
+//        if (result.hasErrors()) {
+//            flash.addFlashAttribute("workout", workout);
+//            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "workout", result);
+//            return "redirect:/users/workout/newWorkoutForm";
+//        }
+//        User currentUser = (User) session.getAttribute("currentUser");
+//
+//        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
+//
+//        workoutDAO.updateWorkout(currentUser.getUserName(), currentWorkout);
+//
+//        session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(), currentWorkout.getWorkoutName()));
+//
+//        return "redirect:/users/profile";
+//    }
 }

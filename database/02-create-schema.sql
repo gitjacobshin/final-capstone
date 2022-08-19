@@ -17,7 +17,7 @@ CREATE TABLE app_user (
   desired_weight int,
   age int,
   height int,
-  birthdate varchar(15),
+  birthdate date,
   salt varchar(255) NOT NULL,
   goal varchar(300),
   profile_pic varchar(300)
@@ -31,7 +31,7 @@ CREATE TABLE workout (
                           workout_name varchar(32) NOT NULL UNIQUE,
                           workout_type varchar(32),
                           total_calories int,
-                          date DATE
+                          date date
 );
 
 DROP TABLE IF EXISTS exercise;
@@ -39,11 +39,10 @@ DROP TABLE IF EXISTS exercise;
 CREATE TABLE exercise (
                           id SERIAL PRIMARY KEY,
                           workout_id int NOT NULL,
-                          exercise_name varchar(32) NOT NULL,
+                          exercise_name varchar(32) NOT NULL UNIQUE,
                           calories int,
                           reps int,
-                          sets int,
-                          category varchar(32)
+                          sets int
 );
 
 

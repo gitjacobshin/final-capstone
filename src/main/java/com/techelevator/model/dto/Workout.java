@@ -1,5 +1,7 @@
 package com.techelevator.model.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Workout {
@@ -8,6 +10,7 @@ public class Workout {
     private String workoutName;
     private String workoutType;
     private int totalCalories;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
     public int getId() {
