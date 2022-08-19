@@ -6,34 +6,49 @@
 <script src="${validationJs}"></script>
 
 <c:url var="editProfileAction" value="/users/edit"/>
-<c:url var="addWorkoutAction" value="/users/workout/addWorkout"/>
+<c:url var="addWorkoutAction" value="/users/workout/workoutForm"/>
+<c:url var="uploadImageAction" value="/users/upload"/>
+
+<c:if test="${not empty currentUser}">
+    <c:choose>
+        <c:when test="${not empty currentUser.name}">
+            <c:set var="displayName" value="${currentUser.name}"/>
+        </c:when>
+        <c:otherwise>
+            <c:set var="displayName" value="${currentUser.userName}"/>
+        </c:otherwise>
+    </c:choose>
+</c:if>
 
 <div class="page-background">
     <h1>
         <c:url var="imgSrc" value="/img/fitnesslogo.png" />
-        <c:if test="${not empty currentUser}">
-            <c:choose>
-                <c:when test="${not empty currentUser.name}">
-                    <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> ${currentUser.name}'s Page</a>
-                </c:when>
-                <c:otherwise>
-                    <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> ${currentUser.userName}'s Page</a>
-                </c:otherwise>
-            </c:choose>
-        </c:if>
+        <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> ${displayName}'s Page</a>
 
     </h1>
     <div class="flex-container flex-container-style">
 
         <div class="flex-column-profile">
             <div class="flex-column flex-column-style">
-                Profile Info
+                <h4 class="section-header">${displayName}'s Info</h4>
+
+                <table>
+                    <td>
+                        <img src="imgSrc" alt="Profile Pic"/>
+                        <form method="GET" action="${uploadImageAction}">
+                            <button type="submit" class="btn btn-primary">Edit Image</button>
+                        </form>
+                    </td>
+                </table>
+
                 <form method="GET" action="${editProfileAction}">
                     <button type="submit" class="btn btn-primary">Edit Profile</button>
                 </form>
+
+
             </div>
             <div class="flex-column flex-column-style">
-                Workout History
+               <h4 class="section-header">Workout History</h4>
                 <form method="GET" action="${addWorkoutAction}">
                     <button type="submit" class="btn btn-primary">Add Workout</button>
                 </form>
@@ -42,7 +57,7 @@
 
 
         <div class="flex-column flex-column-style">
-            Graph Data
+            <h4 class="section-header">Graph Data</h4>
 
         </div>
     </div>

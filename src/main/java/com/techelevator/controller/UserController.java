@@ -118,4 +118,15 @@ public class UserController {
 		return "redirect:/users/profile";
 	}
 
+	//----------------------------------------------------------------- Profile Pic Upload Page
+	@RequestMapping(path="/users/upload", method=RequestMethod.GET)
+	public String displayUploadImageForm(ModelMap modelHolder, @ModelAttribute User user) {
+		if( ! modelHolder.containsAttribute("user")) {
+			modelHolder.addAttribute("user", new User());
+
+		}
+
+		return "uploadImage";
+	}
+
 }
