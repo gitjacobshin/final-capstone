@@ -3,7 +3,6 @@ package com.techelevator.model.dao.jdbc;
 import com.techelevator.model.dao.WorkoutDAO;
 import com.techelevator.model.dto.User;
 import com.techelevator.model.dto.Workout;
-import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -73,7 +72,9 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
             thisWorkout.setWorkoutName(workout.getString("workout_name"));
             thisWorkout.setWorkoutType(workout.getString("workout_type"));
             thisWorkout.setTotalCalories(workout.getInt("total_calories"));
-//          thisWorkout.setDate(workout.getDate("date"));
+            if(workout.getDate("date") != null) {
+                thisWorkout.setDate(workout.getDate("date").toLocalDate());
+            }
         }
 
         return thisWorkout;
@@ -83,7 +84,8 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
     public void updateWorkout(String userName, Workout workout) {
         jdbcTemplate.update("UPDATE workout " +
                         "SET workout_name = ?, " +
-                        "workout_type = ? " +
+                        "workout_type = ?, " +
+                        "date = ? " +
 //                        "total_calories = ? " +
                         "FROM app_user as u " +
                         "LEFT JOIN workout w " +
@@ -91,14 +93,14 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
                         "WHERE UPPER(user_name) = ? " +
                         "AND workout_name = ?",
                 workout.getWorkoutName(), workout.getWorkoutType(),
-                workout.getTotalCalories(), userName);
+                workout.getTotalCalories(), workout.getDate(), userName);
     }
 
-//    @Override
-//    public void createWorkout(String userId, Workout workout) {
-//        jdbcTemplate.update(
-//                "INSERT INTO workout(profile_id, workout_name, workout_type) VALUES (?, ?, ?)",
-//                userId , workout.getWorkoutName(), workout.getWorkoutType());
+    @Override
+    public void createWorkout(User user, Workout workout) {
+        jdbcTemplate.update(
+                "INSERT INTO workout(profile_id, workout_name, workout_type, date) VALUES (?, ?, ?, ?)",
+                user.getId() , workout.getWorkoutName(), workout.getWorkoutType(), workout.getDate());
 //                "UPDATE workout " +
 //                        "SET workout_name = ?, " +
 //                        "workout_type = ? " +
@@ -106,12 +108,12 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
 ////                      "date = ? " +
 //                        "FROM app_user as u " +
 //                        "LEFT JOIN workout w " +
-//                        "ON u.id = w.profile_id "+
+//                        "ON u.id = w.profile_id " +
 //                        "WHERE UPPER(user_name) = ? " +
 //                        "AND workout_name = ?",
 //                workout.getWorkoutName(), workout.getWorkoutType(), userName);
-//    }
-//
+    }
+
 //    @Override
 //    public void saveUser(String userName, String password) {
 //        byte[] salt = hashMaster.generateRandomSalt();

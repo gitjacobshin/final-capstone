@@ -37,7 +37,8 @@ public class User {
 
 //	@NotNull(message="Birthday is required")
 //	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String birthdate;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate birthdate;
 
 	private String confirmPassword;
 
@@ -110,19 +111,19 @@ public class User {
 		this.height = height;
 	}
 
-//	public int getAge() {
-//		if (birthdate.getMonthValue() < LocalDate.now().getMonthValue()
-//				&& birthdate.getDayOfMonth() < LocalDate.now().getDayOfMonth()
-//				&&  birthdate.getYear() < LocalDate.now().getYear()) {
-//
-//			age = LocalDate.now().getYear() - birthdate.getYear();
-//
-//		} else {
-//			age = (LocalDate.now().getYear() - birthdate.getYear()) - 1;
-//
-//		}
-//		return age;
-//	}
+	public int getAge() {
+		if (birthdate.getMonthValue() < LocalDate.now().getMonthValue()
+				&& birthdate.getDayOfMonth() < LocalDate.now().getDayOfMonth()
+				&&  birthdate.getYear() < LocalDate.now().getYear()) {
+
+			age = LocalDate.now().getYear() - birthdate.getYear();
+
+		} else {
+			age = (LocalDate.now().getYear() - birthdate.getYear()) - 1;
+
+		}
+		return age;
+	}
 
 	public void setAge(int age) {
 		this.age = age;
@@ -137,11 +138,11 @@ public class User {
 	}
 
 
-	public String getBirthdate() {
+	public LocalDate getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(LocalDate birthdate) {
 		this.birthdate = birthdate;
 	}
 
