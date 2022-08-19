@@ -147,4 +147,10 @@ public class JDBCUserDAO implements UserDAO
 				user.getName(), user.getHeight(), user.getCurrentWeight(), user.getDesiredWeight(), user.getGoal(), user.getBirthdate(), userName);
 	}
 
+	@Override
+	public void updateProfilePic(String userName, String profilePic) {
+
+
+	}
+
 }

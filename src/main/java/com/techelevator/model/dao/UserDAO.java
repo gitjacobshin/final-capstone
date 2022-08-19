@@ -33,4 +33,6 @@ public interface UserDAO {
 	boolean isUserNameAvailable(String userName);
 
 	public void updateProfile(String userName, User user);
+
+	public void updateProfilePic(String userName, String profilePic);
 }

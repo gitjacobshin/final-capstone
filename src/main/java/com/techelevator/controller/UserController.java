@@ -120,11 +120,17 @@ public class UserController {
 
 	//----------------------------------------------------------------- Profile Pic Upload Page
 	@RequestMapping(path="/users/upload", method=RequestMethod.GET)
-	public String displayUploadImageForm(ModelMap modelHolder, @ModelAttribute User user) {
+	public String displayUploadImageForm(ModelMap modelHolder, @ModelAttribute User user, @RequestParam String profilePic, HttpSession session) {
 		if( ! modelHolder.containsAttribute("user")) {
 			modelHolder.addAttribute("user", new User());
 
 		}
+
+		User currentUser = (User) session.getAttribute("currentUser");
+
+		userDAO.updateProfilePic(currentUser.getUserName(), profilePic);
+
+		session.setAttribute("currentUser", userDAO.getUserByUserName(currentUser.getUserName()));
 
 		return "uploadImage";
 	}

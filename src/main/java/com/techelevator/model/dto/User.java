@@ -44,7 +44,7 @@ public class User {
 	//@NotBlank(message="Please enter a goal")
 	private String goal;
 
-	private String updateUsername;
+	private String profilePic;
 
 	public int getId() {
 		return id;
@@ -136,13 +136,6 @@ public class User {
 		this.goal = goal;
 	}
 
-	public String getUpdateUsername() {
-		return updateUsername;
-	}
-
-	public void setUpdateUsername(String updateUsername) {
-		this.updateUsername = updateUsername;
-	}
 
 	public String getBirthdate() {
 		return birthdate;
@@ -150,6 +143,14 @@ public class User {
 
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 	public String getConfirmPassword() {
