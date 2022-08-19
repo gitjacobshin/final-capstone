@@ -6,7 +6,7 @@
 <script src="${validationJs}"></script>
 
 <c:url var="editProfileAction" value="/users/edit"/>
-<c:url var="addWorkoutAction" value="/users/workout/workoutForm"/>
+<c:url var="addWorkoutAction" value="/users/workout/newWorkoutForm"/>
 <c:url var="uploadImageAction" value="/users/upload"/>
 
 <c:if test="${not empty currentUser}">
