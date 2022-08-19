@@ -6,7 +6,7 @@
 <c:url var="validationJs" value="/js/user-validation.js" />
 <script src="${validationJs}"></script>
 
-<c:url var="addingWorkout" value="/users/workout/workoutForm" />
+<c:url var="addingWorkout" value="/users/workout/newWorkoutForm" />
 <c:url var="customExercise" value="/users/custom-exercise" />
 
 <c:set var="workout" scope="session" value="${workout}"/>
@@ -18,7 +18,7 @@
         <div class="col-sm-4 form-column">
 
             <div class="form-group">
-                <label for="workoutType">Type: WE ARE NOW IN WORKOUT FORM!!!!!!!!!!!!!!!!!!!!</label>
+                <label for="workoutType">Type: </label>
                 <select name="workoutType" id="workoutType" class="form-control">
                     <option value="Arms">Arms</option>
                     <option value="Legs">Legs</option>
@@ -30,20 +30,9 @@
             </div>
 
             <div class="form-group">
-                <label for="workoutReps">Reps: </label>
-                <input type="text" id="workoutReps" value="${workout.workoutReps}" name="workoutReps" placeHolder="Workout Reps" class="form-control" />
+                <label for="workoutName">Workout Name: </label>
+                <input type="text" id="workoutName" value="${workout.workoutName}" name="workoutName" placeHolder="Workout Name" class="form-control" />
             </div>
-
-            <div class="form-group">
-                <label for="workoutSets">sets: </label>
-                <input type="text" id="workoutSets" value="${workout.workoutSets}" name="workoutSets" placeHolder="Workout Sets" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label for="workoutLength">Length: </label>
-                <input type="text" id="workoutLength" value="${workout.workoutLength}" name="workoutLength" placeHolder="Workout Length" class="form-control" />
-            </div>
-
 
             <div class="form-group">
                 <label for="date">Date: </label>

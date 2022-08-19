@@ -41,8 +41,8 @@
             </div>
 
             <div class="form-group">
-                <label for="birthdate">Birthday: </label>
-                <input type="date" id="birthdate" name="birthdate" value="${currentUser.birthdate}" placeHolder="Birthdate" class="form-control" />
+                <label for="birthdate">Birthday (yyyy-MM-dd): </label>
+                <input type="text" id="birthdate" name="birthdate" value="${currentUser.birthdate}" placeHolder="Birthdate" class="form-control" />
             </div>
 
             <div class="form-group">
