@@ -153,7 +153,6 @@ public class JDBCUserDAO implements UserDAO
 				"SET profile_pic = ?" +
 				" WHERE user_name = ?",
 				profilePic, userName
-
 		);
 
 	}

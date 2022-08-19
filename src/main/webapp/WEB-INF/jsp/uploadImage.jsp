@@ -8,13 +8,13 @@
 <c:set var="currentUser" scope="session" value="${currentUser}"/>
 
 
-<form:form modelAttribute="user" method="POST" action="${formAction}">
+<form:form modelAttribute="user" method="POST" action="${formAction}" enctype="multipart/form-data">
     <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
     <div class="form-container">
         <div class="form-column">
             <div class="form-group">
-                <label for="profilePic">Insert Profile Picture </label>
-                <input type="file" name="profilePic" id="profilePic"/>
+                <label for="file">Insert Profile Picture </label>
+                <input type="file" name="file" id="file"/>
             </div>
             <a href="${profileAction}" class="btn btn-primary">Cancel</a>
             <button type="submit" class="btn btn-primary">Update User</button>

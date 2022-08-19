@@ -34,7 +34,8 @@
 
                 <table>
                     <td>
-                        <img src="imgSrc" alt="Profile Pic"/>
+                        <c:url var="profPic" value="img/uploads/${currentUser.profilePic}"/>
+                        <img src="${profPic}" alt="Profile Pic"/>
                         <form method="GET" action="${uploadImageAction}">
                             <button type="submit" class="btn btn-primary">Edit Image</button>
                         </form>

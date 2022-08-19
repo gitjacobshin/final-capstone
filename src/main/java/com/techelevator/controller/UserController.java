@@ -1,12 +1,7 @@
-
-
 package com.techelevator.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import com.techelevator.model.dao.ExerciseDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import com.techelevator.services.uploads.UploadProvider;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.techelevator.model.dto.User;
@@ -25,10 +22,12 @@ import com.techelevator.model.dao.UserDAO;
 public class UserController {
 
 	private UserDAO userDAO;
+	private UploadProvider uploadProvider;
 
 	@Autowired
-	public UserController(UserDAO userDAO) {
+	public UserController(UserDAO userDAO, UploadProvider uploadProvider) {
 		this.userDAO = userDAO;
+		this.uploadProvider = uploadProvider;
 	}
 
 	//-------------------------------------------------------------------REGISTERING
@@ -39,7 +38,7 @@ public class UserController {
 		}
 		return "newUser";
 	}
-	
+
 	@RequestMapping(path="/users/new", method=RequestMethod.POST)
 	public String createUser(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
 
@@ -130,22 +129,35 @@ public class UserController {
 	}
 
 	//----------------------------------------------------------------- Profile Pic Upload
-	@RequestMapping(path="/users/upload", method=RequestMethod.POST)
-	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash, HttpSession session,
-							  @RequestParam String profilePic) {
-		if (result.hasErrors()) {
-			flash.addFlashAttribute("user", user);
-			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-			return "redirect:/users/upload";
-		}
+	@RequestMapping(value="/users/upload", method = RequestMethod.POST)
+	public String updateImage(@RequestParam(required = false) MultipartFile file, HttpSession session) {
 
 		User currentUser = (User) session.getAttribute("currentUser");
 
-		userDAO.updateProfilePic(currentUser.getUserName(), profilePic);
+		if (file != null && !file.isEmpty()) {
+			try {
+				// file name from username
+				String defaultFileName = currentUser.getUserName();
 
-		session.setAttribute("currentUser", userDAO.getUserByUserName(currentUser.getUserName()));
+				//save the file with the chosen name
+				String fileName = uploadProvider.uploadFile(file, defaultFileName);
+
+				//update the database with the saved file name
+
+				userDAO.updateProfilePic(currentUser.getUserName(), fileName);
+
+				session.setAttribute("currentUser", userDAO.getUserByUserName(currentUser.getUserName()));
+
+				return "redirect:/users/profile";
+			} catch (Throwable ex) {
+
+			}
+		} else {
+			return "redirect:/users/upload";
+		}
 
 		return "redirect:/users/profile";
 	}
+
 
 }

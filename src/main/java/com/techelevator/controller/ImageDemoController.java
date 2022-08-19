@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import com.techelevator.model.dao.UserDAO;
 import com.techelevator.model.dto.User;
 import com.techelevator.services.uploads.UploadProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,7 @@ public class ImageDemoController
             try
             {
                 //come up with a file name first
-                String defaultFileName = currentUser.getName();
-
+                String defaultFileName = currentUser.getUserName();
 
                 //save the file with the chosen name
                 String fileName = uploadProvider.uploadFile( file, defaultFileName );
