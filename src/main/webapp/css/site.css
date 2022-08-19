@@ -44,18 +44,34 @@ body {
    flex-wrap: wrap;
    text-align: center;
    height: 100%;
+}
+
+.flex-container-profile {
+   flex-direction: column;
+   width: 100%;
+}
+
+.flex-container-style {
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
    border-radius: 20px;
-
+   padding: 20px;
 }
 
 .flex-column {
    flex: 1;
    display: inline-block;
+}
+
+.flex-column-profile {
+   flex: 1;
+   display: inline-block;
+   flex-direction: column;
+}
+
+.flex-column-style {
    background: #2474ad;
    margin: 20px;
    border-radius: 30px;
-
 }
 
 .img-tile {

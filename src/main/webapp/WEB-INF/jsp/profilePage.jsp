@@ -11,27 +11,33 @@
 <div class="page-background">
     <h1>
         <c:url var="imgSrc" value="/img/fitnesslogo.png" />
-        <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> Profile Page</a>
-    </h1>
-    <div class="flex-container">
+        <c:if test="${not empty currentUser}">
+            <c:if test="${not empty currentUser.name}">
+                <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/>${currentUser.name}'s Page</a>
+            </c:if>
+            <c:otherwise>
+                <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/>${currentUser.userName}'s Page</a>
+            </c:otherwise>
+        </c:if>
 
-        <div class="flex-column">
-            <div>
+    </h1>
+    <div class="flex-container flex-container-style">
+
+        <div class="flex-column-profile">
+            <div class="flex-column flex-column-style">
                 Profile Info
                 <form method="GET" action="${editProfileAction}">
                     <button type="submit" class="btn btn-primary">Edit Profile</button>
                 </form>
             </div>
-
-            <div>
+            <div> </div>
+            <div class="flex-column">
                 Workout History
                 <form method="GET" action="${addWorkoutAction}">
                     <button type="submit" class="btn btn-primary">Add Workout</button>
                 </form>
             </div>
         </div>
-
-
 
         <div class="flex-column">
             Graph Data
