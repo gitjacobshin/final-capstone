@@ -12,12 +12,14 @@
     <h1>
         <c:url var="imgSrc" value="/img/fitnesslogo.png" />
         <c:if test="${not empty currentUser}">
-            <c:if test="${not empty currentUser.name}">
-                <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/>${currentUser.name}'s Page</a>
-            </c:if>
-            <c:otherwise>
-                <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/>${currentUser.userName}'s Page</a>
-            </c:otherwise>
+            <c:choose>
+                <c:when test="${ currentUser.name}">
+                    <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> ${currentUser.name}'s Page</a>
+                </c:when>
+                <c:otherwise>
+                    <img src="${imgSrc}" class="logo-big" style="height: 50px;"  alt="Logo"/> ${currentUser.userName}'s Page</a>
+                </c:otherwise>
+            </c:choose>
         </c:if>
 
     </h1>
