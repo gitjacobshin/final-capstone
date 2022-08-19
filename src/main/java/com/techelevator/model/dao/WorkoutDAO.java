@@ -20,6 +20,6 @@ public interface WorkoutDAO {
 
     public void updateWorkout(String userName, Workout workout);
 
-//    public Object getUserProfileId(int profile_id);
+//    public Object createWorkout(String userName, Workout workout);
 
 }

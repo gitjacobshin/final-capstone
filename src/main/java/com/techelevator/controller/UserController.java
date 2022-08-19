@@ -56,20 +56,18 @@ public class UserController {
 		}
 
 		userDAO.saveUser(user.getUserName(), user.getPassword());
+
 		return "redirect:/login";
 	}
 
 	@RequestMapping(path="/users/create", method=RequestMethod.POST)
 	public String createProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash) {
 
-		//boolean isUserName
-
 		if (result.hasErrors()) {
 			flash.addFlashAttribute("user", user);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
 			return "redirect:/users/create";
 		}
-
 
 		return "redirect:/login";
 	}

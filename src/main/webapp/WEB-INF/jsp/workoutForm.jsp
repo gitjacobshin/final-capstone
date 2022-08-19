@@ -6,7 +6,7 @@
 <c:url var="validationJs" value="/js/user-validation.js" />
 <script src="${validationJs}"></script>
 
-<c:url var="addingWorkout" value="/users/workout/addWorkout" />
+<c:url var="addingWorkout" value="/users/workout/workoutForm" />
 <c:url var="customExercise" value="/users/custom-exercise" />
 
 <c:set var="workout" scope="session" value="${workout}"/>
@@ -18,7 +18,7 @@
         <div class="col-sm-4">
 
             <div class="form-group">
-                <label for="workoutType">Type: </label>
+                <label for="workoutType">Type: WE ARE NOW IN WORKOUT FORM!!!!!!!!!!!!!!!!!!!!</label>
                 <select name="workoutType" id="workoutType" class="form-control">
                     <option value="Arms">Arms</option>
                     <option value="Legs">Legs</option>
