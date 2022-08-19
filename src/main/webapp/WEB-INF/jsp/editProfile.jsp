@@ -1,5 +1,6 @@
 <%@ page import="com.techelevator.model.dto.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" />
 
@@ -43,8 +44,8 @@
             </div>
 
             <div class="form-group">
-                <label for="birthday">Birthday: </label>
-                <input type="date" id="birthday" name="birthday" placeHolder="Birthday" class="form-control" />
+                <label for="birthdate">Birthday: </label>
+                <input type="date" id="birthdate" name="birthdate" value="${currentUser.birthdate}" placeHolder="Birthdate" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -57,7 +58,6 @@
         </div>
     </div>
 
-
-</form>
+</form:form>
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />
