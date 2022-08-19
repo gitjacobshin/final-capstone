@@ -41,8 +41,8 @@
             </div>
 
             <div class="form-group">
-                <label for="birthday">Birthday: </label>
-                <input type="date" id="birthday" name="birthday" placeHolder="Birthday" class="form-control" />
+                <label for="birthdate">Birthday: </label>
+                <input type="date" id="birthdate" name="birthdate" value="${currentUser.birthdate}" placeHolder="Birthdate" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -54,8 +54,6 @@
 
         </div>
     </div>
-
-
 </form:form>
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />

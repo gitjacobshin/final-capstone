@@ -64,6 +64,4 @@ public class WorkoutController {
 
         return "redirect:/users/profile";
     }
-
-
 }
