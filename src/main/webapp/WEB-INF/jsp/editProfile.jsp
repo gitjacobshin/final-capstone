@@ -45,13 +45,6 @@
                 <input type="text" id="birthdate" name="birthdate" value="${currentUser.birthdate}" placeHolder="Birthdate" class="form-control" />
             </div>
 
-            <div class="form-group">
-                <label for="file">Insert Profile Picture </label>
-                <input type="file" name="file" id="file"/>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Update User</button>
-
         </div>
     </div>
 </form:form>

@@ -149,7 +149,12 @@ public class JDBCUserDAO implements UserDAO
 
 	@Override
 	public void updateProfilePic(String userName, String profilePic) {
+		jdbcTemplate.update("UPDATE app_user " +
+				"SET profile_pic = ?" +
+				" WHERE user_name = ?",
+				profilePic, userName
 
+		);
 
 	}
 

@@ -120,10 +120,23 @@ public class UserController {
 
 	//----------------------------------------------------------------- Profile Pic Upload Page
 	@RequestMapping(path="/users/upload", method=RequestMethod.GET)
-	public String displayUploadImageForm(ModelMap modelHolder, @ModelAttribute User user, @RequestParam String profilePic, HttpSession session) {
+	public String displayUploadImageForm(ModelMap modelHolder, @ModelAttribute User user) {
 		if( ! modelHolder.containsAttribute("user")) {
 			modelHolder.addAttribute("user", new User());
 
+		}
+
+		return "uploadImage";
+	}
+
+	//----------------------------------------------------------------- Profile Pic Upload
+	@RequestMapping(path="/users/upload", method=RequestMethod.POST)
+	public String editProfile(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes flash, HttpSession session,
+							  @RequestParam String profilePic) {
+		if (result.hasErrors()) {
+			flash.addFlashAttribute("user", user);
+			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
+			return "redirect:/users/upload";
 		}
 
 		User currentUser = (User) session.getAttribute("currentUser");
@@ -132,7 +145,7 @@ public class UserController {
 
 		session.setAttribute("currentUser", userDAO.getUserByUserName(currentUser.getUserName()));
 
-		return "uploadImage";
+		return "redirect:/users/profile";
 	}
 
 }
