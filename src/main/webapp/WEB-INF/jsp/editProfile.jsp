@@ -1,5 +1,6 @@
 <%@ page import="com.techelevator.model.dto.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" />
 
@@ -7,10 +8,7 @@
 <script src="${validationJs}"></script>
 
 <c:url var="formAction" value="/users/edit" />
-
 <c:set var="currentUser" scope="session" value="${currentUser}"/>
-
-
 <form:form modelAttribute="user" method="POST" action="${formAction}">
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 
@@ -58,6 +56,6 @@
     </div>
 
 
-</form>
+</form:form>
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />

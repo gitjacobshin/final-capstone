@@ -3,6 +3,7 @@ package com.techelevator.model.dao.jdbc;
 import com.techelevator.model.dao.WorkoutDAO;
 import com.techelevator.model.dto.User;
 import com.techelevator.model.dto.Workout;
+import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -61,7 +62,7 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
                 "FROM app_user as u " +
                 "LEFT JOIN workout w " +
                 "ON u.id = w.profile_id "+
-                "WHERE UPPER(user_name) = ?" +
+                "WHERE UPPER(user_name) = ? " +
                 "AND workout_name = ?";
 
         SqlRowSet workout = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, userName.toUpperCase(), workoutName);
@@ -81,16 +82,41 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
     @Override
     public void updateWorkout(String userName, Workout workout) {
         jdbcTemplate.update("UPDATE workout " +
-                        "SET workout_name = ?," +
-                        " workout_type = ?, " +
-                        " total_calories = ?" +
-                         "FROM app_user as u " +
-                          "LEFT JOIN workout w " +
-                         "ON u.id = w.profile_id "+
-                         "WHERE UPPER(user_name) = ?" +
-                             "AND workout_name = ?",
+                        "SET workout_name = ?, " +
+                        "workout_type = ?, " +
+                        "total_calories = ? " +
+                        "FROM app_user as u " +
+                        "LEFT JOIN workout w " +
+                        "ON u.id = w.profile_id "+
+                        "WHERE UPPER(user_name) = ? " +
+                        "AND workout_name = ?",
                 workout.getWorkoutName(), workout.getWorkoutType(),
                 workout.getTotalCalories(), userName);
     }
+
+//    @Override
+//    public Object createWorkout(String userName, String workoutName, String workoutType) {
+//        jdbcTemplate.update("UPDATE workout " +
+//                        "SET workout_name = ?, " +
+//                        "workout_type = ?, " +
+//                        "total_calories = ? " +
+//                        "FROM app_user as u " +
+//                        "LEFT JOIN workout w " +
+//                        "ON u.id = w.profile_id "+
+//                        "WHERE UPPER(user_name) = ? " +
+//                        "AND workout_name = ?",
+//                workout.getWorkoutName(), workout.getWorkoutType(),
+//                workout.getTotalCalories(), userName);
+//    }
+//
+//    @Override
+//    public void saveUser(String userName, String password) {
+//        byte[] salt = hashMaster.generateRandomSalt();
+//        String hashedPassword = hashMaster.computeHash(password, salt);
+//        String saltString = new String(Base64.encode(salt));
+//
+//        jdbcTemplate.update("INSERT INTO app_user(user_name, password, salt) VALUES (?, ?, ?)",
+//                userName, hashedPassword, saltString);
+//    }
 
 }
