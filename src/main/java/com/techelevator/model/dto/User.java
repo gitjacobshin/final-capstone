@@ -19,7 +19,7 @@ public class User {
 			@Pattern(regexp=".*[A-Z].*", message="Must have a capital")
 	})
 	private String password;
-	private String role;
+	private String role = "user";
 
 	//@NotBlank(message="Name is required")
 	private String name;

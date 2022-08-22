@@ -1,9 +1,11 @@
 package com.techelevator.model.dao;
 
+import com.techelevator.model.dto.Exercise;
 import com.techelevator.model.dto.User;
 import com.techelevator.model.dto.Workout;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface WorkoutDAO {
 
@@ -22,5 +24,8 @@ public interface WorkoutDAO {
     public void updateWorkout(String userName, Workout workout);
 
     public void createWorkout(User user, Workout workout);
+
+    public List<Exercise> showExercises(String workoutName);
+    public boolean isWorkoutAvailable( String workoutName, String userName);
 
 }

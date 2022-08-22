@@ -45,6 +45,8 @@
                 <input type="date" id="birthdate" name="birthdate" value="${currentUser.birthdate}" placeHolder="Birthdate" class="form-control" />
             </div>
 
+            <button type="submit" class="btn btn-primary">Update User</button>
+
         </div>
     </div>
 </form:form>

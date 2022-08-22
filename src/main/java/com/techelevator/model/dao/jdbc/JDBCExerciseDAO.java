@@ -67,15 +67,15 @@ public class JDBCExerciseDAO implements ExerciseDAO {
         jdbcTemplate.update("UPDATE exercise " +
                         "SET exercise_name = ?, " +
                         "reps = ?, " +
-                        "sets = ? " +
-//                        "total_calories = ? " +
-                        "FROM workout as w " +
-                        "LEFT JOIN exercise e " +
+                        "sets = ?, " +
+                        "calories = ? " +
+                        "FROM exercise as e " +
+                        "LEFT JOIN workout w " +
                         "ON w.id = e.workout_id "+
-                        "WHERE workout_name = ? " +
-                        "AND exercise_name = ?",
+                        "WHERE w.workout_name = ? " +
+                        "AND e.exercise_name = ?",
                 exercise.getExerciseName(), exercise.getReps(),
-                exercise.getSets(), workout.getWorkoutName(), exercise.getExerciseName());
+                exercise.getSets(), exercise.getCalories(), workout.getWorkoutName(), exercise.getExerciseName());
     }
 
     @Override
@@ -84,6 +84,15 @@ public class JDBCExerciseDAO implements ExerciseDAO {
         jdbcTemplate.update("DELETE FROM exercise " +
                         "WHERE exercise_name = ? ",
                         exercise.getExerciseName());
+    }
+
+    @Override
+    public boolean isExerciseNameAvailable(String exerciseName, String workoutName) {
+        if (getExerciseByExerciseName(exerciseName, workoutName) == null) {
+
+            return true;
+        }
+        return false;
     }
 
 }

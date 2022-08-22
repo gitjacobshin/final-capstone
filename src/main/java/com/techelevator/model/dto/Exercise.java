@@ -1,17 +1,24 @@
 package com.techelevator.model.dto;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class Exercise {
 
     private int id;
+
     private String exerciseName;
 
-    @Pattern(regexp=".*[0-9].*", message="Must contain only numbers")
+//    @Pattern(regexp=".*[0-9].*", message="Must contain only numbers")
+    @NotNull
     private int reps;
+
+//    @Pattern(regexp=".*[0-9].*", message="Must contain only numbers")
+    @NotNull
     private int sets;
 
-    @Pattern(regexp=".*[0-9].*", message="Must contain only numbers")
+//    @Pattern(regexp=".*[0-9].*", message="Must contain only numbers")
+    @NotNull
     private int calories;
 
     public int getId() {

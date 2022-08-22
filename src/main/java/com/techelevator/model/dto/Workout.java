@@ -3,6 +3,7 @@ package com.techelevator.model.dto;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Workout {
 
@@ -53,4 +54,5 @@ public class Workout {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
 }

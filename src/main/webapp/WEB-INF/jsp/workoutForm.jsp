@@ -6,13 +6,12 @@
 <c:url var="validationJs" value="/js/user-validation.js" />
 <script src="${validationJs}"></script>
 
-<c:url var="addWorkoutAction" value="/users/workout/newWorkoutForm"/>
-<c:url var="customExercise" value="/users/custom-exercise" />
+<c:url var="toExercises" value="/users/workout/newWorkoutForm"/>
 
 <c:set var="workout" scope="session" value="${workout}"/>
 
 
-<form method="POST" action="${addWorkoutAction}">
+<form method="POST" action="${toExercises}">
     <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 
     <div class="row form-container">
@@ -40,8 +39,6 @@
                 <label for="date">Date (yyyy-MM-dd): </label>
                 <input type="date" id="date" name="date" placeHolder="Date" class="form-control" />
             </div>
-
-            <a href="${customExercise}" class="btn btn-primary">Add Custom Exercise</a>
 
             <button type="submit" class="btn btn-primary">Create Workout</button>
 

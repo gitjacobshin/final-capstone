@@ -8,7 +8,7 @@
 
 <c:url var="formAction" value="/users/custom-exercise" />
 
-<c:set var="exercise" scope="session" value="${exercise}"/>
+<c:set var="currentExercise" scope="session" value="${exercise}"/>
 
 <form method="POST" action="${formAction}">
     <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>

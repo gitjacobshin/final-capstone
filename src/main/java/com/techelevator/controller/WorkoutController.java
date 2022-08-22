@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +22,8 @@ public class WorkoutController {
 
     @Autowired
     private WorkoutDAO workoutDAO;
-    @Autowired
-    private UserDAO userDAO;
+    //@Autowired
+    //private UserDAO userDAO;
 
     //----------------------------------------------------------------- Display Add Workout Form
     @RequestMapping(path="/users/workout/newWorkoutForm", method= RequestMethod.GET)
@@ -36,37 +37,25 @@ public class WorkoutController {
     @RequestMapping(path="/users/workout/newWorkoutForm", method=RequestMethod.POST)
     public String createWorkout(@Valid @ModelAttribute Workout workout, BindingResult result, RedirectAttributes flash, HttpSession session) {
 
+        User currentUser = (User) session.getAttribute("currentUser");
+
+        boolean isWorkoutNameAvailable = workoutDAO.isWorkoutAvailable(workout.getWorkoutName(), currentUser.getUserName());
+        if(!isWorkoutNameAvailable) {
+            FieldError error = new FieldError("workout", "workoutName","Workout name is already used.");
+            result.addError(error);
+        }
         if(result.hasErrors()) {
             flash.addFlashAttribute("workout", workout);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "workout", result);
             return "redirect:/users/workout/newWorkoutForm";
         }
 
-        User currentUser = (User) session.getAttribute("currentUser");
+
 
         workoutDAO.createWorkout(currentUser, workout);
 
         session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(), workout.getWorkoutName()));
 
-        return "redirect:/users/profile";
+        return "redirect:/users/exerciseForm";
     }
-
-//    //----------------------------------------------------------------- Add Workout Form
-//    @RequestMapping(path="/users/workout/newWorkoutForm", method=RequestMethod.POST)
-//    public String editWorkout(@Valid @ModelAttribute Workout workout, BindingResult result, RedirectAttributes flash, HttpSession session) {
-//        if (result.hasErrors()) {
-//            flash.addFlashAttribute("workout", workout);
-//            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "workout", result);
-//            return "redirect:/users/workout/newWorkoutForm";
-//        }
-//        User currentUser = (User) session.getAttribute("currentUser");
-//
-//        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
-//
-//        workoutDAO.updateWorkout(currentUser.getUserName(), currentWorkout);
-//
-//        session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(), currentWorkout.getWorkoutName()));
-//
-//        return "redirect:/users/profile";
-//    }
 }

@@ -1,6 +1,7 @@
 package com.techelevator.model.dao.jdbc;
 
 import com.techelevator.model.dao.WorkoutDAO;
+import com.techelevator.model.dto.Exercise;
 import com.techelevator.model.dto.User;
 import com.techelevator.model.dto.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class JDBCWorkoutDAO implements WorkoutDAO {
@@ -101,27 +104,40 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
         jdbcTemplate.update(
                 "INSERT INTO workout(profile_id, workout_name, workout_type, date) VALUES (?, ?, ?, ?)",
                 user.getId() , workout.getWorkoutName(), workout.getWorkoutType(), workout.getDate());
-//                "UPDATE workout " +
-//                        "SET workout_name = ?, " +
-//                        "workout_type = ? " +
-////                      "total_calories = ? " +
-////                      "date = ? " +
-//                        "FROM app_user as u " +
-//                        "LEFT JOIN workout w " +
-//                        "ON u.id = w.profile_id " +
-//                        "WHERE UPPER(user_name) = ? " +
-//                        "AND workout_name = ?",
-//                workout.getWorkoutName(), workout.getWorkoutType(), userName);
     }
 
-//    @Override
-//    public void saveUser(String userName, String password) {
-//        byte[] salt = hashMaster.generateRandomSalt();
-//        String hashedPassword = hashMaster.computeHash(password, salt);
-//        String saltString = new String(Base64.encode(salt));
-//
-//        jdbcTemplate.update("INSERT INTO app_user(user_name, password, salt) VALUES (?, ?, ?)",
-//                userName, hashedPassword, saltString);
-//    }
+    @Override
+    public List<Exercise> showExercises(String workoutName) {
+        String sqlSearchForWorkout ="SELECT e.id, e.exercise_name, e.reps, e.sets, e.calories "+
+                "FROM exercise as e " +
+                "LEFT JOIN workout w " +
+                "ON w.id = e.workout_id "+
+                "WHERE workout_name = ?";
+
+        SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, workoutName);
+        List<Exercise> thisExerciseList = new ArrayList<>();
+        while(exercise.next()) {
+            Exercise thisExercise = new Exercise();
+            thisExercise.setId(exercise.getInt("id"));
+            thisExercise.setExerciseName(exercise.getString("exercise_name"));
+            thisExercise.setReps(exercise.getInt("reps"));
+            thisExercise.setSets(exercise.getInt("sets"));
+            thisExercise.setCalories(exercise.getInt("calories"));
+
+            thisExerciseList.add(thisExercise);
+        }
+
+        return thisExerciseList;
+    }
+
+    @Override
+    public boolean isWorkoutAvailable(String workoutName, String userName) {
+        if (getWorkoutByWorkoutName(userName, workoutName) == null) {
+
+            return true;
+        }
+        return false;
+    }
+
 
 }
