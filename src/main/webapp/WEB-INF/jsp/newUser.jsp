@@ -7,6 +7,7 @@
 <script src="${validationJs}"></script>
 
 <c:url var="formAction" value="/users/new" />
+<c:url var="cancelAction" value="/" />
 <form:form modelAttribute="user" method="POST" action="${formAction}">
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 	<div class="row form-container">
@@ -25,7 +26,7 @@
 				<input type="password" id="confirmPassword" name="confirmPassword" placeHolder="Re-Type Password" class="form-control" />	
 			</div>
 
-
+			<a href="${cancelAction}" class="btn btn-primary">Cancel</a>
 			<button type="submit" class="btn btn-primary">Create User</button>
 		</div>
 	</div>

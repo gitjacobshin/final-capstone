@@ -122,6 +122,7 @@ public class JDBCUserDAO implements UserDAO
 			}
 			thisUser.setGoal(user.getString("goal"));
 			thisUser.setId(user.getInt("id"));
+			thisUser.setProfilePic(user.getString("profile_pic"));
 		}
 
 		return thisUser;

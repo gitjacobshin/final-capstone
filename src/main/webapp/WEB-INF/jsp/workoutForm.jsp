@@ -8,6 +8,7 @@
 
 <c:url var="addWorkoutAction" value="/users/workout/newWorkoutForm"/>
 <c:url var="customExercise" value="/users/custom-exercise" />
+<c:url var="cancelAction" value="/users/profile" />
 
 <c:set var="workout" scope="session" value="${workout}"/>
 
@@ -45,6 +46,7 @@
 
             <button type="submit" class="btn btn-primary">Create Workout</button>
 
+            <a href="${cancelAction}" class="btn btn-primary">Cancel</a>
 
         </div>
 

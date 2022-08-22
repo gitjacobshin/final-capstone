@@ -144,10 +144,10 @@ public class UserController {
 				String fileName = uploadProvider.uploadFile(file, defaultFileName);
 
 				//update the database with the saved file name
-
 				userDAO.updateProfilePic(currentUser.getUserName(), fileName);
 
 				session.setAttribute("currentUser", userDAO.getUserByUserName(currentUser.getUserName()));
+
 
 				return "redirect:/users/profile";
 			} catch (Throwable ex) {
