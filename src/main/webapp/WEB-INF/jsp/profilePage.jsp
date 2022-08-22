@@ -32,7 +32,7 @@
             <div class="flex-column flex-column-style">
                 <h4 class="section-header">${displayName}'s Info</h4>
 
-                <div class="flex-column-container">
+                <div class="flex-container-profile">
                     <div class="flex-column-profile">
                         <c:choose>
                             <c:when test="${not empty currentUser.profilePic}">

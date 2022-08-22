@@ -67,9 +67,11 @@ body {
    flex: 1;
    display: inline-block;
    flex-direction: column;
+   width: 45%;
 }
 
 .flex-column-small-big {
+   width: 100%;
    flex: .75;
    display: inline-block;
    flex-direction: column;
@@ -150,9 +152,9 @@ h3 {
 }
 
 .info-table {
-   width: 100%;
+   width: auto;
    padding: 5px;
-   max-width: 200px;
+   max-width: 250px;
 }
 
 .table-style {
