@@ -38,7 +38,7 @@
               <td>${exercise.reps}</td>
               <td>${exercise.sets}</td>
               <td>${exercise.calories}</td>
-              <c:url var="editExercise" value="/users/custom-exercise/edit/${exercise.id}"/>
+              <c:url var="editExercise" value="/users/custom-exercise/edit/${exercise.exerciseName}"/>
               <td><a href="${editExercise}" class="btn btn-primary">Edit</a></td>
               <c:url var="deleteExercise"  value="/users/custom-exercise"/>
               <td><a href="${deleteExercise}" class="btn btn-primary">Delete</a></td>
