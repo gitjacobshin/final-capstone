@@ -103,22 +103,26 @@ public class ExerciseController {
     }
 
     //----------------------------------------------------------------- Edit Exercise Form
-    @RequestMapping(path="/users/custom-exercise/edit/{id}", method= RequestMethod.GET)
-    public String editExerciseForm(ModelMap modelHolder, @ModelAttribute Exercise exercise) {
-        if( ! modelHolder.containsAttribute("user")) {
+    @RequestMapping(path="/users/custom-exercise/edit/{exerciseName}", method= RequestMethod.GET)
+    public String editExerciseForm(ModelMap modelHolder, @ModelAttribute Exercise exercise, HttpSession session) {
+        if( ! modelHolder.containsAttribute("exercise")) {
             modelHolder.addAttribute("exercise", new Exercise());
         }
+
+        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
+
+        session.setAttribute("exercise", exerciseDAO.getExerciseByExerciseName(currentWorkout.getWorkoutName(), exercise.getExerciseName()));
 
         return "editExercise";
     }
 
     //----------------------------------------------------------------- POST edit Exercise Form
-    @RequestMapping(path="/users/custom-exercise/edit/{id}", method=RequestMethod.POST)
+    @RequestMapping(path="/users/custom-exercise/edit/{exerciseName}", method=RequestMethod.POST)
     public String editExercise(@Valid @ModelAttribute Exercise exercise, BindingResult result, RedirectAttributes flash, HttpSession session) {
         if (result.hasErrors()) {
             flash.addFlashAttribute("exercise", exercise);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-            return "redirect:/users/custom-exercise/edit/{id}";
+            return "redirect:/users/custom-exercise/edit/{exerciseName}";
         }
 
         Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
