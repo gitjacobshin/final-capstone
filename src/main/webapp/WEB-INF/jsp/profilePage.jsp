@@ -34,8 +34,17 @@
 
                 <table>
                     <td>
-                        <c:url var="profPic" value="img/uploads/${currentUser.profilePic}"/>
-                        <img src="${profPic}" alt="Profile Pic"/>
+                        <c:choose>
+                            <c:when test="${not empty currentUser.profilePic}">
+                                <c:url var="profPic" value="img/uploads/${currentUser.profilePic}"/>
+                                <img class="profile-pic" src="${profPic}" alt="Profile Pic"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:url var="profPic" value="/img/blank-profile.png"/>
+                                <img class="profile-pic" src="${profPic}" alt="Profile Pic"/>
+                            </c:otherwise>
+                        </c:choose>
+
                         <form method="GET" action="${uploadImageAction}">
                             <button type="submit" class="btn btn-primary">Edit Image</button>
                         </form>
