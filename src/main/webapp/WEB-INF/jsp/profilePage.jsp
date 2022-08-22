@@ -32,28 +32,32 @@
             <div class="flex-column flex-column-style">
                 <h4 class="section-header">${displayName}'s Info</h4>
 
-                <table>
-                    <td>
-                        <c:choose>
-                            <c:when test="${not empty currentUser.profilePic}">
-                                <c:url var="profPic" value="img/uploads/${currentUser.profilePic}"/>
-                                <img class="profile-pic" src="${profPic}" alt="Profile Pic"/>
-                            </c:when>
-                            <c:otherwise>
-                                <c:url var="profPic" value="/img/blank-profile.png"/>
-                                <img class="profile-pic" src="${profPic}" alt="Profile Pic"/>
-                            </c:otherwise>
-                        </c:choose>
 
-                        <form method="GET" action="${uploadImageAction}">
-                            <button type="submit" class="btn btn-primary">Edit Image</button>
-                        </form>
-                    </td>
-                </table>
+                <div>
+                    <c:choose>
+                        <c:when test="${not empty currentUser.profilePic}">
+                            <c:url var="profPic" value="img/uploads/${currentUser.profilePic}"/>
+                            <img class="profile" src="${profPic}" alt="Profile Pic"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:url var="profPic" value="/img/blank-profile.png"/>
+                            <img class="img-tile" src="${profPic}" alt="Profile Pic"/>
+                        </c:otherwise>
+                    </c:choose>
 
-                <form method="GET" action="${editProfileAction}">
-                    <button type="submit" class="btn btn-primary">Edit Profile</button>
-                </form>
+                    <form method="GET" action="${uploadImageAction}">
+                        <button type="submit" class="btn btn-primary">Edit Image</button>
+                    </form>
+                </div>
+
+
+                <div class="profile-section">
+                    <p>Words</p>
+                    <form method="GET" action="${editProfileAction}">
+                        <button type="submit" class="btn btn-primary">Edit Profile</button>
+                    </form>
+                </div>
+
 
 
             </div>
