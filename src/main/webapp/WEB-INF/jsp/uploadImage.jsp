@@ -4,7 +4,7 @@
 <c:import url="/WEB-INF/jsp/common/header.jsp" />
 
 <c:url var="formAction" value="/users/upload" />
-<c:url var="profileAction" value="/users/profile"/>
+<c:url var="cancelAction" value="/users/profile"/>
 <c:set var="currentUser" scope="session" value="${currentUser}"/>
 
 
@@ -16,7 +16,7 @@
                 <label for="file">Insert Profile Picture </label>
                 <input type="file" name="file" id="file"/>
             </div>
-            <a href="${profileAction}" class="btn btn-primary">Cancel</a>
+            <a href="${cancelAction}" class="btn btn-primary">Cancel</a>
             <button type="submit" class="btn btn-primary">Update User</button>
 
         </div>

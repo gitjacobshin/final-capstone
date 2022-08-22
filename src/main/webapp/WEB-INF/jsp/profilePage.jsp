@@ -32,11 +32,11 @@
             <div class="flex-column flex-column-style">
                 <h4 class="section-header">${displayName}'s Info</h4>
 
-                <table>
-                    <td>
+                <div class="flex-column-container">
+                    <div class="flex-column-profile">
                         <c:choose>
                             <c:when test="${not empty currentUser.profilePic}">
-                                <c:url var="profPic" value="img/uploads/${currentUser.profilePic}"/>
+                                <c:url var="profPic" value="/img/uploads/${currentUser.profilePic}"/>
                                 <img class="profile-pic" src="${profPic}" alt="Profile Pic"/>
                             </c:when>
                             <c:otherwise>
@@ -44,17 +44,57 @@
                                 <img class="profile-pic" src="${profPic}" alt="Profile Pic"/>
                             </c:otherwise>
                         </c:choose>
+                    </div>
 
-                        <form method="GET" action="${uploadImageAction}">
-                            <button type="submit" class="btn btn-primary">Edit Image</button>
-                        </form>
-                    </td>
-                </table>
+                    <div class="flex-column-profile">
+                        <table class="info-table table-style">
+                            <tr>
+                                <th>Name:
+                                <td>${currentUser.name}</td>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Birthday:
+                                <td>${currentUser.birthdate}</td>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Height:
+                                <td>${currentUser.height} in.</td>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Starting Weight:
+                                <td>${currentUser.currentWeight} lbs.</td>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Desired Weight:
+                                <td>${currentUser.desiredWeight} lbs.</td>
+                                </th>
+                            </tr>
 
-                <form method="GET" action="${editProfileAction}">
-                    <button type="submit" class="btn btn-primary">Edit Profile</button>
-                </form>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="flex-column">
+                    <table class="table-style">
+
+                        <th>Goal:<td class="goal-table">${currentUser.goal}</td></th>
+
+                    </table>
+                </div>
+
+                <div class="profile-section">
+                    <form class="flex-column-profile" method="GET" action="${uploadImageAction}">
+                        <button type="submit" class="btn btn-primary">Edit Image</button>
+                    </form>
+
+                    <form class="flex-column-profile" method="GET" action="${editProfileAction}">
+                        <button type="submit" class="btn btn-primary">Edit Profile</button>
+                    </form>
+                </div>
 
             </div>
             <div class="flex-column flex-column-style">

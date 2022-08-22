@@ -1,4 +1,3 @@
-<%@ page import="com.techelevator.model.dto.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 

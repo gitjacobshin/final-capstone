@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" />
+<c:url var="cancelAction" value="/" />
+<c:url var="registerRedirect" value="/users/new"/>
 
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -39,7 +41,11 @@
 				<label for="password">Password: </label>
 				<input type="password" id="password" name="password" placeHolder="Password" class="form-control" />
 			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
+			<a href="${registerRedirect}">No account? Click here to create!</a>
+			<div>
+				<a href="${cancelAction}" class="btn btn-primary">Cancel</a>
+				<button type="submit" class="btn btn-primary">Login</button>
+			</div>
 		</form>
 	</div>
 </div>
