@@ -3,7 +3,6 @@ package com.techelevator.controller;
 import com.techelevator.model.dao.ProgressDAO;
 import com.techelevator.model.dto.Progress;
 import com.techelevator.model.dto.User;
-import com.techelevator.model.dto.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,7 +22,7 @@ public class ProgressController {
     private ProgressDAO progressDAO;
 
     @Autowired
-    public ProgressController (ProgressDAO progressDAO){
+    public ProgressController(ProgressDAO progressDAO){
         this.progressDAO = progressDAO;
     }
 
