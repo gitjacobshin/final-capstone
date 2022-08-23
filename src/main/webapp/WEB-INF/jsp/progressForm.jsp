@@ -10,7 +10,7 @@
 <c:url var="cancelAction" value="/users/profile"/>
 <c:set var="currentUser" scope="session" value="${currentUser}"/>
 
-<form method="POST" action="${formAction}">
+<form:form method="POST" action="${formAction}">
     <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 
     <div class="row form-container">
@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label for="workoutDate">Date: </label>
-                <input type="date" id="workoutDate" name="date" placeHolder="Date" class="form-control" />
+                <input type="date" id="workoutDate" name="workoutDate" placeHolder="Date" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -49,6 +49,6 @@
 
         </div>
     </div>
-</form>
+</form:form>
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />
