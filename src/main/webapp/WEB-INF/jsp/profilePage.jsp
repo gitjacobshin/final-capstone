@@ -8,6 +8,9 @@
 <c:url var="editProfileAction" value="/users/edit"/>
 <c:url var="addWorkoutAction" value="/users/workout/newWorkoutForm"/>
 <c:url var="uploadImageAction" value="/users/upload"/>
+<c:url var="trackProgressAction" value="/users/progress"/>
+
+<c:set var="workouts" scope="session" value="${workouts}"/>
 
 <c:if test="${not empty currentUser}">
     <c:choose>
@@ -99,6 +102,38 @@
             </div>
             <div class="flex-column flex-column-style">
                <h4 class="section-header">Workout History</h4>
+
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Workout Name</th>
+                            <th>Type</th>
+                            <th>Total Calories</th>
+                            <th>Date</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+
+                        <c:forEach var="workout" items="${workouts}">
+                            <tr>
+                                <td>${workout.workoutName}</td>
+                                <td>${workout.workoutType}</td>
+                                <td>${workout.totalCalories}</td>
+                                <td>${workout.date}</td>
+                                <c:url var="editExercise" value="/users/custom-exercise/edit/${exercise.exerciseName}"/>
+                                <td><a href="${editExercise}" class="btn btn-primary">Edit</a></td>
+                                <c:url var="deleteExercise"  value="/users/custom-exercise"/>
+                                <td><a href="${deleteExercise}" class="btn btn-primary">Delete</a></td>
+                            </tr>
+
+                        </c:forEach>
+
+                        </tbody>
+                    </table>
+                </div>
+
                 <form method="GET" action="${addWorkoutAction}">
                     <button type="submit" class="btn btn-primary">Add Workout</button>
                 </form>
@@ -108,6 +143,9 @@
 
         <div class="flex-column flex-column-style">
             <h4 class="section-header">Graph Data</h4>
+            <form method="GET" action="${trackProgressAction}">
+                <button type="submit" class="btn btn-primary">Track Progress</button>
+            </form>
 
         </div>
     </div>

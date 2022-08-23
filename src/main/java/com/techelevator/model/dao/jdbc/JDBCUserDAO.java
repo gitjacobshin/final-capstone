@@ -3,6 +3,9 @@ package com.techelevator.model.dao.jdbc;
 import javax.sql.DataSource;
 
 import com.techelevator.model.dao.UserDAO;
+import com.techelevator.model.dao.WorkoutDAO;
+import com.techelevator.model.dto.Exercise;
+import com.techelevator.model.dto.Workout;
 import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +16,8 @@ import com.techelevator.model.dto.User;
 import com.techelevator.services.security.PasswordHasher;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class JDBCUserDAO implements UserDAO
@@ -160,6 +165,31 @@ public class JDBCUserDAO implements UserDAO
 				profilePic, userName
 		);
 
+	}
+
+	@Override
+	public List<Workout> showWorkouts(String userName) {
+		String sqlSearchForWorkout ="SELECT w.id, w.workout_name, w.workout_type, w.total_calories, w.date "+
+				"FROM app_user as u " +
+				"LEFT JOIN workout w " +
+				"ON u.id = w.profile_id "+
+				"WHERE user_name = ?";
+
+		SqlRowSet workout = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, userName);
+		List<Workout> thisWorkoutList = new ArrayList<>();
+		while(workout.next()) {
+			Workout thisWorkout = new Workout();
+			thisWorkout.setId(workout.getInt("id"));
+			thisWorkout.setWorkoutName(workout.getString("workout_name"));
+			thisWorkout.setWorkoutType(workout.getString("workout_type"));
+			thisWorkout.setTotalCalories(workout.getInt("total_calories"));
+			if(workout.getDate("date") != null) {
+				thisWorkout.setDate(workout.getDate("date").toLocalDate());
+			}
+			thisWorkoutList.add(thisWorkout);
+		}
+
+		return thisWorkoutList;
 	}
 
 }

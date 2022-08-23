@@ -15,7 +15,7 @@ public interface WorkoutDAO {
 
     public void updateWorkoutType(String  profile_id, String workoutType);
 
-    public void updateTotalCalories(String profile_id, int totalCalories);
+    public void updateTotalCalories(int profile_id, Workout workout);
 
     public void updateDate(String profile_id, LocalDate date);
 

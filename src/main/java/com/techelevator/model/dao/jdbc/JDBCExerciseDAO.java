@@ -11,7 +11,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.util.Locale;
 
 @Component
 public class JDBCExerciseDAO implements ExerciseDAO {
@@ -23,13 +22,6 @@ public class JDBCExerciseDAO implements ExerciseDAO {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Override
-    public void saveExercise(String exerciseName, int calories, int reps, int sets, String category) {
-
-        jdbcTemplate.update("INSERT INTO exercise(exercise_name, calories, reps, sets) VALUES (?, ?, ?, ?)",
-                exerciseName, calories, reps, sets, category
-        );
-    }
 
     @Override
     public void createExercise(Workout workout, Exercise exercise) {
@@ -70,7 +62,7 @@ public class JDBCExerciseDAO implements ExerciseDAO {
                 "ON w.id = e.workout_id "+
                 "AND e.id = ?";
 
-        SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForExercise, workoutName, exerciseId);
+        SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForExercise, exerciseId);
         Exercise thisExercise = null;
         if(exercise.next()) {
             thisExercise = new Exercise();
@@ -91,21 +83,18 @@ public class JDBCExerciseDAO implements ExerciseDAO {
                         "reps = ?, " +
                         "sets = ?, " +
                         "calories = ? " +
-                        "FROM exercise as e " +
-                        "LEFT JOIN workout w " +
-                        "ON w.id = e.workout_id "+
-                        "WHERE w.workout_name = ? " +
-                        "AND e.id = ?",
+                        "WHERE id = ?",
                 exercise.getExerciseName(), exercise.getReps(),
-                exercise.getSets(), exercise.getCalories(), workout.getWorkoutName(), exercise.getId());
+                exercise.getSets(), exercise.getCalories(), exercise.getId());
     }
 
     @Override
-    public void deleteExercise(Workout workout, Exercise exercise) {
+    public void deleteExercise(Exercise exercise) {
 
         jdbcTemplate.update("DELETE FROM exercise " +
-                        "WHERE exercise_name = ? ",
-                        exercise.getExerciseName());
+                        "WHERE id = ? ",
+                        exercise.getId());
+
     }
 
     @Override

@@ -1,11 +1,9 @@
 package com.techelevator.model.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class User {

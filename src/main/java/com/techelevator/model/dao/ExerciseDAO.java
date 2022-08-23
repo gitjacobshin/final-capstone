@@ -5,15 +5,13 @@ import com.techelevator.model.dto.Workout;
 
 public interface ExerciseDAO {
 
-    public void saveExercise(String name, int calories, int reps, int sets, String category);
-
     public void createExercise(Workout workout, Exercise exercise);
 
     public Object getExerciseByExerciseName(String userName, String workoutName);
 
     public void updateExercise(Workout workout, Exercise exercise);
 
-    public void deleteExercise(Workout workout, Exercise exercise);
+    public void deleteExercise(Exercise exercise);
 
     public boolean isExerciseNameAvailable(String exerciseName, String workoutName);
 
