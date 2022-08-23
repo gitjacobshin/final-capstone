@@ -47,9 +47,16 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
 
 
     @Override
-    public void updateTotalCalories(String profile_id, int totalCalories) {
-        jdbcTemplate.update("UPDATE workout SET total_calories = ? WHERE profile_id = ?",
-                totalCalories, profile_id);
+    public void updateTotalCalories(int profile_id, Workout workout) {
+        jdbcTemplate.update("UPDATE workout " +
+                        "SET total_calories = (" +
+                            "SELECT sum(e.calories) as total_calories " +
+                            "FROM exercise as e " +
+                            "LEFT JOIN workout w ON e.workout_id = w.id " +
+                            "WHERE profile_id = ? AND workout_name = ?" +
+                        ") " +
+                        "WHERE profile_id = ? AND workout_name = ?",
+                profile_id, workout.getWorkoutName(), profile_id, workout.getWorkoutName());
     }
 
     @Override
@@ -89,12 +96,11 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
                         "SET workout_name = ?, " +
                         "workout_type = ?, " +
                         "date = ? " +
-//                        "total_calories = ? " +
-                        "FROM app_user as u " +
-                        "LEFT JOIN workout w " +
+                        "FROM workout as w " +
+                        "LEFT JOIN app_user u " +
                         "ON u.id = w.profile_id "+
                         "WHERE UPPER(user_name) = ? " +
-                        "AND workout_name = ?",
+                        "AND w.workout_name = ?",
                 workout.getWorkoutName(), workout.getWorkoutType(), workout.getDate(),
                 userName, workout.getWorkoutName());
     }
