@@ -11,7 +11,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.util.Locale;
 
 @Component
 public class JDBCExerciseDAO implements ExerciseDAO {

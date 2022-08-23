@@ -8,6 +8,7 @@
 <c:url var="editProfileAction" value="/users/edit"/>
 <c:url var="addWorkoutAction" value="/users/workout/newWorkoutForm"/>
 <c:url var="uploadImageAction" value="/users/upload"/>
+<c:url var="trackProgressAction" value="/users/progress"/>
 
 <c:if test="${not empty currentUser}">
     <c:choose>
@@ -108,6 +109,9 @@
 
         <div class="flex-column flex-column-style">
             <h4 class="section-header">Graph Data</h4>
+            <form method="GET" action="${trackProgressAction}">
+                <button type="submit" class="btn btn-primary">Track Progress</button>
+            </form>
 
         </div>
     </div>
