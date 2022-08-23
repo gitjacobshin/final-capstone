@@ -6,4 +6,5 @@ BEGIN;
 
 -- INSERT statements go here
 
+
 COMMIT;

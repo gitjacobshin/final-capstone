@@ -16,4 +16,6 @@ public interface ExerciseDAO {
     public void deleteExercise(Workout workout, Exercise exercise);
 
     public boolean isExerciseNameAvailable(String exerciseName, String workoutName);
+
+    public Object getExerciseByExerciseId(String workoutName, int exerciseId);
 }

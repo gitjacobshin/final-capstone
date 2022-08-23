@@ -42,13 +42,35 @@ public class JDBCExerciseDAO implements ExerciseDAO {
     @Override
     public Object getExerciseByExerciseName(String workoutName, String exerciseName) {
         String sqlSearchForExercise ="SELECT e.id, e.workout_id, e.exercise_name, e.calories, e.reps, e.sets " +
-                "FROM workout as w " +
-                "LEFT JOIN exercise e " +
+                "FROM exercise as e " +
+                "LEFT JOIN workout w " +
                 "ON w.id = e.workout_id "+
-                "WHERE UPPER(workout_name) = ? " +
+                "WHERE workout_name = ? " +
                 "AND exercise_name = ?";
 
         SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForExercise, workoutName, exerciseName);
+        Exercise thisExercise = null;
+        if(exercise.next()) {
+            thisExercise = new Exercise();
+            thisExercise.setId(exercise.getInt("id"));
+            thisExercise.setExerciseName(exercise.getString("exercise_name"));
+            thisExercise.setReps(exercise.getInt("reps"));
+            thisExercise.setSets(exercise.getInt("sets"));
+            thisExercise.setCalories(exercise.getInt("calories"));
+        }
+
+        return thisExercise;
+    }
+
+    @Override
+    public Object getExerciseByExerciseId(String workoutName, int exerciseId) {
+        String sqlSearchForExercise ="SELECT e.id, e.workout_id, e.exercise_name, e.calories, e.reps, e.sets " +
+                "FROM exercise as e " +
+                "LEFT JOIN workout w " +
+                "ON w.id = e.workout_id "+
+                "AND e.id = ?";
+
+        SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForExercise, workoutName, exerciseId);
         Exercise thisExercise = null;
         if(exercise.next()) {
             thisExercise = new Exercise();
@@ -73,9 +95,9 @@ public class JDBCExerciseDAO implements ExerciseDAO {
                         "LEFT JOIN workout w " +
                         "ON w.id = e.workout_id "+
                         "WHERE w.workout_name = ? " +
-                        "AND e.exercise_name = ?",
+                        "AND e.id = ?",
                 exercise.getExerciseName(), exercise.getReps(),
-                exercise.getSets(), exercise.getCalories(), workout.getWorkoutName(), exercise.getExerciseName());
+                exercise.getSets(), exercise.getCalories(), workout.getWorkoutName(), exercise.getId());
     }
 
     @Override
@@ -88,7 +110,7 @@ public class JDBCExerciseDAO implements ExerciseDAO {
 
     @Override
     public boolean isExerciseNameAvailable(String exerciseName, String workoutName) {
-        if (getExerciseByExerciseName(exerciseName, workoutName) == null) {
+        if (getExerciseByExerciseName(workoutName, exerciseName) == null) {
 
             return true;
         }

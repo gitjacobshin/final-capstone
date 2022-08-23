@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS workout;
 CREATE TABLE workout (
                           id SERIAL PRIMARY KEY,
                           profile_id int NOT NULL,
-                          workout_name varchar(32) NOT NULL UNIQUE,
+                          workout_name varchar(32) NOT NULL,
                           workout_type varchar(32),
                           total_calories int,
                           date date
@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS exercise;
 CREATE TABLE exercise (
                           id SERIAL PRIMARY KEY,
                           workout_id int NOT NULL,
-                          exercise_name varchar(32) NOT NULL UNIQUE,
+                          exercise_name varchar(32) NOT NULL,
                           calories int,
                           reps int,
                           sets int

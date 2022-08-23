@@ -111,7 +111,9 @@ public class ExerciseController {
 
         Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
 
-        session.setAttribute("exercise", exerciseDAO.getExerciseByExerciseName(currentWorkout.getWorkoutName(), exercise.getExerciseName()));
+        Exercise selectedExercise = (Exercise) exerciseDAO.getExerciseByExerciseName(currentWorkout.getWorkoutName(), exercise.getExerciseName());
+
+        session.setAttribute("currentExercise", selectedExercise);
 
         return "editExercise";
     }
@@ -126,6 +128,10 @@ public class ExerciseController {
         }
 
         Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
+
+        Exercise selectedExercise = (Exercise) exerciseDAO.getExerciseByExerciseName(currentWorkout.getWorkoutName(), exercise.getExerciseName());
+
+        exercise.setId(selectedExercise.getId());
 
         exerciseDAO.updateExercise(currentWorkout, exercise);
 
