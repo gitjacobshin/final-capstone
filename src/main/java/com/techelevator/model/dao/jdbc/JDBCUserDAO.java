@@ -3,8 +3,7 @@ package com.techelevator.model.dao.jdbc;
 import javax.sql.DataSource;
 
 import com.techelevator.model.dao.UserDAO;
-import com.techelevator.model.dao.WorkoutDAO;
-import com.techelevator.model.dto.Exercise;
+import com.techelevator.model.dto.User;
 import com.techelevator.model.dto.Workout;
 import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -170,12 +169,11 @@ public class JDBCUserDAO implements UserDAO
 	@Override
 	public List<Workout> showWorkouts(String userName) {
 		String sqlSearchForWorkout ="SELECT w.id, w.workout_name, w.workout_type, w.total_calories, w.date "+
-				"FROM app_user as u " +
-				"LEFT JOIN workout w " +
-				"ON u.id = w.profile_id "+
-				"WHERE user_name = ?";
+				"FROM workout as w " +
+				"WHERE profile_id = ?";
 
-		SqlRowSet workout = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, userName);
+		SqlRowSet workout = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, ((User)getUserByUserName(userName)).getId() );
+
 		List<Workout> thisWorkoutList = new ArrayList<>();
 		while(workout.next()) {
 			Workout thisWorkout = new Workout();

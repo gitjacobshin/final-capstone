@@ -26,6 +26,9 @@ public interface WorkoutDAO {
     public void createWorkout(User user, Workout workout);
 
     public List<Exercise> showExercises(String workoutName);
+
+    public void deleteWorkout(Workout workout);
+
     public boolean isWorkoutAvailable( String workoutName, String userName);
 
 }
