@@ -8,8 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +52,7 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
         jdbcTemplate.update("UPDATE workout SET workout_type = ? WHERE profile_id = ?",
                 workoutType, profile_id);
     }
+
 
 
     @Override
@@ -95,12 +105,11 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
                         "SET workout_name = ?, " +
                         "workout_type = ?, " +
                         "date = ? " +
-//                        "total_calories = ? " +
-                        "FROM app_user as u " +
-                        "LEFT JOIN workout w " +
+                        "FROM workout as w " +
+                        "LEFT JOIN app_user u " +
                         "ON u.id = w.profile_id "+
                         "WHERE UPPER(user_name) = ? " +
-                        "AND workout_name = ?",
+                        "AND w.workout_name = ?",
                 workout.getWorkoutName(), workout.getWorkoutType(), workout.getDate(),
                 userName, workout.getWorkoutName());
     }
@@ -137,6 +146,18 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
     }
 
     @Override
+    public void deleteWorkout(Workout workout) {
+        jdbcTemplate.update("DELETE FROM exercise " +
+                        "WHERE workout_id = ?",
+                workout.getId());
+
+        jdbcTemplate.update("DELETE FROM workout " +
+                        "WHERE id = ? ",
+                workout.getId());
+    }
+
+
+    @Override
     public boolean isWorkoutAvailable(String workoutName, String userName) {
         if (getWorkoutByWorkoutName(userName, workoutName) == null) {
 
@@ -144,6 +165,4 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
         }
         return false;
     }
-
-
 }

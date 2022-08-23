@@ -122,10 +122,13 @@
                                 <td>${workout.workoutType}</td>
                                 <td>${workout.totalCalories}</td>
                                 <td>${workout.date}</td>
-                                <c:url var="editExercise" value="/users/custom-exercise/edit/${exercise.exerciseName}"/>
-                                <td><a href="${editExercise}" class="btn btn-primary">Edit</a></td>
-                                <c:url var="deleteExercise"  value="/users/custom-exercise"/>
-                                <td><a href="${deleteExercise}" class="btn btn-primary">Delete</a></td>
+
+                                <c:url var="editWorkout" value="/users/workout/edit/${workout.workoutName}"/>
+                                <td><a href="${editWorkout}" class="btn btn-primary">View/Edit</a></td>
+
+                                <c:url var="deleteWorkout"  value="/users/delete-workout/${workout.id}"/>
+                                <td><a href="${deleteWorkout}" class="btn btn-primary">Delete</a></td>
+
                             </tr>
 
                         </c:forEach>
