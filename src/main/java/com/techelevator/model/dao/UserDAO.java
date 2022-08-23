@@ -1,8 +1,10 @@
 package com.techelevator.model.dao;
 
 import com.techelevator.model.dto.User;
+import com.techelevator.model.dto.Workout;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface UserDAO {
 
@@ -35,4 +37,6 @@ public interface UserDAO {
 	public void updateProfile(String userName, User user);
 
 	public void updateProfilePic(String userName, String profilePic);
+
+	public List<Workout> showWorkouts(String userName);
 }

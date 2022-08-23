@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.model.dao.ExerciseDAO;
+import com.techelevator.model.dao.UserDAO;
 import com.techelevator.model.dao.WorkoutDAO;
 import com.techelevator.model.dto.Exercise;
 import com.techelevator.model.dto.User;
@@ -27,6 +28,8 @@ public class ExerciseController {
     private ExerciseDAO exerciseDAO;
     @Autowired
     private WorkoutDAO workoutDAO;
+    @Autowired
+    private UserDAO userDAO;
 
     @Autowired
     public ExerciseController(ExerciseDAO exerciseDAO) {
@@ -52,20 +55,26 @@ public class ExerciseController {
 
     //----------------------------------------------------------------- POST display Exercise Form
     @RequestMapping(path="/users/exerciseForm", method=RequestMethod.POST)
-    public String createExercise(@Valid @ModelAttribute Exercise exercise, BindingResult result, RedirectAttributes flash, HttpSession session) {
+    public String finalizeWorkout(@Valid @ModelAttribute Exercise exercise, BindingResult result, RedirectAttributes flash, HttpSession session) {
         if (result.hasErrors()) {
             flash.addFlashAttribute("exercise", exercise);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
             return "redirect:/users/exerciseForm";
         }
 
+        User currentUser = (User) session.getAttribute("currentUser");
+
         Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
 
-        exerciseDAO.createExercise(currentWorkout, exercise);
+        workoutDAO.updateWorkout(currentUser.getUserName(), currentWorkout);
 
-        session.setAttribute("currentExercise", exerciseDAO.getExerciseByExerciseName(currentWorkout.getWorkoutName(), exercise.getExerciseName()));
+        workoutDAO.updateTotalCalories(currentUser.getId(), currentWorkout);
 
-        return "redirect:/users/workout";
+        session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(), currentWorkout.getWorkoutName()));
+
+        session.setAttribute("workouts", userDAO.showWorkouts(currentUser.getUserName()));
+
+        return "redirect:/users/profile";
     }
 
     //----------------------------------------------------------------- Display Custom Exercise Form
@@ -119,19 +128,19 @@ public class ExerciseController {
     }
 
     //----------------------------------------------------------------- POST edit Exercise Form
-    @RequestMapping(path="/users/custom-exercise/edit/{exerciseName}", method=RequestMethod.POST)
-    public String editExercise(@Valid @ModelAttribute Exercise exercise, BindingResult result, RedirectAttributes flash, HttpSession session) {
+    @RequestMapping(path="/users/custom-exercise/edit/{id}", method=RequestMethod.POST)
+    public String editExercise(@Valid @ModelAttribute Exercise exercise, @PathVariable Integer id, BindingResult result, RedirectAttributes flash, HttpSession session) {
         if (result.hasErrors()) {
             flash.addFlashAttribute("exercise", exercise);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-            return "redirect:/users/custom-exercise/edit/{exerciseName}";
+            return "redirect:/users/custom-exercise/edit/{id}";
         }
 
         Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
+//
+//        Exercise selectedExercise = (Exercise) exerciseDAO.getExerciseByExerciseId(currentWorkout.getWorkoutName(), id);
 
-        Exercise selectedExercise = (Exercise) exerciseDAO.getExerciseByExerciseName(currentWorkout.getWorkoutName(), exercise.getExerciseName());
-
-        exercise.setId(selectedExercise.getId());
+        exercise.setId(id);
 
         exerciseDAO.updateExercise(currentWorkout, exercise);
 
@@ -140,5 +149,39 @@ public class ExerciseController {
         return "redirect:/users/exerciseForm";
     }
 
+
+    //----------------------------------------------------------------- GET DELETE Exercise Form
+    @RequestMapping(path="/users/delete-exercise/{id}", method= RequestMethod.GET)
+    public String deleteExerciseForm(ModelMap modelHolder, @ModelAttribute Exercise exercise, @PathVariable Integer id, HttpSession session) {
+        if( ! modelHolder.containsAttribute("exercise")) {
+            modelHolder.addAttribute("exercise", new Exercise());
+        }
+
+        exercise.setId(id);
+
+        exerciseDAO.deleteExercise(exercise);
+
+        session.setAttribute("currentExercise", null);
+
+        return "redirect:/users/exerciseForm";
+    }
+
+    //----------------------------------------------------------------- POST DELETE Exercise Form
+    @RequestMapping(path="/users/delete-exercise/${id}", method=RequestMethod.POST)
+    public String deleteExercise(@Valid @ModelAttribute Exercise exercise, @PathVariable Integer id, BindingResult result, RedirectAttributes flash, HttpSession session) {
+        if (result.hasErrors()) {
+            flash.addFlashAttribute("exercise", exercise);
+            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
+            return "redirect:/users/custom-exercise/edit/{id}";
+        }
+
+        exercise.setId(id);
+
+        exerciseDAO.deleteExercise(exercise);
+
+        session.setAttribute("currentExercise", null);
+
+        return "redirect:/users/exerciseForm";
+    }
 
 }

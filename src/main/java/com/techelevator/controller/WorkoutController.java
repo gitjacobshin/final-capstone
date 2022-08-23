@@ -50,8 +50,6 @@ public class WorkoutController {
             return "redirect:/users/workout/newWorkoutForm";
         }
 
-
-
         workoutDAO.createWorkout(currentUser, workout);
 
         session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(), workout.getWorkoutName()));
