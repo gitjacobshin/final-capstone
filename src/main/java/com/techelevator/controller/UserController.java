@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import com.techelevator.model.dao.WorkoutDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +26,9 @@ public class UserController {
 	@Autowired
 	private UserDAO userDAO;
 	private UploadProvider uploadProvider;
+
+	@Autowired
+	private WorkoutDAO workoutDAO;
 
 	@Autowired
 	public UserController(UserDAO userDAO, UploadProvider uploadProvider) {
@@ -82,10 +87,12 @@ public class UserController {
 
 	//----------------------------------------------------------------- Profile Page
 	@RequestMapping(path="/users/profile", method=RequestMethod.GET)
-	public String displayUserProfile(ModelMap modelHolder) {
+	public String displayUserProfile(ModelMap modelHolder, HttpSession session) {
 		if( ! modelHolder.containsAttribute("user")) {
 			modelHolder.addAttribute("user", new User());
 		}
+		User currentUser = (User) session.getAttribute("currentUser");
+		session.setAttribute("recentWorkouts",workoutDAO.showDistinctWorkout(currentUser.getUserName()));
 		return "profilePage";
 	}
 

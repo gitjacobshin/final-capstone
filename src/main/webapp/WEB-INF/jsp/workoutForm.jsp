@@ -13,6 +13,7 @@
 <c:url var="cancelAction" value="/users/profile" />
 
 <c:set var="workout" scope="session" value="${workout}"/>
+<c:set var="recentWorkouts" scope="session" value="${recentWorkouts}"/>
 
 
 <form method="POST" action="${toExercises}">
@@ -48,6 +49,34 @@
             <button type="submit" class="btn btn-primary">Create Workout</button>
 
         </div>
+
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Workout Name</th>
+                    <th>Type</th>
+                    <th>Total Calories</th>
+                    <th>Date</th>
+                </tr>
+
+                </thead>
+                <tbody>
+
+                <c:forEach var="recentWorkouts" items="${recentWorkouts}" begin="0" end="4">
+                    <tr>
+                        <td>${recentWorkouts.workoutName}</td>
+                        <td>${recentWorkouts.workoutType}</td>
+                        <td>${recentWorkouts.totalCalories}</td>
+                        <td>${recentWorkouts.date}</td>
+                    </tr>
+
+                </c:forEach>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     </div>
 </form>
