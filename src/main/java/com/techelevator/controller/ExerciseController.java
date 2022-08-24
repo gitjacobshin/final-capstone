@@ -137,8 +137,6 @@ public class ExerciseController {
         }
 
         Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
-//
-//        Exercise selectedExercise = (Exercise) exerciseDAO.getExerciseByExerciseId(currentWorkout.getWorkoutName(), id);
 
         exercise.setId(id);
 
@@ -152,7 +150,7 @@ public class ExerciseController {
 
     //----------------------------------------------------------------- GET DELETE Exercise Form
     @RequestMapping(path="/users/delete-exercise/{id}", method= RequestMethod.GET)
-    public String deleteExerciseForm(ModelMap modelHolder, @ModelAttribute Exercise exercise, @PathVariable Integer id, HttpSession session) {
+    public String deleteExercise(ModelMap modelHolder, @ModelAttribute Exercise exercise, @PathVariable Integer id, HttpSession session) {
         if( ! modelHolder.containsAttribute("exercise")) {
             modelHolder.addAttribute("exercise", new Exercise());
         }
@@ -166,22 +164,5 @@ public class ExerciseController {
         return "redirect:/users/exerciseForm";
     }
 
-    //----------------------------------------------------------------- POST DELETE Exercise Form
-    @RequestMapping(path="/users/delete-exercise/${id}", method=RequestMethod.POST)
-    public String deleteExercise(@Valid @ModelAttribute Exercise exercise, @PathVariable Integer id, BindingResult result, RedirectAttributes flash, HttpSession session) {
-        if (result.hasErrors()) {
-            flash.addFlashAttribute("exercise", exercise);
-            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-            return "redirect:/users/custom-exercise/edit/{id}";
-        }
-
-        exercise.setId(id);
-
-        exerciseDAO.deleteExercise(exercise);
-
-        session.setAttribute("currentExercise", null);
-
-        return "redirect:/users/exerciseForm";
-    }
 
 }

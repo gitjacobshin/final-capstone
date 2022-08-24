@@ -13,6 +13,7 @@
 <c:url var="jqTimeagoJs" value="/js/jquery.timeago.js" />
 <c:url var="popperJs" value="/js/popper.min.js" />
 <c:url var="bootstrapJs" value="/js/bootstrap.min.js" />
+<c:url var="chartJs" value="/js/Chart.js_3.9.1_chart.js"/>
 
 <link rel="stylesheet" type="text/css" href="${bootstrapCss}">
 <link rel="stylesheet" type="text/css" href="${siteCss}">
@@ -23,6 +24,7 @@
 <script src="${jqTimeagoJs}"></script>
 <script src="${popperJs}"></script>
 <script src="${bootstrapJs}"></script>
+<script src="${chartJs}"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {

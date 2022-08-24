@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <label for="workoutName">Workout Name: </label>
-                <input type="text" id="workoutName" value="${workout.workoutName}" name="workoutName" placeHolder="Workout Name" class="form-control" />
+                <input type="text" id="workoutName"  name="workoutName" placeHolder="Workout Name" class="form-control" />
             </div>
 
             <div class="form-group">
