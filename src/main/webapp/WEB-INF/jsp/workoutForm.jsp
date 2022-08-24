@@ -44,9 +44,8 @@
                 <input type="date" id="date" name="date" placeHolder="Date" class="form-control" />
             </div>
 
-            <button type="submit" class="btn btn-primary">Create Workout</button>
-
             <a href="${cancelAction}" class="btn btn-primary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create Workout</button>
 
         </div>
 

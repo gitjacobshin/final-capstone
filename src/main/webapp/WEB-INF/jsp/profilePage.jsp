@@ -139,10 +139,11 @@
                         </tbody>
                     </table>
                 </div>
-
-                <form method="GET" action="${addWorkoutAction}">
-                    <button type="submit" class="btn btn-primary">Add Workout</button>
-                </form>
+                <div class="profile-section">
+                    <form class="flex-column-profile" method="GET" action="${addWorkoutAction}">
+                        <button type="submit" class="btn btn-primary">Add Workout</button>
+                    </form>
+                </div>
             </div>
 
 <%--            <div class="flex-column flex-column-style">--%>
@@ -224,9 +225,11 @@
                 });
             </script>
 
-            <form method="GET" action="${trackProgressAction}">
-                <button type="submit" class="btn btn-primary">Track Progress</button>
-            </form>
+            <div class="profile-section">
+                <form class="flex-column-profile" method="GET" action="${trackProgressAction}">
+                    <button type="submit" class="btn btn-primary">Track Progress</button>
+                </form>
+            </div>
 
         </div>
 
