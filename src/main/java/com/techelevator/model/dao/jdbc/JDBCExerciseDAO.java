@@ -11,6 +11,9 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class JDBCExerciseDAO implements ExerciseDAO {
@@ -33,24 +36,26 @@ public class JDBCExerciseDAO implements ExerciseDAO {
 
     @Override
     public Object getExerciseByExerciseName(String workoutName, String exerciseName) {
-        String sqlSearchForExercise ="SELECT e.id, e.workout_id, e.exercise_name, e.calories, e.reps, e.sets " +
+        String sqlSearchForExercise = "SELECT e.id, e.workout_id, e.exercise_name, e.calories, e.reps, e.sets " +
                 "FROM exercise as e " +
                 "LEFT JOIN workout w " +
-                "ON w.id = e.workout_id "+
+                "ON w.id = e.workout_id " +
                 "WHERE workout_name = ? " +
                 "AND exercise_name = ?";
 
         SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForExercise, workoutName, exerciseName);
         Exercise thisExercise = null;
-        if(exercise.next()) {
+        if (exercise.next()) {
             thisExercise = new Exercise();
             thisExercise.setId(exercise.getInt("id"));
             thisExercise.setExerciseName(exercise.getString("exercise_name"));
             thisExercise.setReps(exercise.getInt("reps"));
             thisExercise.setSets(exercise.getInt("sets"));
             thisExercise.setCalories(exercise.getInt("calories"));
+            if (exercise.getDate("date") != null) {
+                thisExercise.setDate(exercise.getDate("date").toLocalDate());
+            }
         }
-
         return thisExercise;
     }
 
@@ -64,16 +69,46 @@ public class JDBCExerciseDAO implements ExerciseDAO {
 
         SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForExercise, exerciseId);
         Exercise thisExercise = null;
-        if(exercise.next()) {
+        if (exercise.next()) {
             thisExercise = new Exercise();
             thisExercise.setId(exercise.getInt("id"));
             thisExercise.setExerciseName(exercise.getString("exercise_name"));
             thisExercise.setReps(exercise.getInt("reps"));
             thisExercise.setSets(exercise.getInt("sets"));
             thisExercise.setCalories(exercise.getInt("calories"));
+            if (exercise.getDate("date") != null) {
+                thisExercise.setDate(exercise.getDate("date").toLocalDate());
+            }
+        }
+        return thisExercise;
+    }
+
+    @Override
+    public List<Exercise> showDistinctExercises(String exerciseName) {
+        String sqlSearchForWorkout ="SELECT e.id, e.exercise_name, e.reps, e.sets, e.calories "+
+                "FROM exercise as e " +
+                "LEFT JOIN workout w " +
+                "ON w.id = e.workout_id "+
+                "WHERE workout_name = ?" +
+                "ORDER BY e.date ";
+
+        SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, exerciseName);
+        List<Exercise> exerciseList = new ArrayList<>();
+        while(exercise.next()) {
+            Exercise thisExercise = new Exercise();
+            thisExercise.setId(exercise.getInt("id"));
+            thisExercise.setExerciseName(exercise.getString("exercise_name"));
+            thisExercise.setReps(exercise.getInt("reps"));
+            thisExercise.setSets(exercise.getInt("sets"));
+            thisExercise.setCalories(exercise.getInt("calories"));
+            if(exercise.getDate("date") != null) {
+                thisExercise.setDate(exercise.getDate("date").toLocalDate());
+            }
+
+            exerciseList.add(thisExercise);
         }
 
-        return thisExercise;
+        return exerciseList;
     }
 
     @Override

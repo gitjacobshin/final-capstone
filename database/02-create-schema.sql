@@ -42,7 +42,8 @@ CREATE TABLE exercise (
       exercise_name varchar(32) NOT NULL,
       calories int,
       reps int,
-      sets int
+      sets int,
+      date timestamp
 );
 
 DROP TABLE IF EXISTS progress;

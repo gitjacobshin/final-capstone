@@ -11,6 +11,7 @@
 <c:url var="trackProgressAction" value="/users/progress"/>
 
 <c:set var="workouts" scope="session" value="${workouts}"/>
+<c:set var="exercises" scope="session" value="${exercises}"/>
 
 <c:if test="${not empty currentUser}">
     <c:choose>
@@ -138,6 +139,38 @@
                     <button type="submit" class="btn btn-primary">Add Workout</button>
                 </form>
             </div>
+
+            <div class="flex-column flex-column-style">
+                <h4 class="section-header">Recommended Exercises</h4>
+
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Exercise Name</th>
+                            <th>Reps</th>
+                            <th>Sets</th>
+                            <th>Calories</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+
+                        <c:forEach var="exercise" items="${exercises}" begin="0" end="4">
+                            <tr>
+                                <td>${exercise.exerciseName}</td>
+                                <td>${exercise.reps}</td>
+                                <td>${exercise.sets}</td>
+                                <td>${exercise.calories}</td>
+                            </tr>
+
+                        </c:forEach>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
 
@@ -148,6 +181,9 @@
             </form>
 
         </div>
+
+    </div>
+
     </div>
 </div>
 

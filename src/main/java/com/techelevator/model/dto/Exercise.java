@@ -2,6 +2,7 @@ package com.techelevator.model.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDate;
 
 public class Exercise {
 
@@ -20,6 +21,8 @@ public class Exercise {
 //    @Pattern(regexp=".*[0-9].*", message="Must contain only numbers")
     @NotNull
     private int calories;
+
+    private LocalDate date;
 
     public int getId() {
         return id;
@@ -59,5 +62,13 @@ public class Exercise {
 
     public void setSets(int sets) {
         this.sets = sets;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
