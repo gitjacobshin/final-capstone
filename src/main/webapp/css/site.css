@@ -131,10 +131,30 @@ h3 {
    width: 33%;
 }
 
+.form-container-exercise {
+   display: flex;
+   flex-wrap: wrap;
+   text-align: left;
+   height: 60vh;
+   margin-left: 25%;
+   width: 50%;
+}
+
 .form-column {
    flex: 1;
    display: inline-block;
    background: #fafcff;
+   align-self: center;
+   padding: 20px;
+   border-radius: 25px;
+   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.form-column-exercise {
+   flex: 1;
+   display: flex;
+   background: #fafcff;
+   horiz-align: center;
    align-self: center;
    padding: 20px;
    border-radius: 25px;

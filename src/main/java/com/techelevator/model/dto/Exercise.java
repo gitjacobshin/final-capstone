@@ -1,8 +1,13 @@
 package com.techelevator.model.dto;
 
+//import jdk.vm.ci.meta.Local;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Exercise {
 
@@ -22,7 +27,7 @@ public class Exercise {
     @NotNull
     private int calories;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     public int getId() {
         return id;
@@ -64,11 +69,11 @@ public class Exercise {
         this.sets = sets;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

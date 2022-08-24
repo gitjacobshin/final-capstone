@@ -6,10 +6,10 @@
 <c:url var="validationJs" value="/js/user-validation.js" />
 <script src="${validationJs}"></script>
 
-<c:set var="workout" scope="session" value="${workout}"/>
+<c:set var="currentWorkout" scope="session" value="${currentWorkout}"/>
 <c:set var="exercises" scope="session" value="${exercises}"/>
 
-<c:url var="back" value="/users/workout/view/${workout.workoutName}" />
+<c:url var="back" value="/users/workout/view/${currentWorkout.workoutName}" />
 
 
 <form method="GET" action="${back}">
@@ -28,10 +28,10 @@
           <th>Date</th>
         </tr>
         </thead>
-          <td>${workout.workoutName}</td>
-          <td>${workout.workoutType}</td>
-          <td>${workout.totalCalories}</td>
-          <td>${workout.date}</td>
+          <td>${currentWorkout.workoutName}</td>
+          <td>${currentWorkout.workoutType}</td>
+          <td>${currentWorkout.totalCalories}</td>
+          <td>${currentWorkout.date}</td>
 
       </table>
 
