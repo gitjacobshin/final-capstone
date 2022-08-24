@@ -10,10 +10,11 @@
 <c:url var="uploadImageAction" value="/users/upload"/>
 <c:url var="trackProgressAction" value="/users/progress"/>
 <c:url var="obtainRecentExercises" value="/users/recentExercises"/>
+<c:url var="viewWorkout" value="/users/view/${workoutName}"/>
 
 <c:set var="workouts" scope="session" value="${workouts}"/>
 <c:set var="exercises" scope="session" value="${exercises}"/>
-<c:set var="recentExercises" scope="session" value="${recentExercises}"/>
+<c:set var="recentWorkouts" scope="session" value="${recentWorkouts}"/>
 
 <c:if test="${not empty currentUser}">
     <c:choose>
@@ -119,17 +120,17 @@
                         </thead>
                         <tbody>
 
-                        <c:forEach var="workout" items="${workouts}">
+                        <c:forEach var="recentWorkout" items="${recentWorkouts}">
                             <tr>
-                                <td>${workout.workoutName}</td>
-                                <td>${workout.workoutType}</td>
-                                <td>${workout.totalCalories}</td>
-                                <td>${workout.date}</td>
-
-                                <c:url var="editWorkout" value="/users/workout/view/${workout.workoutName}"/>
+                                <td>${recentWorkout.workoutName}</td>
+                                <td>${recentWorkout.workoutType}</td>
+                                <td>${recentWorkout.totalCalories}</td>
+                                <td>${recentWorkout.date}</td>
+                                <form method="GET" action="${viewWorkout}">
+                                <c:url var="editWorkout" value="/users/workout/view/${recentWorkout.workoutName}"/>
                                 <td><a href="${editWorkout}" class="btn btn-primary">View</a></td>
-
-                                <c:url var="deleteWorkout"  value="/users/delete-workout/${workout.id}"/>
+                                </form>
+                                <c:url var="deleteWorkout"  value="/users/delete-workout/${recentWorkout.id}"/>
                                 <td><a href="${deleteWorkout}" class="btn btn-primary">Delete</a></td>
 
                             </tr>

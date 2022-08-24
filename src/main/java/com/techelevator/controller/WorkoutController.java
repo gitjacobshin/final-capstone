@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class WorkoutController {
@@ -53,7 +55,8 @@ public class WorkoutController {
         }
 
         workoutDAO.createWorkout(currentUser, workout);
-
+        List<Workout> recentWorkouts = workoutDAO.showDistinctWorkout(currentUser.getUserName());
+        session.setAttribute("recentWorkouts", recentWorkouts);
         session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(), workout.getWorkoutName()));
 
         return "redirect:/users/exerciseForm";
@@ -81,39 +84,39 @@ public class WorkoutController {
 
     //----------------------------------------------------------------- Edit Exercise Form
     @RequestMapping(path="/users/workout/view/{workoutName}", method= RequestMethod.GET)
-    public String viewWorkoutForm(ModelMap modelHolder, @ModelAttribute Workout workout, HttpSession session) {
+    public String viewWorkoutForm(ModelMap modelHolder, @ModelAttribute Workout workout,@PathVariable String workoutName, HttpSession session) {
         if( ! modelHolder.containsAttribute("workout")) {
             modelHolder.addAttribute("workout", new Workout());
         }
 
         User currentUser = (User) session.getAttribute("currentUser");
 
-        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
-
         session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(),
-                currentWorkout.getWorkoutName()));
+                workoutName));
+
+        session.setAttribute("exercises", workoutDAO.showExercises(workoutName));
 
         return "viewWorkout";
     }
 
 //    //----------------------------------------------------------------- POST edit Exercise Form
-//    @RequestMapping(path="/users/view/{workoutName}", method=RequestMethod.POST)
-//    public String editWorkout(@Valid @ModelAttribute Workout workout, @PathVariable Integer id, BindingResult result, RedirectAttributes flash, HttpSession session) {
-//        if (result.hasErrors()) {
-//            flash.addFlashAttribute("workout", workout);
-//            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
-//            return "redirect:/users/custom-exercise/edit/{id}";
-//        }
-//
-//        User currentUser = (User) session.getAttribute("currentUser");
-//
-//        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
-//
-//        session.setAttribute("workout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(),
-//                currentWorkout.getWorkoutName()));
-//
-//        session.setAttribute("exercises", workoutDAO.showExercises(currentWorkout.getWorkoutName()));
-//
-//        return "redirect:/users/profile";
-//    }
+    @RequestMapping(path="/users/view/{workoutName}", method=RequestMethod.POST)
+    public String viewWorkout(@Valid @ModelAttribute Workout workout, @PathVariable String workoutName, BindingResult result, RedirectAttributes flash, HttpSession session) {
+        if (result.hasErrors()) {
+            flash.addFlashAttribute("workout", workout);
+            flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "user", result);
+            return "redirect:/users/custom-exercise/edit/{id}";
+        }
+
+        User currentUser = (User) session.getAttribute("currentUser");
+
+
+
+        session.setAttribute("workout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(),
+                workoutName));
+
+        session.setAttribute("exercises", workoutDAO.showExercises(workoutName));
+
+        return "redirect:/users/profile";
+    }
 }
