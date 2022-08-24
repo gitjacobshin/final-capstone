@@ -9,6 +9,7 @@
 <c:url var="finalizeWorkout" value="/users/exerciseForm"/>
 <c:url var="customExercise" value="/users/custom-exercise" />
 <%--<c:url var="obtainRecentExercises" value="/users/recentExercises"/>--%>
+<c:url var="cancelAction" value="/users/workout/newWorkoutForm" />
 
 <c:set var="workout" scope="session" value="${workout}"/>
 <c:set var="exercises" scope="session" value="${exercises}"/>
@@ -76,6 +77,10 @@
                 <td>${recentExercises.reps}</td>
                 <td>${recentExercises.sets}</td>
                 <td>${recentExercises.calories}</td>
+
+                <c:url var="addExercise"  value="/users/add-exercise/${exercise.id}"/>
+                <td><a href="${addExercise}" class="btn btn-primary">Add</a></td>
+
               </tr>
 
             </c:forEach>
@@ -84,6 +89,8 @@
           </table>
         </div>
       </div>
+
+      <a href="${cancelAction}" class="btn btn-primary">Cancel</a>
 
       <a href="${customExercise}" class="btn btn-primary">Add Custom Exercise</a>
 

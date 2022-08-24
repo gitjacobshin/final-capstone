@@ -49,12 +49,12 @@
 			<c:url var="imgSrc" value="/img/fitnesslogo.png" />
 			<a href="${homePageHref}"><img src="${imgSrc}" class="img-fluid" style="height: 50px;" /></a>
 		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+<%--		<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"--%>
+<%--			data-target="#navbarSupportedContent"--%>
+<%--			aria-controls="navbarSupportedContent" aria-expanded="false"--%>
+<%--			aria-label="Toggle navigation">--%>
+<%--			<span class="navbar-toggler-icon"></span>--%>
+<%--		</button>--%>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<table>

@@ -134,6 +134,14 @@ public class JDBCExerciseDAO implements ExerciseDAO {
     }
 
     @Override
+    public void addExercise(Exercise exercise) {
+
+        jdbcTemplate.update("INSERT INTO exercise " +
+                        "WHERE id = ? ",
+                        exercise.getId());
+    }
+
+    @Override
     public boolean isExerciseNameAvailable(String exerciseName, String workoutName) {
         if (getExerciseByExerciseName(workoutName, exerciseName) == null) {
 

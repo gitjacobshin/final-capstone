@@ -175,6 +175,22 @@ public class ExerciseController {
         return "redirect:/users/exerciseForm";
     }
 
+    //----------------------------------------------------------------- GET ADD Exercise Form
+    @RequestMapping(path="/users/add-exercise/{id}", method= RequestMethod.GET)
+    public String addExercise(ModelMap modelHolder, @ModelAttribute Exercise exercise, @PathVariable Integer id, HttpSession session) {
+        if( ! modelHolder.containsAttribute("exercise")) {
+            modelHolder.addAttribute("exercise", new Exercise());
+        }
+
+        exercise.setId(id);
+
+        exerciseDAO.addExercise(exercise);
+
+        session.setAttribute("currentExercise", null);
+
+        return "redirect:/users/exerciseForm";
+    }
+
     //----------------------------------------------------------------- GET Recent Exercises Form
     @RequestMapping(path="/users/recentExercises", method= RequestMethod.GET)
     public String recentExercises(ModelMap modelHolder, @ModelAttribute List<Exercise> exercises, HttpSession session) {

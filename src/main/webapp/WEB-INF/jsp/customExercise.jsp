@@ -7,6 +7,7 @@
 <script src="${validationJs}"></script>
 
 <c:url var="formAction" value="/users/custom-exercise" />
+<c:url var="cancelAction" value="/users/exerciseForm" />
 
 <c:set var="currentExercise" scope="session" value="${exercise}"/>
 
@@ -28,15 +29,17 @@
             </div>
 
             <div class="form-group">
-                <label for="sets">sets: </label>
+                <label for="sets">Sets: </label>
                 <input type="text" id="sets" value="${exercise.sets}" name="sets" placeHolder="Sets" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label for="calories">calories: </label>
+                <label for="calories">Calories: </label>
                 <input type="text" id="calories" value="${exercise.calories}" name="calories" placeHolder="Calories" class="form-control" />
             </div>
 
+
+            <a href="${cancelAction}" class="btn btn-primary">Cancel</a>
             <button type="submit" class="btn btn-primary">Create Exercise</button>
         </div>
     </div>
