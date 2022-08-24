@@ -9,9 +9,11 @@
 <c:url var="addWorkoutAction" value="/users/workout/newWorkoutForm"/>
 <c:url var="uploadImageAction" value="/users/upload"/>
 <c:url var="trackProgressAction" value="/users/progress"/>
+<c:url var="obtainRecentExercises" value="/users/recentExercises"/>
 
 <c:set var="workouts" scope="session" value="${workouts}"/>
 <c:set var="exercises" scope="session" value="${exercises}"/>
+<c:set var="recentExercises" scope="session" value="${recentExercises}"/>
 
 <c:if test="${not empty currentUser}">
     <c:choose>
@@ -124,8 +126,8 @@
                                 <td>${workout.totalCalories}</td>
                                 <td>${workout.date}</td>
 
-                                <c:url var="editWorkout" value="/users/workout/edit/${workout.workoutName}"/>
-                                <td><a href="${editWorkout}" class="btn btn-primary">View/Edit</a></td>
+                                <c:url var="editWorkout" value="/users/workout/view/${workout.workoutName}"/>
+                                <td><a href="${editWorkout}" class="btn btn-primary">View</a></td>
 
                                 <c:url var="deleteWorkout"  value="/users/delete-workout/${workout.id}"/>
                                 <td><a href="${deleteWorkout}" class="btn btn-primary">Delete</a></td>
@@ -159,15 +161,17 @@
                         </thead>
                         <tbody>
 
-                        <c:forEach var="exercise" items="${exercises}" begin="0" end="4">
+                        <form method="GET" action="${obtainRecentExercises}">
+                        <c:forEach var="recentExercise" items="${recentExercises}" begin="0" end="4">
                             <tr>
-                                <td>${exercise.exerciseName}</td>
-                                <td>${exercise.reps}</td>
-                                <td>${exercise.sets}</td>
-                                <td>${exercise.calories}</td>
+                                <td>${recentExercise.exerciseName}</td>
+                                <td>${recentExercise.reps}</td>
+                                <td>${recentExercise.sets}</td>
+                                <td>${recentExercise.calories}</td>
                             </tr>
 
                         </c:forEach>
+                        </form>
 
                         </tbody>
                     </table>

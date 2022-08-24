@@ -38,12 +38,13 @@ DROP TABLE IF EXISTS exercise;
 
 CREATE TABLE exercise (
       id SERIAL PRIMARY KEY,
-      workout_id int NOT NULL,
+      workout_id int,
+      user_id int,
       exercise_name varchar(32) NOT NULL,
       calories int,
       reps int,
       sets int,
-      date timestamp
+      date timestamp not null default(current_timestamp)
 );
 
 DROP TABLE IF EXISTS progress;

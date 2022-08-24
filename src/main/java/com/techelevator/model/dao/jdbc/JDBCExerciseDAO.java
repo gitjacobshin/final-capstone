@@ -27,10 +27,10 @@ public class JDBCExerciseDAO implements ExerciseDAO {
 
 
     @Override
-    public void createExercise(Workout workout, Exercise exercise) {
+    public void createExercise(User user, Workout workout, Exercise exercise) {
         jdbcTemplate.update(
-                "INSERT INTO exercise(workout_id, exercise_name, reps, sets, calories) VALUES (?, ?, ?, ?, ?)",
-                workout.getId(), exercise.getExerciseName(), exercise.getReps(), exercise.getSets(), exercise.getCalories()
+                "INSERT INTO exercise(workout_id, user_id, exercise_name, reps, sets, calories) VALUES (?, ?, ?, ?, ?, ?)",
+                workout.getId(), user.getId(), exercise.getExerciseName(), exercise.getReps(), exercise.getSets(), exercise.getCalories()
         );
     }
 
@@ -84,15 +84,15 @@ public class JDBCExerciseDAO implements ExerciseDAO {
     }
 
     @Override
-    public List<Exercise> showDistinctExercises(String exerciseName) {
-        String sqlSearchForWorkout ="SELECT e.id, e.exercise_name, e.reps, e.sets, e.calories "+
+    public List<Exercise> showDistinctExercises(String userName) {
+        String sqlSearchForWorkout ="SELECT DISTINCT on (e.exercise_name) e.id, e.exercise_name, e.reps, e.sets, e.calories " +
                 "FROM exercise as e " +
-                "LEFT JOIN workout w " +
-                "ON w.id = e.workout_id "+
-                "WHERE workout_name = ?" +
-                "ORDER BY e.date ";
+                "LEFT JOIN app_user u " +
+                "ON u.id = e.user_id " +
+                "WHERE user_name = ? " +
+                "ORDER BY e.date DESC";
 
-        SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, exerciseName);
+        SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, userName);
         List<Exercise> exerciseList = new ArrayList<>();
         while(exercise.next()) {
             Exercise thisExercise = new Exercise();

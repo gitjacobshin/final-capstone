@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -104,9 +105,11 @@ public class ExerciseController {
             return "redirect:/users/workout/custom-exercise";
         }
 
+        User currentUser = (User) session.getAttribute("currentUser");
+
         currentWorkout = (Workout) session.getAttribute("currentWorkout");
 
-        exerciseDAO.createExercise(currentWorkout, exercise);
+        exerciseDAO.createExercise(currentUser, currentWorkout, exercise);
 
         return "redirect:/users/exerciseForm";
     }
@@ -164,5 +167,18 @@ public class ExerciseController {
         return "redirect:/users/exerciseForm";
     }
 
+    //----------------------------------------------------------------- GET Recent Exercises Form
+    @RequestMapping(path="/users/recentExercises", method= RequestMethod.GET)
+    public String recentExercises(ModelMap modelHolder, @ModelAttribute List<Exercise> exercises, HttpSession session) {
+        if( ! modelHolder.containsAttribute("exercises")) {
+            modelHolder.addAttribute("exercises", new ArrayList<Exercise>());
+        }
+
+        User currentUser = (User) session.getAttribute("currentUser");
+
+        session.setAttribute("recentExercises", exerciseDAO.showDistinctExercises(currentUser.getUserName()));
+
+        return "profilePage";
+    }
 
 }
