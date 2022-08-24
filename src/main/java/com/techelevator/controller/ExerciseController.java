@@ -53,11 +53,11 @@ public class ExerciseController {
 
         session.setAttribute("exercises", exercises);
 
-//        if(exercises.size() > 0) {
-//            List<Exercise> recentExercises = exerciseDAO.showDistinctExercises(currentUser.getUserName());
-//
-//            session.setAttribute("recentExercises", recentExercises);
-//        }
+        if(exercises.size() > 0) {
+            List<Exercise> recentExercises = exerciseDAO.showDistinctExercises(currentUser.getUserName());
+
+            session.setAttribute("recentExercises", recentExercises);
+        }
 
         return "exerciseForm";
     }

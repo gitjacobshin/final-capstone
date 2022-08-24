@@ -12,7 +12,7 @@
 
 <c:set var="workout" scope="session" value="${workout}"/>
 <c:set var="exercises" scope="session" value="${exercises}"/>
-<%--<c:set var="recentExercises" scope="session" value="${recentExercises}"/>--%>
+<c:set var="recentExercises" scope="session" value="${recentExercises}"/>
 
 
 <form method="POST" action="${finalizeWorkout}">
@@ -70,12 +70,12 @@
             </thead>
             <tbody>
 
-            <c:forEach var="exercise" items="${exercises}" begin="0" end="4">
+            <c:forEach var="recentExercises" items="${recentExercises}" begin="0" end="4">
               <tr>
-                <td>${exercise.exerciseName}</td>
-                <td>${exercise.reps}</td>
-                <td>${exercise.sets}</td>
-                <td>${exercise.calories}</td>
+                <td>${recentExercises.exerciseName}</td>
+                <td>${recentExercises.reps}</td>
+                <td>${recentExercises.sets}</td>
+                <td>${recentExercises.calories}</td>
               </tr>
 
             </c:forEach>

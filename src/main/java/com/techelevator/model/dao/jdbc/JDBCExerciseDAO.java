@@ -85,7 +85,7 @@ public class JDBCExerciseDAO implements ExerciseDAO {
 
     @Override
     public List<Exercise> showDistinctExercises(String userName) {
-        String sqlSearchForWorkout ="SELECT DISTINCT ON (e.exercise_name) e.id, e.exercise_name, e.reps, e.sets, e.calories " +
+        String sqlSearchForWorkout ="SELECT DISTINCT ON (e.date, e.exercise_name) e.id, e.exercise_name, e.reps, e.sets, e.calories " +
                 "FROM exercise as e " +
                 "LEFT JOIN app_user u " +
                 "ON u.id = e.user_id " +
