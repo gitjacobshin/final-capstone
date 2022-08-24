@@ -8,6 +8,8 @@
 
 <c:url var="formAction" value="/users/edit" />
 <c:set var="currentUser" scope="session" value="${currentUser}"/>
+<c:url var="cancelAction" value="/users/profile" />
+
 <form:form modelAttribute="user" method="POST" action="${formAction}">
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 
@@ -44,6 +46,7 @@
                 <input type="date" id="birthdate" name="birthdate" value="${currentUser.birthdate}" placeHolder="Birthdate" class="form-control" />
             </div>
 
+            <a href="${cancelAction}" class="btn btn-primary">Cancel</a>
             <button type="submit" class="btn btn-primary">Update User</button>
 
         </div>
