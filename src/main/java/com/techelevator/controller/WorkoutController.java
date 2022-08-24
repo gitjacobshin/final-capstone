@@ -119,4 +119,23 @@ public class WorkoutController {
 
         return "redirect:/users/profile";
     }
+
+//    @RequestMapping(path="/users/delete-workout/{id}", method= RequestMethod.GET)
+//    public String deleteWorkout(ModelMap modelHolder, @ModelAttribute Workout workout, @PathVariable Integer id, HttpSession session) {
+//        if( ! modelHolder.containsAttribute("workout")) {
+//            modelHolder.addAttribute("workout", new Workout());
+//        }
+//
+//        workout.setId(id);
+//
+//        workoutDAO.deleteWorkout(workout);
+//
+//        session.setAttribute("currentWorkout", null);
+//
+//        User currentUser = (User) session.getAttribute("currentUser");
+//
+//        session.setAttribute("workouts", userDAO.showWorkouts(currentUser.getUserName()));
+//
+//        return "redirect:/users/profile";
+//    }
 }

@@ -69,7 +69,10 @@
                         <td>${recentWorkouts.workoutType}</td>
                         <td>${recentWorkouts.totalCalories}</td>
                         <td>${recentWorkouts.date}</td>
+                        <c:url var="addWorkout"  value="/users/add-workout/${recentWorkout.id}"/>
+                        <td><a href="${addWorkout}" class="btn btn-primary">Add</a></td>
                     </tr>
+
 
                 </c:forEach>
 

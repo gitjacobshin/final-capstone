@@ -182,9 +182,10 @@ public class ExerciseController {
             modelHolder.addAttribute("exercise", new Exercise());
         }
 
-        exercise.setId(id);
 
-        exerciseDAO.addExercise(exercise);
+        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
+
+        exerciseDAO.addExercise(currentWorkout, (Exercise) exerciseDAO.getExerciseByExerciseId(currentWorkout.getWorkoutName(), id));
 
         session.setAttribute("currentExercise", null);
 

@@ -133,6 +133,7 @@
                                 <c:url var="deleteWorkout"  value="/users/delete-workout/${recentWorkout.id}"/>
                                 <td><a href="${deleteWorkout}" class="btn btn-primary">Delete</a></td>
 
+
                             </tr>
 
                         </c:forEach>

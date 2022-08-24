@@ -134,11 +134,12 @@ public class JDBCExerciseDAO implements ExerciseDAO {
     }
 
     @Override
-    public void addExercise(Exercise exercise) {
+    public void addExercise(Workout workout, Exercise exercise) {
 
-        jdbcTemplate.update("INSERT INTO exercise " +
-                        "WHERE id = ? ",
-                        exercise.getId());
+        jdbcTemplate.update("INSERT INTO exercise( workout_id, exercise_name, calories, reps, sets)" +
+                        " VALUES (?, ?, ?, ?, ?)"
+                        , workout.getId(), exercise.getExerciseName(), exercise.getCalories(),
+                        exercise.getReps(), exercise.getSets());
     }
 
     @Override

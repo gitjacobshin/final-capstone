@@ -78,7 +78,7 @@
                 <td>${recentExercises.sets}</td>
                 <td>${recentExercises.calories}</td>
 
-                <c:url var="addExercise"  value="/users/add-exercise/${exercise.id}"/>
+                <c:url var="addExercise"  value="/users/add-exercise/${recentExercises.id}"/>
                 <td><a href="${addExercise}" class="btn btn-primary">Add</a></td>
 
               </tr>

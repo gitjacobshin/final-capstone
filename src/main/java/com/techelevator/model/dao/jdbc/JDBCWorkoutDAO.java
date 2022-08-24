@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -192,5 +193,15 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void addWorkout(Workout workout, User user) {
+        LocalDate date = LocalDate.now();
+
+        jdbcTemplate.update("INSERT INTO workout(profile_id, workout_name, workout_type, total_calories, date)" +
+                        " VALUES (?, ?, ?, ?, ?)"
+                , workout.getId(), workout.getWorkoutName(), workout.getWorkoutType(),
+               workout.getWorkoutType(), workout.getTotalCalories(), date );
     }
 }
