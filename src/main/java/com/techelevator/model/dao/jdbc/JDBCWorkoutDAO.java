@@ -201,7 +201,7 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
 
         jdbcTemplate.update("INSERT INTO workout(profile_id, workout_name, workout_type, total_calories, date)" +
                         " VALUES (?, ?, ?, ?, ?)"
-                , workout.getId(), workout.getWorkoutName(), workout.getWorkoutType(),
+                , user.getId(), workout.getWorkoutName(),
                workout.getWorkoutType(), workout.getTotalCalories(), date );
     }
 }

@@ -63,13 +63,13 @@
                 </thead>
                 <tbody>
 
-                <c:forEach var="recentWorkouts" items="${recentWorkouts}" begin="0" end="4">
+                <c:forEach var="recentWorkout" items="${recentWorkouts}" begin="0" end="4">
                     <tr>
-                        <td>${recentWorkouts.workoutName}</td>
-                        <td>${recentWorkouts.workoutType}</td>
-                        <td>${recentWorkouts.totalCalories}</td>
-                        <td>${recentWorkouts.date}</td>
-                        <c:url var="addWorkout"  value="/users/add-workout/${recentWorkout.id}"/>
+                        <td>${recentWorkout.workoutName}</td>
+                        <td>${recentWorkout.workoutType}</td>
+                        <td>${recentWorkout.totalCalories}</td>
+                        <td>${recentWorkout.date}</td>
+                        <c:url var="addWorkout"  value="/users/add-workout/${recentWorkout.workoutName}"/>
                         <td><a href="${addWorkout}" class="btn btn-primary">Add</a></td>
                     </tr>
 
