@@ -45,11 +45,19 @@ public class ExerciseController {
             modelHolder.addAttribute("workout", new Workout());
         }
 
+        User currentUser = (User) session.getAttribute("currentUser");
+
         Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
 
         List<Exercise> exercises = workoutDAO.showExercises(currentWorkout.getWorkoutName());
 
         session.setAttribute("exercises", exercises);
+
+//        if(exercises.size() > 0) {
+//            List<Exercise> recentExercises = exerciseDAO.showDistinctExercises(currentUser.getUserName());
+//
+//            session.setAttribute("recentExercises", recentExercises);
+//        }
 
         return "exerciseForm";
     }

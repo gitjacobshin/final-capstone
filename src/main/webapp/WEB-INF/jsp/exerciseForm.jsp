@@ -8,18 +8,20 @@
 
 <c:url var="finalizeWorkout" value="/users/exerciseForm"/>
 <c:url var="customExercise" value="/users/custom-exercise" />
+<%--<c:url var="obtainRecentExercises" value="/users/recentExercises"/>--%>
 
 <c:set var="workout" scope="session" value="${workout}"/>
 <c:set var="exercises" scope="session" value="${exercises}"/>
+<%--<c:set var="recentExercises" scope="session" value="${recentExercises}"/>--%>
 
 
 <form method="POST" action="${finalizeWorkout}">
   <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 
-  <div class="row form-container">
+  <div class="row form-container-exercise">
 
-    <div class="col-sm-4 form-column">
-
+    <div class="form-column">
+      <h4>Selected Exercises</h4>
         <table>
           <thead>
           <tr>
@@ -52,6 +54,36 @@
           </tbody>
         </table>
 
+      <div class="flex-column">
+        <h4>Recent Exercises</h4>
+
+        <div>
+          <table>
+            <thead>
+            <tr>
+              <th>Exercise Name</th>
+              <th>Reps</th>
+              <th>Sets</th>
+              <th>Calories</th>
+            </tr>
+
+            </thead>
+            <tbody>
+
+            <c:forEach var="exercise" items="${exercises}" begin="0" end="4">
+              <tr>
+                <td>${exercise.exerciseName}</td>
+                <td>${exercise.reps}</td>
+                <td>${exercise.sets}</td>
+                <td>${exercise.calories}</td>
+              </tr>
+
+            </c:forEach>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <a href="${customExercise}" class="btn btn-primary">Add Custom Exercise</a>
 
@@ -59,7 +91,38 @@
 
 
     </div>
+<%--    <div class="col-sm-4 form-column">--%>
+<%--      <div class="flex-column flex-column-style">--%>
+<%--        <h4 class="section-header">Recommended Exercises</h4>--%>
 
+<%--        <div>--%>
+<%--          <table>--%>
+<%--            <thead>--%>
+<%--            <tr>--%>
+<%--              <th>Exercise Name</th>--%>
+<%--              <th>Reps</th>--%>
+<%--              <th>Sets</th>--%>
+<%--              <th>Calories</th>--%>
+<%--            </tr>--%>
+
+<%--            </thead>--%>
+<%--            <tbody>--%>
+
+<%--              <c:forEach var="exercise" items="${exercises}" begin="0" end="4">--%>
+<%--                <tr>--%>
+<%--                  <td>${exercise.exerciseName}</td>--%>
+<%--                  <td>${exercise.reps}</td>--%>
+<%--                  <td>${exercise.sets}</td>--%>
+<%--                  <td>${exercise.calories}</td>--%>
+<%--                </tr>--%>
+
+<%--              </c:forEach>--%>
+
+<%--            </tbody>--%>
+<%--          </table>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </div>--%>
   </div>
 </form>
 

@@ -52,9 +52,9 @@ public class JDBCExerciseDAO implements ExerciseDAO {
             thisExercise.setReps(exercise.getInt("reps"));
             thisExercise.setSets(exercise.getInt("sets"));
             thisExercise.setCalories(exercise.getInt("calories"));
-            if (exercise.getDate("date") != null) {
-                thisExercise.setDate(exercise.getDate("date").toLocalDate());
-            }
+//            if (exercise.getDate("date") != null) {
+//                thisExercise.setDate(exercise.getDate("date").toLocalDate().atTime());
+//            }
         }
         return thisExercise;
     }
@@ -76,20 +76,21 @@ public class JDBCExerciseDAO implements ExerciseDAO {
             thisExercise.setReps(exercise.getInt("reps"));
             thisExercise.setSets(exercise.getInt("sets"));
             thisExercise.setCalories(exercise.getInt("calories"));
-            if (exercise.getDate("date") != null) {
-                thisExercise.setDate(exercise.getDate("date").toLocalDate());
-            }
+//            if (exercise.getDate("date") != null) {
+//                thisExercise.setDate(exercise.getDate("date").toLocalDate().atTime());
+//            }
         }
         return thisExercise;
     }
 
     @Override
     public List<Exercise> showDistinctExercises(String userName) {
-        String sqlSearchForWorkout ="SELECT DISTINCT on (e.exercise_name) e.id, e.exercise_name, e.reps, e.sets, e.calories " +
+        String sqlSearchForWorkout ="SELECT DISTINCT ON (e.exercise_name) e.id, e.exercise_name, e.reps, e.sets, e.calories " +
                 "FROM exercise as e " +
                 "LEFT JOIN app_user u " +
                 "ON u.id = e.user_id " +
                 "WHERE user_name = ? " +
+                "GROUP BY e.exercise_name, e.date, e.id " +
                 "ORDER BY e.date DESC";
 
         SqlRowSet exercise = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, userName);
@@ -101,9 +102,9 @@ public class JDBCExerciseDAO implements ExerciseDAO {
             thisExercise.setReps(exercise.getInt("reps"));
             thisExercise.setSets(exercise.getInt("sets"));
             thisExercise.setCalories(exercise.getInt("calories"));
-            if(exercise.getDate("date") != null) {
-                thisExercise.setDate(exercise.getDate("date").toLocalDate());
-            }
+//            if(exercise.getDate("date") != null) {
+//                thisExercise.setDate(exercise.getDate("date").toLocalDate());
+//            }
 
             exerciseList.add(thisExercise);
         }

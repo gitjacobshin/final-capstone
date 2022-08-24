@@ -90,7 +90,7 @@ public class WorkoutController {
 
         Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
 
-        session.setAttribute("workout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(),
+        session.setAttribute("currentWorkout", workoutDAO.getWorkoutByWorkoutName(currentUser.getUserName(),
                 currentWorkout.getWorkoutName()));
 
         return "viewWorkout";

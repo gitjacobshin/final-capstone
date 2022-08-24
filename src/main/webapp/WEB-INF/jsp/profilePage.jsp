@@ -145,38 +145,38 @@
                 </form>
             </div>
 
-            <div class="flex-column flex-column-style">
-                <h4 class="section-header">Recommended Exercises</h4>
+<%--            <div class="flex-column flex-column-style">--%>
+<%--                <h4 class="section-header">Recommended Exercises</h4>--%>
 
-                <div>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Exercise Name</th>
-                            <th>Reps</th>
-                            <th>Sets</th>
-                            <th>Calories</th>
-                        </tr>
+<%--                <div>--%>
+<%--                    <table>--%>
+<%--                        <thead>--%>
+<%--                        <tr>--%>
+<%--                            <th>Exercise Name</th>--%>
+<%--                            <th>Reps</th>--%>
+<%--                            <th>Sets</th>--%>
+<%--                            <th>Calories</th>--%>
+<%--                        </tr>--%>
 
-                        </thead>
-                        <tbody>
+<%--                        </thead>--%>
+<%--                        <tbody>--%>
 
-                        <form method="GET" action="${obtainRecentExercises}">
-                        <c:forEach var="recentExercise" items="${recentExercises}" begin="0" end="4">
-                            <tr>
-                                <td>${recentExercise.exerciseName}</td>
-                                <td>${recentExercise.reps}</td>
-                                <td>${recentExercise.sets}</td>
-                                <td>${recentExercise.calories}</td>
-                            </tr>
+<%--                        <form method="GET" action="${obtainRecentExercises}">--%>
+<%--                        <c:forEach var="recentExercise" items="${recentExercises}" begin="0" end="4">--%>
+<%--                            <tr>--%>
+<%--                                <td>${recentExercise.exerciseName}</td>--%>
+<%--                                <td>${recentExercise.reps}</td>--%>
+<%--                                <td>${recentExercise.sets}</td>--%>
+<%--                                <td>${recentExercise.calories}</td>--%>
+<%--                            </tr>--%>
 
-                        </c:forEach>
-                        </form>
+<%--                        </c:forEach>--%>
+<%--                        </form>--%>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<%--                        </tbody>--%>
+<%--                    </table>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
         </div>
 
