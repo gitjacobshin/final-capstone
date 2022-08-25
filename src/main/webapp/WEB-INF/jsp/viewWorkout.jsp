@@ -58,12 +58,13 @@
           </c:forEach>
         </tbody>
       </table>
+
     </div>
 
   </div>
 
   <c:url var="back"  value="/users/profile"/>
-  <td><a href="${back}" class="btn btn-primary">Back</a></td>
+  <a href="${back}" class="btn btn-primary" style="margin-left: 47%">Back</a>
 
 </form>
 

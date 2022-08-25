@@ -115,7 +115,7 @@
             <div class="flex-column flex-column-style">
                <h4 class="section-header">Workout History</h4>
 
-                <div>
+                <div class="graph">
                     <table>
                         <thead>
                         <tr>
@@ -210,7 +210,6 @@
                                    }
                                },
                                y: {
-                                   beginAtZero: true,
                                    display: true,
                                    title: {
                                        display: true,
@@ -271,7 +270,6 @@
                                     }
                                 },
                                 y: {
-                                    beginAtZero: true,
                                     display: true,
                                     title: {
                                         display: true,

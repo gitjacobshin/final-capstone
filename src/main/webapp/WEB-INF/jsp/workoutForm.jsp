@@ -50,7 +50,10 @@
 
         </div>
 
-        <div>
+    </div>
+
+    <div class="row form-container" style="margin-top: -150px">
+        <div class="form-column">
             <table>
                 <thead>
                 <tr>

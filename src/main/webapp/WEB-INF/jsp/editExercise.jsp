@@ -13,9 +13,8 @@
 <form method="POST" action="${formAction}">
   <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 
-  <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
+  <div class="row form-container">
+    <div class="col-sm-4 form-column">
 
       <div class="form-group">
         <label for="exerciseName">Exercise Name: </label>
@@ -40,7 +39,6 @@
       <button type="submit" class="btn btn-primary">Update Exercise</button>
 
     </div>
-    <div class="col-sm-4"></div>
   </div>
 
 
