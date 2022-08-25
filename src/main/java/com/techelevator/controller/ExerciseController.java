@@ -53,11 +53,11 @@ public class ExerciseController {
 
         session.setAttribute("exercises", exercises);
 
-//        if(exercises.size() > 0) {
-//            List<Exercise> recentExercises = exerciseDAO.showDistinctExercises(currentUser.getUserName());
-//
-//            session.setAttribute("recentExercises", recentExercises);
-//        }
+        if(exercises.size() > 0) {
+            List<Exercise> recentExercises = exerciseDAO.showDistinctExercises(currentUser.getUserName());
+
+            session.setAttribute("recentExercises", recentExercises);
+        }
 
         return "exerciseForm";
     }
@@ -169,6 +169,23 @@ public class ExerciseController {
         exercise.setId(id);
 
         exerciseDAO.deleteExercise(exercise);
+
+        session.setAttribute("currentExercise", null);
+
+        return "redirect:/users/exerciseForm";
+    }
+
+    //----------------------------------------------------------------- GET ADD Exercise Form
+    @RequestMapping(path="/users/add-exercise/{id}", method= RequestMethod.GET)
+    public String addExercise(ModelMap modelHolder, @ModelAttribute Exercise exercise, @PathVariable Integer id, HttpSession session) {
+        if( ! modelHolder.containsAttribute("exercise")) {
+            modelHolder.addAttribute("exercise", new Exercise());
+        }
+
+
+        Workout currentWorkout = (Workout) session.getAttribute("currentWorkout");
+
+        exerciseDAO.addExercise(currentWorkout, (Exercise) exerciseDAO.getExerciseByExerciseId(currentWorkout.getWorkoutName(), id));
 
         session.setAttribute("currentExercise", null);
 

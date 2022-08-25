@@ -85,7 +85,7 @@ public class JDBCExerciseDAO implements ExerciseDAO {
 
     @Override
     public List<Exercise> showDistinctExercises(String userName) {
-        String sqlSearchForWorkout ="SELECT DISTINCT ON (e.exercise_name) e.id, e.exercise_name, e.reps, e.sets, e.calories " +
+        String sqlSearchForWorkout ="SELECT DISTINCT ON (e.date, e.exercise_name) e.id, e.exercise_name, e.reps, e.sets, e.calories " +
                 "FROM exercise as e " +
                 "LEFT JOIN app_user u " +
                 "ON u.id = e.user_id " +
@@ -131,6 +131,15 @@ public class JDBCExerciseDAO implements ExerciseDAO {
                         "WHERE id = ? ",
                         exercise.getId());
 
+    }
+
+    @Override
+    public void addExercise(Workout workout, Exercise exercise) {
+
+        jdbcTemplate.update("INSERT INTO exercise( workout_id, exercise_name, calories, reps, sets)" +
+                        " VALUES (?, ?, ?, ?, ?)"
+                        , workout.getId(), exercise.getExerciseName(), exercise.getCalories(),
+                        exercise.getReps(), exercise.getSets());
     }
 
     @Override

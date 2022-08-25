@@ -31,4 +31,8 @@ public interface WorkoutDAO {
 
     public boolean isWorkoutAvailable( String workoutName, String userName);
 
+    public List<Workout> showDistinctWorkout(String userName);
+
+    public void addWorkout(Workout workout, User user);
+
 }

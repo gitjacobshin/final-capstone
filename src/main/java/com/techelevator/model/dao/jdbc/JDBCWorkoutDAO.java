@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -146,6 +147,34 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
     }
 
     @Override
+    public List<Workout> showDistinctWorkout(String userName) {
+        String sqlSearchForWorkout ="SELECT DISTINCT ON (w.date, w.workout_name) w.id, workout_name, w.workout_type, w.total_calories, w.date " +
+                "FROM workout as w " +
+                "LEFT JOIN app_user u " +
+                "ON u.id = w.profile_id " +
+                "WHERE user_name = ? " +
+                "GROUP BY w.workout_name, w.date, w.id " +
+                "ORDER BY w.date DESC";
+
+        SqlRowSet workout = jdbcTemplate.queryForRowSet(sqlSearchForWorkout, userName);
+        List<Workout> workoutList = new ArrayList<>();
+        while(workout.next()) {
+            Workout thisWorkout = new Workout();
+            thisWorkout.setId(workout.getInt("id"));
+            thisWorkout.setWorkoutName(workout.getString("workout_name"));
+            thisWorkout.setWorkoutType(workout.getString("workout_type"));
+            thisWorkout.setTotalCalories(workout.getInt("total_calories"));
+            if(workout.getDate("date") != null) {
+                thisWorkout.setDate(workout.getDate("date").toLocalDate());
+            }
+
+            workoutList.add(thisWorkout);
+        }
+
+        return workoutList;
+    }
+
+    @Override
     public void deleteWorkout(Workout workout) {
 //        jdbcTemplate.update("DELETE FROM exercise " +
 //                        "WHERE workout_id = ?",
@@ -164,5 +193,15 @@ public class JDBCWorkoutDAO implements WorkoutDAO {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void addWorkout(Workout workout, User user) {
+        LocalDate date = LocalDate.now();
+
+        jdbcTemplate.update("INSERT INTO workout(profile_id, workout_name, workout_type, total_calories, date)" +
+                        " VALUES (?, ?, ?, ?, ?)"
+                , user.getId(), workout.getWorkoutName(),
+               workout.getWorkoutType(), workout.getTotalCalories(), date );
     }
 }
