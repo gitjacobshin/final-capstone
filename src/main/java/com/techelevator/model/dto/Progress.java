@@ -15,6 +15,8 @@ public class Progress {
 
     private int workoutLength;
 
+    private int weightDesired;
+
     private int weightAfter;
 
     public int getId() {
@@ -47,6 +49,14 @@ public class Progress {
 
     public void setWorkoutLength(int workoutLength) {
         this.workoutLength = workoutLength;
+    }
+
+    public int getWeightDesired() {
+        return weightDesired;
+    }
+
+    public void setWeightDesired(int weightDesired) {
+        this.weightDesired = weightDesired;
     }
 
     public int getWeightAfter() {

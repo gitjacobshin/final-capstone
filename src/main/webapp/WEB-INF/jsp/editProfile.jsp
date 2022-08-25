@@ -22,17 +22,17 @@
             </div>
 
             <div class="form-group">
-                <label for="height">Height: </label>
+                <label for="height">Height (in): </label>
                 <input type="text" id="height" value="${currentUser.height}" name="height" placeHolder="Height" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label for="currentWeight">Current Weight: </label>
+                <label for="currentWeight">Current Weight (lbs): </label>
                 <input type="text" id="currentWeight" value="${currentUser.currentWeight}" name="currentWeight" placeHolder="Current Weight" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label for="desiredWeight">Desired Weight: </label>
+                <label for="desiredWeight">Desired Weight (lbs): </label>
                 <input type="text" id="desiredWeight" value="${currentUser.desiredWeight}" name="desiredWeight" placeHolder="Desired Weight" class="form-control" />
             </div>
 

@@ -73,17 +73,17 @@
 							</c:choose>
 							<td class="nav-item"><a class="nav-link" href="${homePageHref}">
 									${displayName}'s Home Page</a></td>
-							<c:url var="dashboardHref" value="/users/${currentUser}" />
-							<td class="nav-item"><a class="nav-link" href="${dashboardHref}">Private Messages</a></td>
-							<c:url var="newMessageHref"
-								value="/users/${currentUser}/messages/new" />
-							<td class="nav-item"><a class="nav-link" href="${newMessageHref}">New Message</a></td>
-							<c:url var="sentMessagesHref"
-								value="/users/${currentUser}/messages" />
-							<td class="nav-item"><a class="nav-link" href="${sentMessagesHref}">Sent Messages</a></td>
-							<c:url var="changePasswordHref"
-								value="/users/${currentUser}/changePassword" />
-							<td class="nav-item"><a class="nav-link" href="${changePasswordHref}">Change Password</a></td>
+<%--							<c:url var="dashboardHref" value="/users/${currentUser}" />--%>
+<%--							<td class="nav-item"><a class="nav-link" href="${dashboardHref}">Private Messages</a></td>--%>
+<%--							<c:url var="newMessageHref"--%>
+<%--								value="/users/${currentUser}/messages/new" />--%>
+<%--							<td class="nav-item"><a class="nav-link" href="${newMessageHref}">New Message</a></td>--%>
+<%--							<c:url var="sentMessagesHref"--%>
+<%--								value="/users/${currentUser}/messages" />--%>
+<%--							<td class="nav-item"><a class="nav-link" href="${sentMessagesHref}">Sent Messages</a></td>--%>
+<%--							<c:url var="changePasswordHref"--%>
+<%--								value="/users/${currentUser}/changePassword" />--%>
+<%--							<td class="nav-item"><a class="nav-link" href="${changePasswordHref}">Change Password</a></td>--%>
 						</c:if>
 					</div>
 					<div class="navbar-nav ml-auto">

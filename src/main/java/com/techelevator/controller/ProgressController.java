@@ -28,7 +28,7 @@ public class ProgressController {
 
     //----------------------------------------------------------------- Display Track Progress Form
     @RequestMapping(path="/users/progress", method=RequestMethod.GET)
-    public String displayProgressForm(ModelMap modelHolder) {
+    public String displayProgressForm(ModelMap modelHolder, HttpSession session) {
         if( ! modelHolder.containsAttribute("progress")) {
             modelHolder.addAttribute("progress", new Progress());
         }
@@ -49,7 +49,14 @@ public class ProgressController {
         User currentUser = (User) session.getAttribute("currentUser");
 
         progressDAO.addProgress(currentUser.getId(), progress.getWorkoutDate(), progress.getWorkoutType()
-                                , progress.getWorkoutLength(), progress.getWeightAfter());
+                                , progress.getWorkoutLength(), progress.getWeightAfter(), currentUser.getDesiredWeight());
+
+
+        session.setAttribute("progressDates", progressDAO.getProgressDates(currentUser.getId()));
+        session.setAttribute("progressWeights", progressDAO.getProgressWeights(currentUser.getId()));
+        session.setAttribute("desiredWeights", progressDAO.getDesiredWeights(currentUser.getId()));
+        session.setAttribute("progressTimes", progressDAO.getProgressTimes(currentUser.getId()));
+        session.setAttribute("workoutTypes", progressDAO.getWorkoutType(currentUser.getId()));
 
         return "redirect:/users/profile";
     }

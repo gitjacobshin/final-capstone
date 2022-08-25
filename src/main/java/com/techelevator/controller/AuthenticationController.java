@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.techelevator.model.dao.ProgressDAO;
+import com.techelevator.model.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,10 +17,12 @@ import com.techelevator.model.dao.UserDAO;
 public class AuthenticationController {
 
 	private UserDAO userDAO;
+	private ProgressDAO progressDAO;
 
 	@Autowired
-	public AuthenticationController(UserDAO userDAO) {
+	public AuthenticationController(UserDAO userDAO, ProgressDAO progressDAO) {
 		this.userDAO = userDAO;
+		this.progressDAO = progressDAO;
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.GET)
@@ -33,6 +37,14 @@ public class AuthenticationController {
 						HttpSession session) {
 		if(userDAO.searchForUsernameAndPassword(userName, password)) {
 			session.setAttribute("currentUser", userDAO.getUserByUserName(userName));
+
+			User currentUser = (User) session.getAttribute("currentUser");
+
+			session.setAttribute("progressDates", progressDAO.getProgressDates(currentUser.getId()));
+			session.setAttribute("progressWeights", progressDAO.getProgressWeights(currentUser.getId()));
+			session.setAttribute("desiredWeights", progressDAO.getDesiredWeights(currentUser.getId()));
+			session.setAttribute("progressTimes", progressDAO.getProgressTimes(currentUser.getId()));
+			session.setAttribute("workoutTypes", progressDAO.getWorkoutType(currentUser.getId()));
 			
 			if(destination != null && ! destination.isEmpty()) {
 				return "redirect:" + destination;

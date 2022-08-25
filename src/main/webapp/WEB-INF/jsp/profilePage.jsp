@@ -15,6 +15,12 @@
 <c:set var="exercises" scope="session" value="${exercises}"/>
 <c:set var="recentExercises" scope="session" value="${recentExercises}"/>
 
+<c:set var="progressDateList" scope="session" value="${progressDates}"/>
+<c:set var="progressWeightsList" scope="session" value="${progressWeights}"/>
+<c:set var="desiredWeightsList" scope="session" value="${desiredWeights}"/>
+<c:set var="progressTimesList" scope="session" value="${progressTimes}"/>
+<c:set var="workoutTypesList" scope="session" value="${workoutTypes}"/>
+
 <c:if test="${not empty currentUser}">
     <c:choose>
         <c:when test="${not empty currentUser.name}">
@@ -25,6 +31,8 @@
         </c:otherwise>
     </c:choose>
 </c:if>
+
+
 
 <div class="page-background">
     <h1>
@@ -145,86 +153,197 @@
                     </form>
                 </div>
             </div>
-
-<%--            <div class="flex-column flex-column-style">--%>
-<%--                <h4 class="section-header">Recommended Exercises</h4>--%>
-
-<%--                <div>--%>
-<%--                    <table>--%>
-<%--                        <thead>--%>
-<%--                        <tr>--%>
-<%--                            <th>Exercise Name</th>--%>
-<%--                            <th>Reps</th>--%>
-<%--                            <th>Sets</th>--%>
-<%--                            <th>Calories</th>--%>
-<%--                        </tr>--%>
-
-<%--                        </thead>--%>
-<%--                        <tbody>--%>
-
-<%--                        <form method="GET" action="${obtainRecentExercises}">--%>
-<%--                        <c:forEach var="recentExercise" items="${recentExercises}" begin="0" end="4">--%>
-<%--                            <tr>--%>
-<%--                                <td>${recentExercise.exerciseName}</td>--%>
-<%--                                <td>${recentExercise.reps}</td>--%>
-<%--                                <td>${recentExercise.sets}</td>--%>
-<%--                                <td>${recentExercise.calories}</td>--%>
-<%--                            </tr>--%>
-
-<%--                        </c:forEach>--%>
-<%--                        </form>--%>
-
-<%--                        </tbody>--%>
-<%--                    </table>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
         </div>
 
-
         <div class="flex-column flex-column-style">
-            <h4 class="section-header">Graph Data</h4>
+            <h4 class="section-header">Data From Last 7 Workouts</h4>
 
+<%--            Weights Line Graph--%>
+            <div class="graph">
+                <canvas id="progressWeightChart"></canvas>
+                <script type="module">
+                    <c:set var="graphType" value="line"/>
+                    <c:set var='chartName' value='Recorded vs. Desired Weight per Workout'/>
+                    <c:set var="data" value="${progressWeightsList}"/>
+                    <c:set var="data2" value="${desiredWeightsList}"/>
+                    <c:set var="label" value="${progressDateList}"/>
 
-            <canvas id="progressChart" width="400px" height="400px"></canvas>
-            <script type="module">
-                const ctx = 'progressChart'
-                const progressChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
+                    var dates = [];
+                    <c:forEach var="date" items="${progressDateList}">
+                        dates.push('${date}')
+                    </c:forEach>
+                    const ctx = 'progressWeightChart'
+                    const progressWeightChart = new Chart(ctx, {
+                       type: '${graphType}',
+                       data: {
+                           labels: dates,
+                           datasets: [{
+                               label: 'Recorded Weight',
+                               data: ${data},
+                               fill: true,
+                               borderColor: 'rgb(255, 159, 64)',
+                               tension: 0.1,
+                               backgroundColor: 'rgb(255, 159, 64, 0.25)'
+                           }
+                           , {
+                               label: 'Desired Weight',
+                               data: ${data2},
+                               fill: true,
+                               borderColor: 'rgb(54, 162, 235)',
+                               tension: 0.1,
+                               backgroundColor: 'rgb(54, 162, 235, 0.25)'
+                               }]
+                       },
+                       options: {
+                           scales: {
+                               x: {
+                                   display: true,
+                                   title: {
+                                       display: true,
+                                       text: 'Workout Date'
+                                   },
+                                   ticks: {
+                                       maxRotation: 45,
+                                       minRotation: 45
+                                   }
+                               },
+                               y: {
+                                   beginAtZero: true,
+                                   display: true,
+                                   title: {
+                                       display: true,
+                                       text: 'Weight'
+                                   }
+                               }
+                           },
+                           plugins: {
+                               title: {
+                                   display: true,
+                                   text: '${chartName}',
+                                   color: 'rgb(0,0,0)'
+                               }
+                           }
+                       }
+                    });
+                </script>
+            </div>
+
+<%--            Times Line Graph--%>
+            <div class="graph">
+                <canvas id="progressTimesChart"></canvas>
+                <script type="module">
+                    <c:set var="graphType" value="line"/>
+                    <c:set var='chartName' value='Time per Workout'/>
+                    <c:set var="data" value="${progressTimesList}"/>
+                    <c:set var="label" value="${progressDateList}"/>
+
+                    var dates = [];
+                    <c:forEach var="date" items="${progressDateList}">
+                    dates.push('${date}')
+                    </c:forEach>
+                    const ctx_2 = 'progressTimesChart'
+                    const progressTimesChart = new Chart(ctx_2, {
+                        type: '${graphType}',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: 'Time',
+                                data: ${data},
+                                fill: true,
+                                borderColor: 'rgb(255, 159, 64)',
+                                tension: 0.1,
+                                backgroundColor: 'rgb(255, 159, 64, 0.25)'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    display: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Workout Date'
+                                    },
+                                    ticks: {
+                                        maxRotation: 45,
+                                        minRotation: 45
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    display: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Time'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: '${chartName}',
+                                    color: 'rgb(0,0,0)'
+                                }
                             }
                         }
-                    }
-                });
-            </script>
+                    });
+                </script>
+            </div>
 
+<%--        Types Bar Chart    --%>
+            <h4 class="section-header">Data From Last 30 Workouts</h4>
+            <div class="graph">
+                <canvas id="workoutTypeChart"></canvas>
+                <script type="module">
+                    <c:set var="graphType" value="bar"/>
+                    <c:set var='chartName' value='Workout Type Count'/>
+
+                    var types = [];
+                    <c:forEach var="type" items="${workoutTypesList}">
+                    types.push('${type}')
+                    </c:forEach>
+
+                    const ctx = 'workoutTypeChart'
+                    const workoutTypeChart = new Chart(ctx, {
+                        type: '${graphType}',
+                        data: {
+                            labels: ['Arms', 'Legs', 'Core', 'Cardio', 'Rest'],
+                            datasets: [{
+                                label: 'Workout Type Count',
+                                data: [types.filter((v) => (v === 'Arms')).length,
+                                    types.filter((v) => (v === 'Legs')).length,
+                                    types.filter((v) => (v === 'Core')).length,
+                                    types.filter((v) => (v === 'Cardio')).length,
+                                    types.filter((v) => (v === 'Rest')).length,
+                                ],
+                                backgroundColor: [
+                                    'rgba(255, 159, 64, 0.25)',
+                                    'rgba(255, 159, 64, 0.25)',
+                                    'rgba(255, 159, 64, 0.25)',
+                                    'rgba(255, 159, 64, 0.25)',
+                                    'rgba(255, 159, 64, 0.25)',
+                                    ],
+                                borderColor: [
+                                    'rgba(255, 159, 64)',
+                                    'rgba(255, 159, 64)',
+                                    'rgba(255, 159, 64)',
+                                    'rgba(255, 159, 64)',
+                                    'rgba(255, 159, 64)',
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: '${chartName}',
+                                    color: 'rgb(0,0,0)'
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
             <div class="profile-section">
                 <form class="flex-column-profile" method="GET" action="${trackProgressAction}">
                     <button type="submit" class="btn btn-primary">Track Progress</button>

@@ -55,7 +55,8 @@ CREATE TABLE progress (
     date date,
     workout_type varchar(32),
     workout_length int,
-    weight_after int
+    weight_after int,
+    weight_desired int
 );
 
 
